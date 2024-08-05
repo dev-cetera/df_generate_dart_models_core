@@ -4,6 +4,7 @@
 
 - Released @ 8/2024 (UTC)
 - chore: Update changelog script
+- chore: Update generated code comments and URLs
 
 ## [0.1.1]
 
