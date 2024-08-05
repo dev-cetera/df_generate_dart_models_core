@@ -159,7 +159,8 @@ class GenerateDartModel extends _GenerateDartModel {
       final shouldInherit0 = otherData?['shouldInherit'];
       final shouldInherit = letBool(shouldInherit0);
       final inheritanceConstructor0 = otherData?['inheritanceConstructor'];
-      final inheritanceConstructor = inheritanceConstructor0?.toString().trim().nullIfEmpty;
+      final inheritanceConstructor =
+          inheritanceConstructor0?.toString().trim().nullIfEmpty;
       final keyStringCase0 = otherData?['keyStringCase'];
       final keyStringCase = keyStringCase0?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
@@ -219,7 +220,8 @@ class GenerateDartModel extends _GenerateDartModel {
           .nullIfEmpty
           ?.toList();
       final shouldInherit0 = this.shouldInherit;
-      final inheritanceConstructor0 = this.inheritanceConstructor?.trim().nullIfEmpty;
+      final inheritanceConstructor0 =
+          this.inheritanceConstructor?.trim().nullIfEmpty;
       final keyStringCase0 = this.keyStringCase?.trim().nullIfEmpty;
       final withNulls = mergeMapsDeep([
         {
