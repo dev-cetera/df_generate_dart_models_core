@@ -1,4 +1,4 @@
-# Dart Package Template
+# DF Generate Dart Models Core
 
 Dart & Flutter Packages by DevCetra.com & contributors.
 
