@@ -9,11 +9,11 @@
 
 import '/df_generate_dart_models_core.dart';
 
-part '_generate_model.g.dart';
+part '_generate_dart_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateModel(
+@GenerateDartModel(
   shouldInherit: true,
   fields: {
     ('className?', String),
@@ -23,6 +23,6 @@ part '_generate_model.g.dart';
     ('keyStringCase?', String),
   },
 )
-abstract class _GenerateModel extends Model {
-  const _GenerateModel();
+abstract class _GenerateDartModel extends Model {
+  const _GenerateDartModel();
 }

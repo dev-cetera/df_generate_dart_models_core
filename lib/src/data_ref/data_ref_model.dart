@@ -13,7 +13,7 @@ part '_data_ref_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateModel(
+@GenerateDartModel(
   shouldInherit: true,
   fields: {
     ('id?', String),

@@ -13,7 +13,7 @@ part '_field.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateModel(
+@GenerateDartModel(
   shouldInherit: true,
   fields: {
     /// The name of the field.

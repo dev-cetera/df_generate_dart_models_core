@@ -12,11 +12,11 @@ export 'base_model.dart';
 export 'types.dart';
 export 'model.dart';
 export 'data_ref/data_ref_model.dart';
-export 'annotations/generate_model/generate_model.dart';
 export 'annotations/field/field.dart';
+export 'annotations/generate_dart_model/generate_dart_model.dart';
 
 // --- PRIVATE FILES (EXCLUDED) ---
 // None found.
 
 // --- GENERATED FILES (EXCLUDED) ---
-// None found.
+// export '_index.g.dart';

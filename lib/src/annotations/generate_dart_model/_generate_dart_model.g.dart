@@ -15,16 +15,16 @@
 // ignore_for_file: unnecessary_question_mark
 // ignore_for_file: unnecessary_this
 
-part of 'generate_model.dart';
+part of 'generate_dart_model.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class GenerateModel extends _GenerateModel {
+class GenerateDartModel extends _GenerateDartModel {
   //
   //
   //
 
-  static const CLASS_NAME = 'GenerateModel';
+  static const CLASS_NAME = 'GenerateDartModel';
 
   @override
   String get $className => CLASS_NAME;
@@ -39,7 +39,7 @@ class GenerateModel extends _GenerateModel {
   //
   //
 
-  const GenerateModel({
+  const GenerateDartModel({
     this.className,
     this.fields,
     this.shouldInherit,
@@ -47,7 +47,7 @@ class GenerateModel extends _GenerateModel {
     this.keyStringCase,
   });
 
-  const GenerateModel.c2({
+  const GenerateDartModel.c2({
     this.className,
     this.fields,
     this.shouldInherit,
@@ -55,14 +55,14 @@ class GenerateModel extends _GenerateModel {
     this.keyStringCase,
   });
 
-  factory GenerateModel.c3({
+  factory GenerateDartModel.c3({
     String? className,
     Set<dynamic>? fields,
     bool? shouldInherit,
     String? inheritanceConstructor,
     String? keyStringCase,
   }) {
-    return GenerateModel(
+    return GenerateDartModel(
       className: className,
       fields: fields,
       shouldInherit: shouldInherit,
@@ -71,78 +71,78 @@ class GenerateModel extends _GenerateModel {
     );
   }
 
-  factory GenerateModel.from(
+  factory GenerateDartModel.from(
     BaseModel? other,
   ) {
     try {
       return fromOrNull(other)!;
     } catch (e) {
-      assert(false, 'GenerateModel.from: $e');
+      assert(false, 'GenerateDartModel.from: $e');
       rethrow;
     }
   }
 
-  static GenerateModel? fromOrNull(
+  static GenerateDartModel? fromOrNull(
     BaseModel? other,
   ) {
     return fromJsonOrNull(other?.toJson())!;
   }
 
-  factory GenerateModel.of(
-    GenerateModel other,
+  factory GenerateDartModel.of(
+    GenerateDartModel other,
   ) {
     try {
       return ofOrNull(other)!;
     } catch (e) {
-      assert(false, 'GenerateModel.of: $e');
+      assert(false, 'GenerateDartModel.of: $e');
       rethrow;
     }
   }
 
-  static GenerateModel? ofOrNull(
-    GenerateModel? other,
+  static GenerateDartModel? ofOrNull(
+    GenerateDartModel? other,
   ) {
     return fromJsonOrNull(other?.toJson());
   }
 
-  factory GenerateModel.fromJsonString(
+  factory GenerateDartModel.fromJsonString(
     String source,
   ) {
     try {
       return fromJsonStringOrNull(source)!;
     } catch (e) {
-      assert(false, 'GenerateModel.fromJsonString: $e');
+      assert(false, 'GenerateDartModel.fromJsonString: $e');
       rethrow;
     }
   }
 
-  static GenerateModel? fromJsonStringOrNull(
+  static GenerateDartModel? fromJsonStringOrNull(
     String? source,
   ) {
     try {
       if (source!.isNotEmpty) {
         final decoded = jsonDecode(source);
-        return GenerateModel.fromJson(decoded);
+        return GenerateDartModel.fromJson(decoded);
       } else {
-        return const GenerateModel.c2();
+        return const GenerateDartModel.c2();
       }
     } catch (_) {
       return null;
     }
   }
 
-  factory GenerateModel.fromJson(
+  factory GenerateDartModel.fromJson(
     Map<String, dynamic>? otherData,
   ) {
     try {
       return fromJsonOrNull(otherData)!;
     } catch (e) {
-      assert(false, 'GenerateModel.fromJson: $e');
+      assert(false, 'GenerateDartModel.fromJson: $e');
       rethrow;
     }
   }
 
-  static GenerateModel? fromJsonOrNull(
+  static GenerateDartModel? fromJsonOrNull(
     Map<String, dynamic>? otherData,
   ) {
     try {
@@ -162,7 +162,7 @@ class GenerateModel extends _GenerateModel {
       final inheritanceConstructor = inheritanceConstructor0?.toString().trim().nullIfEmpty;
       final keyStringCase0 = otherData?['keyStringCase'];
       final keyStringCase = keyStringCase0?.toString().trim().nullIfEmpty;
-      return GenerateModel(
+      return GenerateDartModel(
         className: className,
         fields: fields,
         shouldInherit: shouldInherit,
@@ -174,25 +174,25 @@ class GenerateModel extends _GenerateModel {
     }
   }
 
-  factory GenerateModel.fromUri(
+  factory GenerateDartModel.fromUri(
     Uri? uri,
   ) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
-      assert(false, 'GenerateModel.fromUri: $e');
+      assert(false, 'GenerateDartModel.fromUri: $e');
       rethrow;
     }
   }
 
-  static GenerateModel? fromUriOrNull(
+  static GenerateDartModel? fromUriOrNull(
     Uri? uri,
   ) {
     try {
       if (uri != null && uri.path == CLASS_NAME) {
-        return GenerateModel.fromJson(uri.queryParameters);
+        return GenerateDartModel.fromJson(uri.queryParameters);
       } else {
-        return const GenerateModel.c2();
+        return const GenerateDartModel.c2();
       }
     } catch (_) {
       return null;
@@ -240,7 +240,7 @@ class GenerateModel extends _GenerateModel {
       ]).mapWithDefault(defaultValue);
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
-      assert(false, 'GenerateModel.toJson: $e');
+      assert(false, 'GenerateDartModel.toJson: $e');
       rethrow;
     }
   }
@@ -250,11 +250,11 @@ class GenerateModel extends _GenerateModel {
   //
 
   @override
-  GenerateModel copyWith(BaseModel? other) {
+  GenerateDartModel copyWith(BaseModel? other) {
     final a = this.toJson();
     final b = other?.toJson();
     final c = {...a, ...?b};
-    return GenerateModel.fromJson(c);
+    return GenerateDartModel.fromJson(c);
   }
 
   //
@@ -279,7 +279,7 @@ class GenerateModel extends _GenerateModel {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class GenerateModelFieldNames {
+final class GenerateDartModelFieldNames {
   //
   //
   //
@@ -294,5 +294,5 @@ final class GenerateModelFieldNames {
   //
   //
 
-  const GenerateModelFieldNames._();
+  const GenerateDartModelFieldNames._();
 }
