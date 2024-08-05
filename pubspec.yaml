@@ -1,0 +1,31 @@
+##.title
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## Dart/Flutter (DF) Packages by DevCetra.com & contributors. See LICENSE file
+## in the root directory.
+##
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##.title~
+
+name: df_generate_dart_models_core
+description: A package that provides core dependencies for models generated with df_generate_dart_models.
+version: 0.1.0
+repository: https://github.com/robmllze/df_generate_dart_models_core
+
+## -----------------------------------------------------------------------------
+
+environment:
+  sdk: ">=3.0.0 < 4.0.0"
+
+## -----------------------------------------------------------------------------
+
+dependencies:
+  df_collection:
+  df_type:
+  collection:
+
+## -----------------------------------------------------------------------------
+
+dev_dependencies:
+  lints: ^4.0.0
+  test: ^1.24.0
