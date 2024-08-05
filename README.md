@@ -11,10 +11,6 @@ Dart & Flutter Packages by DevCetra.com & contributors.
 
 A package that provides core dependencies for models generated with df_generate_dart_models.
 
-## Usage Example
-
-For a full feature set, please refer to the [API reference](https://pub.dev/documentation/df_generate_dart_models_core/).
-
 ## Installation
 
 Use this package as a dependency by adding it to your `pubspec.yaml` file (see [here](https://pub.dev/packages/df_generate_dart_models_core/install)).
