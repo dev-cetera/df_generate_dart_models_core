@@ -53,7 +53,8 @@ abstract class BaseModel {
     bool includeNulls = false,
   }) {
     final a = toJson(includeNulls: includeNulls);
-    final b = a.keys.toList(growable: false)..sort((k1, k2) => k1.compareTo(k2));
+    final b = a.keys.toList(growable: false)
+      ..sort((k1, k2) => k1.compareTo(k2));
     final c = {for (var k in b) k: a[k] as dynamic};
     return c;
   }
@@ -89,7 +90,8 @@ abstract class BaseModel {
   /// `DeepCollectionEquality` and returns `true` if they are equal.
   bool equals(dynamic other) {
     if (other is BaseModel) {
-      return const DeepCollectionEquality().equals(other.toJson(), this.toJson());
+      return const DeepCollectionEquality()
+          .equals(other.toJson(), this.toJson());
     } else {
       return false;
     }
