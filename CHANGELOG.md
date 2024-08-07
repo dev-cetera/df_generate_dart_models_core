@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.1]
+
+- Released @ 8/2024 (UTC)
+- fix: Fix type error bug in copyWith function in template
+
 ## [0.2.0]
 
 - Released @ 8/2024 (UTC)
