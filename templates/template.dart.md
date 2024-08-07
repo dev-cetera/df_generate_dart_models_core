@@ -191,8 +191,9 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   ___CLASS_NAME___ copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
     final b = other?.toJson() ?? {};
-    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
-    return ___CLASS_NAME___.fromJson(data);
+    final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    final data1 = letMapOrNull<String, dynamic>(data0);
+    return ___CLASS_NAME___.fromJson(data1);
   }
 
   //
