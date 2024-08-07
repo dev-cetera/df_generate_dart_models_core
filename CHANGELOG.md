@@ -4,6 +4,7 @@
 
 - Released @ 8/2024 (UTC)
 - feat: Add option to merge or overwrite data in copyWith function
+- docs: Update readme
 
 ## [0.1.3]
 
