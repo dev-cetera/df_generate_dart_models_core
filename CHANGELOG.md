@@ -5,16 +5,10 @@
 - Released @ 8/2024 (UTC)
 - feat: Add option to merge or overwrite data in copyWith function
 
-## [0.1.4]
-
-- Released @ 8/2024 (UTC)
-- fix: Fix copyWith function in template to use mergeDataDeep
-
 ## [0.1.3]
 
 - Released @ 8/2024 (UTC)
 - chore: Update workflow scripts
-- hore: Update workflow scripts
 
 ## [0.1.2]
 
