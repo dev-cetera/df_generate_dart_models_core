@@ -4,7 +4,6 @@
 
 - Released @ 8/2024 (UTC)
 - fix: Fix copyWith function in template to use mergeDataDeep
-- feat: Add option to merge or overwrite data in copyWith function
 
 ## [0.1.3]
 
