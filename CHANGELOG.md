@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.0]
+
+- Released @ 8/2024 (UTC)
+- feat: Add option to merge or overwrite data in copyWith function
+
 ## [0.1.4]
 
 - Released @ 8/2024 (UTC)
