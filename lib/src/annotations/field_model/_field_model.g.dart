@@ -15,16 +15,16 @@
 // ignore_for_file: unnecessary_question_mark
 // ignore_for_file: unnecessary_this
 
-part of 'field.dart';
+part of 'field_model.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class Field extends _Field {
+class FieldModel extends _FieldModel {
   //
   //
   //
 
-  static const CLASS_NAME = 'Field';
+  static const CLASS_NAME = 'FieldModel';
 
   @override
   String get $className => CLASS_NAME;
@@ -32,35 +32,35 @@ class Field extends _Field {
   final List<String>? fieldPath;
   final dynamic? fieldType;
   final bool? nullable;
-  final Field? child;
+  final FieldModel? child;
 
   //
   //
   //
 
-  const Field({
+  const FieldModel({
     this.fieldPath,
     required this.fieldType,
     this.nullable,
     this.child,
   });
 
-  const Field.c2({
+  const FieldModel.c2({
     this.fieldPath,
     this.fieldType,
     this.nullable,
     this.child,
   });
 
-  factory Field.c3({
+  factory FieldModel.c3({
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
-    Field? child,
+    FieldModel? child,
   }) {
     assert(fieldType != null);
 
-    return Field(
+    return FieldModel(
       fieldPath: fieldPath,
       fieldType: fieldType,
       nullable: nullable,
@@ -68,78 +68,78 @@ class Field extends _Field {
     );
   }
 
-  factory Field.from(
+  factory FieldModel.from(
     BaseModel? other,
   ) {
     try {
       return fromOrNull(other)!;
     } catch (e) {
-      assert(false, 'Field.from: $e');
+      assert(false, 'FieldModel.from: $e');
       rethrow;
     }
   }
 
-  static Field? fromOrNull(
+  static FieldModel? fromOrNull(
     BaseModel? other,
   ) {
     return fromJsonOrNull(other?.toJson())!;
   }
 
-  factory Field.of(
-    Field other,
+  factory FieldModel.of(
+    FieldModel other,
   ) {
     try {
       return ofOrNull(other)!;
     } catch (e) {
-      assert(false, 'Field.of: $e');
+      assert(false, 'FieldModel.of: $e');
       rethrow;
     }
   }
 
-  static Field? ofOrNull(
-    Field? other,
+  static FieldModel? ofOrNull(
+    FieldModel? other,
   ) {
     return fromJsonOrNull(other?.toJson());
   }
 
-  factory Field.fromJsonString(
+  factory FieldModel.fromJsonString(
     String source,
   ) {
     try {
       return fromJsonStringOrNull(source)!;
     } catch (e) {
-      assert(false, 'Field.fromJsonString: $e');
+      assert(false, 'FieldModel.fromJsonString: $e');
       rethrow;
     }
   }
 
-  static Field? fromJsonStringOrNull(
+  static FieldModel? fromJsonStringOrNull(
     String? source,
   ) {
     try {
       if (source!.isNotEmpty) {
         final decoded = jsonDecode(source);
-        return Field.fromJson(decoded);
+        return FieldModel.fromJson(decoded);
       } else {
-        return const Field.c2();
+        return const FieldModel.c2();
       }
     } catch (_) {
       return null;
     }
   }
 
-  factory Field.fromJson(
+  factory FieldModel.fromJson(
     Map<String, dynamic>? otherData,
   ) {
     try {
       return fromJsonOrNull(otherData)!;
     } catch (e) {
-      assert(false, 'Field.fromJson: $e');
+      assert(false, 'FieldModel.fromJson: $e');
       rethrow;
     }
   }
 
-  static Field? fromJsonOrNull(
+  static FieldModel? fromJsonOrNull(
     Map<String, dynamic>? otherData,
   ) {
     try {
@@ -153,7 +153,7 @@ class Field extends _Field {
       final fieldType = otherData?['fieldType'];
       final nullable = letBool(otherData?['nullable']);
       final child = otherData?['child'];
-      return Field(
+      return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
         nullable: nullable,
@@ -164,25 +164,25 @@ class Field extends _Field {
     }
   }
 
-  factory Field.fromUri(
+  factory FieldModel.fromUri(
     Uri? uri,
   ) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
-      assert(false, 'Field.fromUri: $e');
+      assert(false, 'FieldModel.fromUri: $e');
       rethrow;
     }
   }
 
-  static Field? fromUriOrNull(
+  static FieldModel? fromUriOrNull(
     Uri? uri,
   ) {
     try {
       if (uri != null && uri.path == CLASS_NAME) {
-        return Field.fromJson(uri.queryParameters);
+        return FieldModel.fromJson(uri.queryParameters);
       } else {
-        return const Field.c2();
+        return const FieldModel.c2();
       }
     } catch (_) {
       return null;
@@ -217,7 +217,7 @@ class Field extends _Field {
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
-      assert(false, 'Field.toJson: $e');
+      assert(false, 'FieldModel.toJson: $e');
       rethrow;
     }
   }
@@ -227,11 +227,11 @@ class Field extends _Field {
   //
 
   @override
-  Field copyWith(BaseModel? other) {
+  FieldModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
-    final b = other?.toJson();
-    final c = {...a, ...?b};
-    return Field.fromJson(c);
+    final b = other?.toJson() ?? {};
+    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    return FieldModel.fromJson(data);
   }
 
   //
@@ -248,7 +248,7 @@ class Field extends _Field {
   bool? get nullableField => this.nullable;
 
   // child.
-  Field? get childField => this.child;
+  FieldModel? get childField => this.child;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

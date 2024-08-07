@@ -9,7 +9,7 @@
 
 import '/df_generate_dart_models_core.dart';
 
-part '_field.g.dart';
+part '_field_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -25,30 +25,30 @@ part '_field.g.dart';
     /// Whether [fieldType] is nullable or not.
     ('nullable?', bool),
 
-    ('child?', 'Model-Field'),
+    ('child?', FieldModel),
   },
 )
 
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
-abstract class _Field extends BaseModel {
-  const _Field();
+abstract class _FieldModel extends BaseModel {
+  const _FieldModel();
 
   /// The type code of the field (the type with any special, characters, such
   /// as 'String?').
-  String? get fieldTypeCode => (this as Field).fieldType;
+  String? get fieldTypeCode => (this as FieldModel).fieldType;
 
   /// Converts this to a [TFieldRecord].
   TFieldRecord get toRecord => (
-        fieldPath: (this as Field).fieldPath,
-        fieldType: (this as Field).fieldType,
-        nullable: (this as Field).nullable,
+        fieldPath: (this as FieldModel).fieldPath,
+        fieldType: (this as FieldModel).fieldType,
+        nullable: (this as FieldModel).nullable,
       );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// A record representing a field. Similar to [Field].
+/// A record representing a field. Similar to [FieldModel].
 typedef TFieldRecord = ({
   List<String>? fieldPath,
   String? fieldType,
@@ -56,8 +56,8 @@ typedef TFieldRecord = ({
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
-  /// Converts this to a [Field].
-  Field get toClass => Field(
+  /// Converts this to a [FieldModel].
+  FieldModel get toClass => FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
         nullable: nullable,
@@ -69,14 +69,14 @@ extension ToClassOnTFieldRecordExtension on TFieldRecord {
 final class FieldUtils {
   FieldUtils();
 
-  /// Assumes [unknown] is a [TFieldRecord] or [Field] or similar and
-  /// tries to construct a [Field], otherwise returns `null`.
-  static Field? ofOrNull(dynamic unknown) {
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] or similar and
+  /// tries to construct a [FieldModel], otherwise returns `null`.
+  static FieldModel? ofOrNull(dynamic unknown) {
     try {
       final fieldPath = fieldPathOrNull(unknown)!;
       final fieldType = fieldTypeOrNull(unknown) ?? 'dynamic';
       final nullable = nullableOrNull(unknown);
-      return Field(
+      return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
         nullable: nullable,
@@ -86,7 +86,7 @@ final class FieldUtils {
     }
   }
 
-  /// Assumes [unknown] is a [TFieldRecord] or [Field] or similar and
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] or similar and
   /// tries to get the [fieldPath] property, or returns `null`.
   static List<String>? fieldPathOrNull(dynamic unknown) {
     try {
@@ -100,7 +100,7 @@ final class FieldUtils {
     }
   }
 
-  /// Assumes [unknown] is a [TFieldRecord] or [Field] or similar and
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] or similar and
   /// tries to get the [fieldType] property, or returns `null`.
   static String? fieldTypeOrNull(dynamic unknown) {
     try {
@@ -114,7 +114,7 @@ final class FieldUtils {
     }
   }
 
-  /// Assumes [unknown] is a [TFieldRecord] or [Field] or similar and
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] or similar and
   /// tries to get the [nullable] property, or returns `null`.
   static bool? nullableOrNull(dynamic unknown) {
     try {
@@ -128,3 +128,7 @@ final class FieldUtils {
     }
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+typedef Field = FieldModel;

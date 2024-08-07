@@ -207,11 +207,11 @@ class DataRefModel extends _DataRefModel {
   //
 
   @override
-  DataRefModel copyWith(BaseModel? other) {
+  DataRefModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
-    final b = other?.toJson();
-    final c = {...a, ...?b};
-    return DataRefModel.fromJson(c);
+    final b = other?.toJson() ?? {};
+    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    return DataRefModel.fromJson(data);
   }
 
   //

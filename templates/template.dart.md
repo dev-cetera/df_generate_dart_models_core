@@ -188,11 +188,11 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   //
 
   @override
-  ___CLASS_NAME___ copyWith(BaseModel? other) {
+  ___CLASS_NAME___ copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
-    final b = other?.toJson();
-    final c = mergeDataDeep(a, b);
-    return ___CLASS_NAME___.fromJson(c);
+    final b = other?.toJson() ?? {};
+    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    return ___CLASS_NAME___.fromJson(data);
   }
 
   //

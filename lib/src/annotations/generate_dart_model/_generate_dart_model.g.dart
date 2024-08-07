@@ -157,8 +157,7 @@ class GenerateDartModel extends _GenerateDartModel {
       final shouldInherit = letBool(otherData?['shouldInherit']);
       final inheritanceConstructor =
           otherData?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
-      final keyStringCase =
-          otherData?['keyStringCase']?.toString().trim().nullIfEmpty;
+      final keyStringCase = otherData?['keyStringCase']?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
         className: className,
         fields: fields,
@@ -215,8 +214,7 @@ class GenerateDartModel extends _GenerateDartModel {
           .nullIfEmpty
           ?.toList();
       final shouldInherit0 = this.shouldInherit;
-      final inheritanceConstructor0 =
-          this.inheritanceConstructor?.trim().nullIfEmpty;
+      final inheritanceConstructor0 = this.inheritanceConstructor?.trim().nullIfEmpty;
       final keyStringCase0 = this.keyStringCase?.trim().nullIfEmpty;
       final withNulls = {
         'shouldInherit': shouldInherit0,
@@ -237,11 +235,11 @@ class GenerateDartModel extends _GenerateDartModel {
   //
 
   @override
-  GenerateDartModel copyWith(BaseModel? other) {
+  GenerateDartModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
-    final b = other?.toJson();
-    final c = {...a, ...?b};
-    return GenerateDartModel.fromJson(c);
+    final b = other?.toJson() ?? {};
+    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    return GenerateDartModel.fromJson(data);
   }
 
   //

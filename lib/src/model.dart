@@ -99,11 +99,11 @@ class Model extends BaseModel {
   //
 
   @override
-  Model copyWith(BaseModel? other) {
-    return Model({
-      ...this.toJson(),
-      ...?other?.toJson(),
-    });
+  Model copyWith(BaseModel? other, {bool merge = false}) {
+    final a = this.toJson();
+    final b = other?.toJson() ?? {};
+    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    return Model(data);
   }
 
   //

@@ -12,7 +12,7 @@ export 'base_model.dart';
 export 'types.dart';
 export 'model.dart';
 export 'data_ref/data_ref_model.dart';
-export 'annotations/field/field.dart';
+export 'annotations/field_model/field_model.dart';
 export 'annotations/generate_dart_model/generate_dart_model.dart';
 
 // --- PRIVATE FILES (EXCLUDED) ---
