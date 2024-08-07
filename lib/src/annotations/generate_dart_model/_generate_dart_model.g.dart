@@ -240,8 +240,9 @@ class GenerateDartModel extends _GenerateDartModel {
   GenerateDartModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
     final b = other?.toJson() ?? {};
-    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
-    return GenerateDartModel.fromJson(data);
+    final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    final data1 = letMapOrNull<String, dynamic>(data0);
+    return GenerateDartModel.fromJson(data1);
   }
 
   //

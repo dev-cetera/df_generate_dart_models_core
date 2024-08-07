@@ -152,7 +152,10 @@ class FieldModel extends _FieldModel {
           ?.toList();
       final fieldType = otherData?['fieldType'];
       final nullable = letBool(otherData?['nullable']);
-      final child = otherData?['child'];
+      final child = () {
+        final a = letMap<String, dynamic>(otherData?['child']);
+        return a != null ? FieldModel.fromJson(a) : null;
+      }();
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -208,7 +211,7 @@ class FieldModel extends _FieldModel {
           ?.toList();
       final fieldType0 = this.fieldType;
       final nullable0 = this.nullable;
-      final child0 = this.child;
+      final child0 = this.child?.toJson();
       final withNulls = {
         'nullable': nullable0,
         'fieldType': fieldType0,
@@ -230,8 +233,9 @@ class FieldModel extends _FieldModel {
   FieldModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
     final b = other?.toJson() ?? {};
-    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
-    return FieldModel.fromJson(data);
+    final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    final data1 = letMapOrNull<String, dynamic>(data0);
+    return FieldModel.fromJson(data1);
   }
 
   //
@@ -253,7 +257,7 @@ class FieldModel extends _FieldModel {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class FieldFieldNames {
+final class FieldModelFieldNames {
   //
   //
   //
@@ -267,5 +271,5 @@ final class FieldFieldNames {
   //
   //
 
-  const FieldFieldNames._();
+  const FieldModelFieldNames._();
 }

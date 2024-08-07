@@ -210,8 +210,9 @@ class DataRefModel extends _DataRefModel {
   DataRefModel copyWith(BaseModel? other, {bool merge = false}) {
     final a = this.toJson();
     final b = other?.toJson() ?? {};
-    final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
-    return DataRefModel.fromJson(data);
+    final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
+    final data1 = letMapOrNull<String, dynamic>(data0);
+    return DataRefModel.fromJson(data1);
   }
 
   //
