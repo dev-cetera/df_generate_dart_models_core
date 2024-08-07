@@ -5,6 +5,7 @@
 - Released @ 8/2024 (UTC)
 - fix: Fix type error bug in copyWith function in template
 - fix: Fix annotation models
+- chore: Upgrade dependencies
 
 ## [0.2.0]
 
