@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.2]
+
+- Released @ 8/2024 (UTC)
+- chore: Update dependencies and export df_string package
+
 ## [0.2.1]
 
 - Released @ 8/2024 (UTC)
