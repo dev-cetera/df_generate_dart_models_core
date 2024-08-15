@@ -1,8 +1,9 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. See LICENSE file
-// in root directory.
+// Dart/Flutter (DF) Packages by DevCetra.com & contributors. Use of this
+// source code is governed by an MIT-style license that can be found in the
+// LICENSE file.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
@@ -25,14 +26,14 @@ abstract class BaseModel {
   //
 
   /// Returns a JSON string representation of the BaseModel.
-  String toJsonString() => jsonEncode(this.sortedJson());
+  String toJsonString() => jsonEncode(sortedJson());
 
   //
   //
   //
 
   @override
-  String toString() => this.toJsonString();
+  String toString() => toJsonString();
 
   //
   //
@@ -53,8 +54,7 @@ abstract class BaseModel {
     bool includeNulls = false,
   }) {
     final a = toJson(includeNulls: includeNulls);
-    final b = a.keys.toList(growable: false)
-      ..sort((k1, k2) => k1.compareTo(k2));
+    final b = a.keys.toList(growable: false)..sort((k1, k2) => k1.compareTo(k2));
     final c = {for (var k in b) k: a[k] as dynamic};
     return c;
   }
@@ -77,8 +77,8 @@ abstract class BaseModel {
   /// the maximum length of a URL.
   Uri toUrl() {
     return Uri(
-      path: this.$className,
-      queryParameters: this.toJson().mapValues((v) => v.toString()),
+      path: $className,
+      queryParameters: toJson().mapValues((v) => v.toString()),
     );
   }
 
@@ -90,8 +90,7 @@ abstract class BaseModel {
   /// `DeepCollectionEquality` and returns `true` if they are equal.
   bool equals(dynamic other) {
     if (other is BaseModel) {
-      return const DeepCollectionEquality()
-          .equals(other.toJson(), this.toJson());
+      return const DeepCollectionEquality().equals(other.toJson(), toJson());
     } else {
       return false;
     }

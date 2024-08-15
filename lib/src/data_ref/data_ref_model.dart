@@ -1,8 +1,9 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. See LICENSE file
-// in root directory.
+// Dart/Flutter (DF) Packages by DevCetra.com & contributors. Use of this
+// source code is governed by an MIT-style license that can be found in the
+// LICENSE file.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
@@ -28,17 +29,17 @@ abstract class _DataRefModel extends Model {
 
 extension DataRefModelExtension on DataRefModel {
   /// The collection path of the model for databases like Firestore.
-  String? get collectionPath => this.collection?.join('/');
+  String? get collectionPath => collection?.join('/');
 
   /// The document path of the model for databases like Firestore.
-  String get docPath => this.doc.join('/');
+  String get docPath => doc.join('/');
 
   /// The document path of the model.
-  List<String> get doc => [...?this.collection, this.id].nonNulls.toList();
+  List<String> get doc => [...?collection, id].nonNulls.toList();
 
   /// Adds two [DataRefModel] objects.
   DataRefModel operator +(DataRefModel other) {
-    final temp = [...this.doc, ...other.doc];
+    final temp = [...doc, ...other.doc];
     if (temp.isNotEmpty) {
       final length = temp.length;
       if (length.isEven) {

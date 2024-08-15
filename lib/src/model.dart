@@ -1,8 +1,9 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. See LICENSE file
-// in root directory.
+// Dart/Flutter (DF) Packages by DevCetra.com & contributors. Use of this
+// source code is governed by an MIT-style license that can be found in the
+// LICENSE file.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
@@ -17,7 +18,7 @@ class Model extends BaseModel {
   //
 
   final Map<String, dynamic> _data;
-  Map<String, dynamic> get data => this._data;
+  Map<String, dynamic> get data => _data;
 
   //
   //
@@ -27,7 +28,7 @@ class Model extends BaseModel {
 
   const Model.fromJson([
     Map<String, dynamic>? otherData,
-  ]) : this._data = otherData ?? const {};
+  ]) : _data = otherData ?? const {};
 
   factory Model.from(BaseModel? other) {
     return Model(other?.toJson() ?? {});
@@ -67,21 +68,21 @@ class Model extends BaseModel {
   //
   //
 
-  DataRefModel? get ref => DataRefModel.fromJsonOrNull(this._data['ref']);
+  DataRefModel? get ref => DataRefModel.fromJsonOrNull(_data['ref']);
 
   //
   //
   //
 
   @override
-  int get hashCode => this.toString().hashCode;
+  int get hashCode => toString().hashCode;
 
   //
   //
   //
 
   @override
-  bool operator ==(Object other) => this.equals(other);
+  bool operator ==(Object other) => equals(other);
 
   //
   //
@@ -91,7 +92,7 @@ class Model extends BaseModel {
   Map<String, dynamic> toJson({
     bool includeNulls = false,
   }) {
-    return includeNulls ? this._data : this._data.nonNulls;
+    return includeNulls ? _data : _data.nonNulls;
   }
 
   //
@@ -100,7 +101,7 @@ class Model extends BaseModel {
 
   @override
   Model copyWith(BaseModel? other, {bool merge = false}) {
-    final a = this.toJson();
+    final a = toJson();
     final b = other?.toJson() ?? {};
     final data = merge ? mergeDataDeep(a, b) : {...a, ...b};
     return Model(data);
