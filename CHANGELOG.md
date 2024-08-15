@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0]
+
+- Released @ 8/2024 (UTC)
+- chore: Update dependencies, linter rules, docs and topics in pubspec.yaml
+
 ## [0.2.3]
 
 - Released @ 8/2024 (UTC)
