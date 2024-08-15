@@ -9,7 +9,7 @@ Dart & Flutter Packages by DevCetra.com & contributors.
 
 ## Summary
 
-A package that provides core dependencies for models generated with df_generate_dart_models_core.
+A package that provides core dependencies for models generated with `df_generate_dart_models`.
 
 ## Installation
 
