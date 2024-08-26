@@ -121,7 +121,7 @@ class GenerateDartModel extends _GenerateDartModel {
   ) {
     try {
       if (source!.isNotEmpty) {
-        final decoded = jsonDecode(source);
+        final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
         return GenerateDartModel.fromJson(decoded);
       } else {
         return const GenerateDartModel.c2();
@@ -147,7 +147,7 @@ class GenerateDartModel extends _GenerateDartModel {
   ) {
     try {
       final className = otherData?['className']?.toString().trim().nullIfEmpty;
-      final fields = letSet(otherData?['fields'])
+      final fields = letSetOrNull<dynamic>(otherData?['fields'])
           ?.map(
             (p0) => p0,
           )

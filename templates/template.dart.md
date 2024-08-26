@@ -104,7 +104,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   ) {
     try {
       if (source!.isNotEmpty) {
-        final decoded = jsonDecode(source);
+        final decoded = leMapOrNull<String, dynamic>(jsonDecode(source));
         return ___CLASS_NAME___.fromJson(decoded);
       } else {
         return const ___CLASS_NAME___.c2();

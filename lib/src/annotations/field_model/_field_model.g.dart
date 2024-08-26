@@ -118,7 +118,7 @@ class FieldModel extends _FieldModel {
   ) {
     try {
       if (source!.isNotEmpty) {
-        final decoded = jsonDecode(source);
+        final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
         return FieldModel.fromJson(decoded);
       } else {
         return const FieldModel.c2();
@@ -143,7 +143,7 @@ class FieldModel extends _FieldModel {
     Map<String, dynamic>? otherData,
   ) {
     try {
-      final fieldPath = letList(otherData?['fieldPath'])
+      final fieldPath = letListOrNull<dynamic>(otherData?['fieldPath'])
           ?.map(
             (p0) => p0?.toString().trim().nullIfEmpty,
           )

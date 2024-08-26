@@ -106,7 +106,7 @@ class DataRefModel extends _DataRefModel {
   ) {
     try {
       if (source!.isNotEmpty) {
-        final decoded = jsonDecode(source);
+        final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
         return DataRefModel.fromJson(decoded);
       } else {
         return const DataRefModel.c2();
@@ -132,7 +132,7 @@ class DataRefModel extends _DataRefModel {
   ) {
     try {
       final id = otherData?['id']?.toString().trim().nullIfEmpty;
-      final collection = letList(otherData?['collection'])
+      final collection = letListOrNull<dynamic>(otherData?['collection'])
           ?.map(
             (p0) => p0?.toString().trim().nullIfEmpty,
           )
