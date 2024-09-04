@@ -151,9 +151,9 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType = otherData?['fieldType'];
-      final nullable = letBool(otherData?['nullable']);
+      final nullable = letBoolOrNull(otherData?['nullable']);
       final child = () {
-        final a = letMap<String, dynamic>(otherData?['child']);
+        final a = letMapOrNull<String, dynamic>(otherData?['child']);
         return a != null ? FieldModel.fromJson(a) : null;
       }();
       return FieldModel(

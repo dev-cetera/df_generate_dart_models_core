@@ -154,7 +154,7 @@ class GenerateDartModel extends _GenerateDartModel {
           .nonNulls
           .nullIfEmpty
           ?.toSet();
-      final shouldInherit = letBool(otherData?['shouldInherit']);
+      final shouldInherit = letBoolOrNull(otherData?['shouldInherit']);
       final inheritanceConstructor =
           otherData?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
       final keyStringCase =
