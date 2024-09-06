@@ -65,6 +65,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static ___CLASS_NAME___? fromOrNull(
     BaseModel? other,
   ) {
@@ -82,6 +83,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static ___CLASS_NAME___? ofOrNull(
     ___CLASS_NAME___? other,
   ) {
@@ -205,17 +207,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class ___CLASS_NAME___FieldNames {
-  //
-  //
-  //
-
+abstract final class ___CLASS_NAME___FieldNames {
   ___FIELD_NAMES___
-
-  //
-  //
-  //
-
-  const ___CLASS_NAME___FieldNames._();
 }
 ```
