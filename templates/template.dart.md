@@ -11,6 +11,7 @@
 // ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
+// ignore_for_file: require_trailing_commas
 // ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
@@ -190,7 +191,10 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   //
 
   @override
-  ___CLASS_NAME___ copyWith(BaseModel? other, {bool merge = false}) {
+  ___CLASS_NAME___ copyWith(
+    BaseModel? other, {
+    bool merge = false,
+  }) {
     final a = this.toJson();
     final b = other?.toJson() ?? {};
     final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
