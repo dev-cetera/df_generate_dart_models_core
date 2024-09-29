@@ -70,7 +70,8 @@ class Model extends BaseModel {
   //
   //
 
-  DataRefModel? get ref => DataRefModel.fromJsonOrNull(letMapOrNull<String, dynamic>(_data['ref']));
+  DataRefModel? get ref =>
+      DataRefModel.fromJsonOrNull(letMapOrNull<String, dynamic>(_data['ref']));
 
   //
   //

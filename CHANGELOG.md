@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.0]
+
+- Released @ 9/2024 (UTC)
+- breaking: Update template and add mergeWith, copyWith and copyWithout methods
+
 ## [0.3.1]
 
 - Released @ 9/2024 (UTC)
