@@ -104,7 +104,7 @@ class Model extends BaseModel {
   @override
   Model mergeWith(
     BaseModel? other, {
-    bool deepMerge = true,
+    bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};

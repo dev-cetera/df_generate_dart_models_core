@@ -193,7 +193,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   @override
   ___CLASS_NAME___ mergeWith(
     BaseModel? other, {
-    bool deepMerge = true,
+    bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};

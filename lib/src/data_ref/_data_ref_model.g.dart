@@ -209,7 +209,7 @@ class DataRefModel extends _DataRefModel {
   @override
   DataRefModel mergeWith(
     BaseModel? other, {
-    bool deepMerge = true,
+    bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};

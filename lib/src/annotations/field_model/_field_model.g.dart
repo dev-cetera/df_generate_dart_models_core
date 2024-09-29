@@ -232,7 +232,7 @@ class FieldModel extends _FieldModel {
   @override
   FieldModel mergeWith(
     BaseModel? other, {
-    bool deepMerge = true,
+    bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};

@@ -66,9 +66,8 @@ abstract class BaseModel {
   //
 
   /// Returns a new copy of the BaseModel with the fields updated from the
-  /// [other] BaseModel. Set [deepMerge] to `false` to avoid merging nested
-  /// objects.
-  BaseModel mergeWith(BaseModel? other, {bool deepMerge = true});
+  /// [other] BaseModel. Set [deepMerge] to `true` to merge nested objects.
+  BaseModel mergeWith(BaseModel? other, {bool deepMerge = false});
 
   //
   //

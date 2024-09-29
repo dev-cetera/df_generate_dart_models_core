@@ -237,7 +237,7 @@ class GenerateDartModel extends _GenerateDartModel {
   @override
   GenerateDartModel mergeWith(
     BaseModel? other, {
-    bool deepMerge = true,
+    bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
