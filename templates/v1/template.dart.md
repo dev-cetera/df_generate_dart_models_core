@@ -205,7 +205,6 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   //
   //
 
-  @override
   ___CLASS_NAME___ copyWith({
     ___COPY_WITH_PARAMS___
   }) {
@@ -218,7 +217,6 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   //
   //
 
-  @override
   ___CLASS_NAME___ copyWithout({
     ___COPY_WITHOUT_PARAMS___
   }) {
