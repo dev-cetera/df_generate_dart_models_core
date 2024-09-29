@@ -10,6 +10,7 @@
 // ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
+// ignore_for_file: require_trailing_commas
 // ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
@@ -67,6 +68,7 @@ class DataRefModel extends _DataRefModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static DataRefModel? fromOrNull(
     BaseModel? other,
   ) {
@@ -84,6 +86,7 @@ class DataRefModel extends _DataRefModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static DataRefModel? ofOrNull(
     DataRefModel? other,
   ) {
@@ -182,9 +185,8 @@ class DataRefModel extends _DataRefModel {
     bool includeNulls = false,
   }) {
     try {
-      final id0 = this.id?.trim().nullIfEmpty;
-      final collection0 = this
-          .collection
+      final id0 = id?.trim().nullIfEmpty;
+      final collection0 = collection
           ?.map(
             (p0) => p0?.trim().nullIfEmpty,
           )
@@ -221,26 +223,46 @@ class DataRefModel extends _DataRefModel {
   //
   //
 
+  DataRefModel copyWith({
+    String? id,
+    List<String>? collection,
+  }) {
+    return DataRefModel.c2(
+      id: id ?? this.id,
+      collection: collection ?? this.collection,
+    );
+  }
+
+  //
+  //
+  //
+
+  DataRefModel copyWithout({
+    bool id = true,
+    bool collection = true,
+  }) {
+    return DataRefModel.c2(
+      id: id ? this.id : null,
+      collection: collection ? this.collection : null,
+    );
+  }
+
+  //
+  //
+  //
+
   // id.
+  @pragma('vm:prefer-inline')
   String? get idField => this.id;
 
   // collection.
+  @pragma('vm:prefer-inline')
   List<String>? get collectionField => this.collection;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class DataRefModelFieldNames {
-  //
-  //
-  //
-
+abstract final class DataRefModelFieldNames {
   static const id = 'id';
   static const collection = 'collection';
-
-  //
-  //
-  //
-
-  const DataRefModelFieldNames._();
 }
