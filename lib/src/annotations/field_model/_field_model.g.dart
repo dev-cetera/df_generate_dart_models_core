@@ -230,12 +230,14 @@ class FieldModel extends _FieldModel {
   //
 
   @override
-  FieldModel copyWith(BaseModel? other, {bool merge = false}) {
-    final a = this.toJson();
+  FieldModel mergeWith(
+    BaseModel? other, {
+    bool deepMerge = true,
+  }) {
+    final a = toJson();
     final b = other?.toJson() ?? {};
-    final data0 = merge ? mergeDataDeep(a, b) : {...a, ...b};
-    final data1 = letMapOrNull<String, dynamic>(data0);
-    return FieldModel.fromJson(data1);
+    final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
+    return FieldModel.fromJson(data.cast());
   }
 
   //

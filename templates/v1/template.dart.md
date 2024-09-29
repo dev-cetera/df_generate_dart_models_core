@@ -1,3 +1,4 @@
+```dart
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
@@ -10,163 +11,155 @@
 // ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
+// ignore_for_file: require_trailing_commas
 // ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
 // ignore_for_file: unnecessary_this
 
-part of 'data_ref_model.dart';
+part of '___CLASS_FILE_NAME___';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class DataRefModel extends _DataRefModel {
+class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   //
   //
   //
 
-  static const CLASS_NAME = 'DataRefModel';
+  static const CLASS_NAME = '___CLASS_NAME___';
 
   @override
   String get $className => CLASS_NAME;
 
-  final String? id;
-  final List<String>? collection;
+  ___FIELD_DECLARATIONS_A___
 
   //
   //
   //
 
-  const DataRefModel({
-    this.id,
-    this.collection,
-  });
+  const ___CLASS_NAME___({
+    ___PARAMS_A1___
+  }) ___SUPER_CONSTRUCTOR___;
 
-  const DataRefModel.c2({
-    this.id,
-    this.collection,
-  });
+  const ___CLASS_NAME___.c2({
+    ___PARAMS_A2___
+  }) ___SUPER_CONSTRUCTOR___;
 
-  factory DataRefModel.c3({
-    String? id,
-    List<String>? collection,
+
+  factory ___CLASS_NAME___.c3({
+    ___PARAMS_A3___
   }) {
-    return DataRefModel(
-      id: id,
-      collection: collection,
+    ___FIELD_ASSERTIONS___
+    return ___CLASS_NAME___(
+      ___ARGS_A___
     );
   }
 
-  factory DataRefModel.from(
+  factory ___CLASS_NAME___.from(
     BaseModel? other,
   ) {
     try {
       return fromOrNull(other)!;
     } catch (e) {
-      assert(false, 'DataRefModel.from: $e');
+      assert(false, '___CLASS_NAME___.from: $e');
       rethrow;
     }
   }
 
-  static DataRefModel? fromOrNull(
+  @pragma('vm:prefer-inline')
+  static ___CLASS_NAME___? fromOrNull(
     BaseModel? other,
   ) {
     return fromJsonOrNull(other?.toJson())!;
   }
 
-  factory DataRefModel.of(
-    DataRefModel other,
+  factory ___CLASS_NAME___.of(
+    ___CLASS_NAME___ other,
   ) {
     try {
       return ofOrNull(other)!;
     } catch (e) {
-      assert(false, 'DataRefModel.of: $e');
+      assert(false, '___CLASS_NAME___.of: $e');
       rethrow;
     }
   }
 
-  static DataRefModel? ofOrNull(
-    DataRefModel? other,
+  @pragma('vm:prefer-inline')
+  static ___CLASS_NAME___? ofOrNull(
+    ___CLASS_NAME___? other,
   ) {
     return fromJsonOrNull(other?.toJson());
   }
 
-  factory DataRefModel.fromJsonString(
+  factory ___CLASS_NAME___.fromJsonString(
     String source,
   ) {
     try {
       return fromJsonStringOrNull(source)!;
     } catch (e) {
-      assert(false, 'DataRefModel.fromJsonString: $e');
+     assert(false, '___CLASS_NAME___.fromJsonString: $e');
       rethrow;
     }
   }
 
-  static DataRefModel? fromJsonStringOrNull(
+  static ___CLASS_NAME___? fromJsonStringOrNull(
     String? source,
   ) {
     try {
       if (source!.isNotEmpty) {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
-        return DataRefModel.fromJson(decoded);
+        return ___CLASS_NAME___.fromJson(decoded);
       } else {
-        return const DataRefModel.c2();
+        return const ___CLASS_NAME___.c2();
       }
     } catch (_) {
       return null;
     }
   }
 
-  factory DataRefModel.fromJson(
+  factory ___CLASS_NAME___.fromJson(
     Map<String, dynamic>? otherData,
   ) {
     try {
       return fromJsonOrNull(otherData)!;
     } catch (e) {
-      assert(false, 'DataRefModel.fromJson: $e');
+      assert(false, '___CLASS_NAME___.fromJson: $e');
       rethrow;
     }
   }
 
-  static DataRefModel? fromJsonOrNull(
+  static ___CLASS_NAME___? fromJsonOrNull(
     Map<String, dynamic>? otherData,
   ) {
     try {
-      final id = otherData?['id']?.toString().trim().nullIfEmpty;
-      final collection = letListOrNull<dynamic>(otherData?['collection'])
-          ?.map(
-            (p0) => p0?.toString().trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
-      return DataRefModel(
-        id: id,
-        collection: collection,
+      ___FROM_JSON_A1___
+      return ___CLASS_NAME___(
+        ___FROM_JSON_A2___
       );
     } catch (e) {
       return null;
     }
   }
 
-  factory DataRefModel.fromUri(
+  factory ___CLASS_NAME___.fromUri(
     Uri? uri,
   ) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
-      assert(false, 'DataRefModel.fromUri: $e');
+      assert(false, '___CLASS_NAME___.fromUri: $e');
       rethrow;
     }
   }
 
-  static DataRefModel? fromUriOrNull(
+  static ___CLASS_NAME___? fromUriOrNull(
     Uri? uri,
   ) {
     try {
       if (uri != null && uri.path == CLASS_NAME) {
-        return DataRefModel.fromJson(uri.queryParameters);
+        return ___CLASS_NAME___.fromJson(uri.queryParameters);
       } else {
-        return const DataRefModel.c2();
+        return const ___CLASS_NAME___.c2();
       }
     } catch (_) {
       return null;
@@ -182,22 +175,13 @@ class DataRefModel extends _DataRefModel {
     bool includeNulls = false,
   }) {
     try {
-      final id0 = this.id?.trim().nullIfEmpty;
-      final collection0 = this
-          .collection
-          ?.map(
-            (p0) => p0?.trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
+      ___TO_JSON_A1___
       final withNulls = {
-        'id': id0,
-        'collection': collection0,
+        ___TO_JSON_A2___
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
-      assert(false, 'DataRefModel.toJson: $e');
+      assert(false, '___CLASS_NAME___.toJson: $e');
       rethrow;
     }
   }
@@ -207,40 +191,52 @@ class DataRefModel extends _DataRefModel {
   //
 
   @override
-  DataRefModel mergeWith(
+  ___CLASS_NAME___ mergeWith(
     BaseModel? other, {
     bool deepMerge = true,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return DataRefModel.fromJson(data.cast());
+    return ___CLASS_NAME___.fromJson(data.cast());
   }
 
   //
   //
   //
 
-  // id.
-  String? get idField => this.id;
+  @override
+  ___CLASS_NAME___ copyWith({
+    ___COPY_WITH_PARAMS___
+  }) {
+    return ___CLASS_NAME___.c2(
+      ___COPY_WITH_ARGS___
+    );
+  }
 
-  // collection.
-  List<String>? get collectionField => this.collection;
+  //
+  //
+  //
+
+  @override
+  ___CLASS_NAME___ copyWithout({
+    ___COPY_WITHOUT_PARAMS___
+  }) {
+    return ___CLASS_NAME___.c2(
+      ___COPY_WITHOUT_ARGS___
+    );
+  }
+
+  //
+  //
+  //
+
+  ___GETTERS_A___
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class DataRefModelFieldNames {
-  //
-  //
-  //
-
-  static const id = 'id';
-  static const collection = 'collection';
-
-  //
-  //
-  //
-
-  const DataRefModelFieldNames._();
+abstract final class ___CLASS_NAME___FieldNames {
+  ___FIELD_NAMES___
 }
+```

@@ -102,11 +102,14 @@ class Model extends BaseModel {
   //
 
   @override
-  Model copyWith(BaseModel? other, {bool merge = false}) {
+  Model mergeWith(
+    BaseModel? other, {
+    bool deepMerge = true,
+  }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
-    final data = (merge ? mergeDataDeep(a, b) : {...a, ...b}) as Map<String, dynamic>;
-    return Model(data);
+    final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
+    return Model.fromJson(data.cast());
   }
 
   //
