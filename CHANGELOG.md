@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.1]
+
+- Released @ 9/2024 (UTC)
+- chore: Improve FIeldModel and GenerateDartModel
+
 ## [0.4.0]
 
 - Released @ 9/2024 (UTC)
