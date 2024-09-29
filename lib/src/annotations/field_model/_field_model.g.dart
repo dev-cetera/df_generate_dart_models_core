@@ -10,6 +10,7 @@
 // ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
+// ignore_for_file: require_trailing_commas
 // ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
@@ -79,6 +80,7 @@ class FieldModel extends _FieldModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static FieldModel? fromOrNull(
     BaseModel? other,
   ) {
@@ -96,6 +98,7 @@ class FieldModel extends _FieldModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static FieldModel? ofOrNull(
     FieldModel? other,
   ) {
@@ -151,7 +154,7 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType = otherData?['fieldType'];
-      final nullable = letBoolOrNull(otherData?['nullable']);
+      final nullable = letAsOrNull<bool>(otherData?['nullable']);
       final child = () {
         final a = letMapOrNull<String, dynamic>(otherData?['child']);
         return a != null ? FieldModel.fromJson(a) : null;
@@ -201,17 +204,16 @@ class FieldModel extends _FieldModel {
     bool includeNulls = false,
   }) {
     try {
-      final fieldPath0 = this
-          .fieldPath
+      final fieldPath0 = fieldPath
           ?.map(
             (p0) => p0?.trim().nullIfEmpty,
           )
           .nonNulls
           .nullIfEmpty
           ?.toList();
-      final fieldType0 = this.fieldType;
-      final nullable0 = this.nullable;
-      final child0 = this.child?.toJson();
+      final fieldType0 = fieldType;
+      final nullable0 = nullable;
+      final child0 = child?.toJson();
       final withNulls = {
         'nullable': nullable0,
         'fieldType': fieldType0,
@@ -244,34 +246,64 @@ class FieldModel extends _FieldModel {
   //
   //
 
+  FieldModel copyWith({
+    List<String>? fieldPath,
+    dynamic? fieldType,
+    bool? nullable,
+    FieldModel? child,
+  }) {
+    return FieldModel.c2(
+      fieldPath: fieldPath ?? this.fieldPath,
+      fieldType: fieldType ?? this.fieldType,
+      nullable: nullable ?? this.nullable,
+      child: child ?? this.child,
+    );
+  }
+
+  //
+  //
+  //
+
+  FieldModel copyWithout({
+    bool fieldPath = true,
+    bool fieldType = true,
+    bool nullable = true,
+    bool child = true,
+  }) {
+    return FieldModel.c2(
+      fieldPath: fieldPath ? this.fieldPath : null,
+      fieldType: fieldType ? this.fieldType : null,
+      nullable: nullable ? this.nullable : null,
+      child: child ? this.child : null,
+    );
+  }
+
+  //
+  //
+  //
+
   // fieldPath.
+  @pragma('vm:prefer-inline')
   List<String>? get fieldPathField => this.fieldPath;
 
   // fieldType.
+  @pragma('vm:prefer-inline')
   dynamic get fieldTypeField => this.fieldType!;
 
   // nullable.
+  @pragma('vm:prefer-inline')
   bool? get nullableField => this.nullable;
 
   // child.
+  @pragma('vm:prefer-inline')
   FieldModel? get childField => this.child;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class FieldModelFieldNames {
-  //
-  //
-  //
-
+abstract final class FieldModelFieldNames {
   static const fieldPath = 'fieldPath';
   static const fieldType = 'fieldType';
   static const nullable = 'nullable';
   static const child = 'child';
-
-  //
-  //
-  //
-
-  const FieldModelFieldNames._();
 }

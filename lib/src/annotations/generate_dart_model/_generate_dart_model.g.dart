@@ -10,6 +10,7 @@
 // ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
+// ignore_for_file: require_trailing_commas
 // ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
@@ -82,6 +83,7 @@ class GenerateDartModel extends _GenerateDartModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static GenerateDartModel? fromOrNull(
     BaseModel? other,
   ) {
@@ -99,6 +101,7 @@ class GenerateDartModel extends _GenerateDartModel {
     }
   }
 
+  @pragma('vm:prefer-inline')
   static GenerateDartModel? ofOrNull(
     GenerateDartModel? other,
   ) {
@@ -154,7 +157,7 @@ class GenerateDartModel extends _GenerateDartModel {
           .nonNulls
           .nullIfEmpty
           ?.toSet();
-      final shouldInherit = letBoolOrNull(otherData?['shouldInherit']);
+      final shouldInherit = letAsOrNull<bool>(otherData?['shouldInherit']);
       final inheritanceConstructor =
           otherData?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
       final keyStringCase =
@@ -205,19 +208,18 @@ class GenerateDartModel extends _GenerateDartModel {
     bool includeNulls = false,
   }) {
     try {
-      final className0 = this.className?.trim().nullIfEmpty;
-      final fields0 = this
-          .fields
+      final className0 = className?.trim().nullIfEmpty;
+      final fields0 = fields
           ?.map(
             (p0) => p0,
           )
           .nonNulls
           .nullIfEmpty
           ?.toList();
-      final shouldInherit0 = this.shouldInherit;
+      final shouldInherit0 = shouldInherit;
       final inheritanceConstructor0 =
-          this.inheritanceConstructor?.trim().nullIfEmpty;
-      final keyStringCase0 = this.keyStringCase?.trim().nullIfEmpty;
+          inheritanceConstructor?.trim().nullIfEmpty;
+      final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
       final withNulls = {
         'shouldInherit': shouldInherit0,
         'keyStringCase': keyStringCase0,
@@ -251,38 +253,75 @@ class GenerateDartModel extends _GenerateDartModel {
   //
   //
 
+  GenerateDartModel copyWith({
+    String? className,
+    Set<dynamic>? fields,
+    bool? shouldInherit,
+    String? inheritanceConstructor,
+    String? keyStringCase,
+  }) {
+    return GenerateDartModel.c2(
+      className: className ?? this.className,
+      fields: fields ?? this.fields,
+      shouldInherit: shouldInherit ?? this.shouldInherit,
+      inheritanceConstructor:
+          inheritanceConstructor ?? this.inheritanceConstructor,
+      keyStringCase: keyStringCase ?? this.keyStringCase,
+    );
+  }
+
+  //
+  //
+  //
+
+  GenerateDartModel copyWithout({
+    bool className = true,
+    bool fields = true,
+    bool shouldInherit = true,
+    bool inheritanceConstructor = true,
+    bool keyStringCase = true,
+  }) {
+    return GenerateDartModel.c2(
+      className: className ? this.className : null,
+      fields: fields ? this.fields : null,
+      shouldInherit: shouldInherit ? this.shouldInherit : null,
+      inheritanceConstructor:
+          inheritanceConstructor ? this.inheritanceConstructor : null,
+      keyStringCase: keyStringCase ? this.keyStringCase : null,
+    );
+  }
+
+  //
+  //
+  //
+
   // className.
+  @pragma('vm:prefer-inline')
   String? get classNameField => this.className;
 
   // fields.
+  @pragma('vm:prefer-inline')
   Set<dynamic>? get fieldsField => this.fields;
 
   // shouldInherit.
+  @pragma('vm:prefer-inline')
   bool? get shouldInheritField => this.shouldInherit;
 
   // inheritanceConstructor.
+  @pragma('vm:prefer-inline')
   String? get inheritanceConstructorField => this.inheritanceConstructor;
 
   // keyStringCase.
+  @pragma('vm:prefer-inline')
   String? get keyStringCaseField => this.keyStringCase;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-final class GenerateDartModelFieldNames {
-  //
-  //
-  //
-
+abstract final class GenerateDartModelFieldNames {
   static const className = 'className';
   static const fields = 'fields';
   static const shouldInherit = 'shouldInherit';
   static const inheritanceConstructor = 'inheritanceConstructor';
   static const keyStringCase = 'keyStringCase';
-
-  //
-  //
-  //
-
-  const GenerateDartModelFieldNames._();
 }
