@@ -20,8 +20,8 @@ topics:
   - build-runner
   - cli
   - codegen
-  - database
-  - json
+  - freezed
+  - json-serializable
 
 ## -----------------------------------------------------------------------------
 
