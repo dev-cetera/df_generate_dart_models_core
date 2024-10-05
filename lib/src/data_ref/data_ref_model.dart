@@ -36,6 +36,9 @@ extension DataRefModelExtension on DataRefModel {
   /// The document path of the model for databases like Firestore.
   String get docPath => doc.join('/');
 
+  /// The table name of the model for databases like SQL.
+  String? get tableName => collection?.lastOrNull;
+
   /// The document path of the model.
   List<String> get doc => [...?collection, id].nonNulls.toList();
 
