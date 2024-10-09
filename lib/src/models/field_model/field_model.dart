@@ -38,14 +38,14 @@ part '_field_model.g.dart';
       fieldType: bool,
       nullable: true,
       description:
-          '[Unimplemented] Whether this field serves as a primary identifier, typically in database contexts.',
+          'Unimplemented: Whether this field serves as a primary identifier, typically in database contexts.',
     ),
     Field(
       fieldPath: ['fallback'],
       fieldType: Object,
       nullable: true,
       description:
-          '[Unimplemented] The default/fallback value for the field, to use in cases where the value is null',
+          'Unimplemented: The default/fallback value for the field, to use in cases where the value is null',
     ),
     Field(
       fieldPath: ['nullable'],
@@ -58,7 +58,7 @@ part '_field_model.g.dart';
       fieldType: List<FieldModel>,
       nullable: true,
       description:
-          '[Unimplemented] Children of this field, allowing for nested fields or complex structures.',
+          'Unimplemented: Children of this field, allowing for nested fields or complex structures.',
     ),
     Field(
       fieldPath: ['description'],
