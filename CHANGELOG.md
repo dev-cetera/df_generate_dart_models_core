@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.6]
+
+- Released @ 10/2024 (UTC)
+- refactor: Organize model fields
+
 ## [0.5.5]
 
 - Released @ 10/2024 (UTC)

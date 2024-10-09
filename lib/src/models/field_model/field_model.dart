@@ -21,13 +21,15 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['fieldPath'],
     fieldType: List<String>,
     nullable: true,
-    description: 'The path of the field within the model, represented as a list of strings.',
+    description:
+        'The path of the field within the model, represented as a list of strings.',
   ),
   Field(
     fieldPath: ['fieldType'],
     fieldType: dynamic,
     nullable: true,
-    description: 'The data type of the field, such as "String", "int", or any dynamic type.',
+    description:
+        'The data type of the field, such as "String", "int", or any dynamic type.',
   ),
   Field(
     fieldPath: ['nullable'],
