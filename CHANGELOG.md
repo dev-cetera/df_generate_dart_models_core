@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.2]
+
+- Released @ 10/2024 (UTC)
+- feat: Add a new template and prepate for next version of df_generate_dart_models
+
 ## [0.5.1]
 
 - Released @ 10/2024 (UTC)

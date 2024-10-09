@@ -24,7 +24,8 @@ part '_referenced_model.g.dart';
       fieldType: String,
       nullable: false,
       primary: true,
-      description: 'The unique identifier for the document, serving as its primary key.',
+      description:
+          'The unique identifier for the document, serving as its primary key.',
     ),
     Field(
       fieldPath: ['ref'],
