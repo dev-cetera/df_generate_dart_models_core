@@ -16,51 +16,51 @@ part '_generate_dart_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+const GENERATE_DART_MODEL_FIELDS = {
+  Field(
+    fieldPath: ['className'],
+    fieldType: String,
+    nullable: true,
+    description:
+        'The class name to be used. If left null, the name is derived from the annotated class.',
+  ),
+  Field(
+    fieldPath: ['fields'],
+    fieldType: Set<dynamic>,
+    nullable: true,
+    description:
+        'A collection of fields, represented as [Field] instances, to be generated for the class.',
+  ),
+  Field(
+    fieldPath: ['shouldInherit'],
+    fieldType: bool,
+    nullable: true,
+    description:
+        'Determines whether the annotated class should be inherited by the generated class.',
+  ),
+  Field(
+    fieldPath: ['inheritanceConstructor'],
+    fieldType: String,
+    nullable: true,
+    description: 'The constructor from the superclass to use, if a custom one is required.',
+  ),
+  Field(
+    fieldPath: ['keyStringCase'],
+    fieldType: String,
+    nullable: true,
+    description: 'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
+  ),
+  Field(
+    fieldPath: ['description'],
+    fieldType: String,
+    nullable: true,
+    description: 'A comment describing the generated class.',
+  ),
+};
+
 @GenerateDartModel(
   shouldInherit: true,
-  fields: {
-    Field(
-      fieldPath: ['className'],
-      fieldType: String,
-      nullable: true,
-      description:
-          'The class name to be used. If left null, the name is derived from the annotated class.',
-    ),
-    Field(
-      fieldPath: ['fields'],
-      fieldType: Set<dynamic>,
-      nullable: true,
-      description:
-          'A collection of fields, represented as [Field] instances, to be generated for the class.',
-    ),
-    Field(
-      fieldPath: ['shouldInherit'],
-      fieldType: bool,
-      nullable: true,
-      description:
-          'Determines whether the annotated class should be inherited by the generated class.',
-    ),
-    Field(
-      fieldPath: ['inheritanceConstructor'],
-      fieldType: String,
-      nullable: true,
-      description:
-          'The constructor from the superclass to use, if a custom one is required.',
-    ),
-    Field(
-      fieldPath: ['keyStringCase'],
-      fieldType: String,
-      nullable: true,
-      description:
-          'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
-    ),
-    Field(
-      fieldPath: ['description'],
-      fieldType: String,
-      nullable: true,
-      description: 'A comment describing the generated class.',
-    ),
-  },
+  fields: GENERATE_DART_MODEL_FIELDS,
 )
 abstract class _GenerateDartModel extends Model {
   const _GenerateDartModel();

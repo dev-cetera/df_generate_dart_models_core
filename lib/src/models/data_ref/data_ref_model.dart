@@ -16,24 +16,26 @@ part '_data_ref_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+const DATA_REF_FIELDS = {
+  Field(
+    fieldPath: ['id'],
+    fieldType: String,
+    nullable: true,
+    description:
+        'The document ID within the database. If null, the reference points to a collection instead of a specific document.',
+  ),
+  Field(
+    fieldPath: ['collection'],
+    fieldType: List<String>,
+    nullable: false,
+    description:
+        'A list representing the hierarchical path where the document or collection resides.',
+  ),
+};
+
 @GenerateDartModel(
   shouldInherit: true,
-  fields: {
-    Field(
-      fieldPath: ['id'],
-      fieldType: String,
-      nullable: true,
-      description:
-          'The document ID within the database. If null, the reference points to a collection instead of a specific document.',
-    ),
-    Field(
-      fieldPath: ['collection'],
-      fieldType: List<String>,
-      nullable: false,
-      description:
-          'A list representing the hierarchical path where the document or collection resides.',
-    ),
-  },
+  fields: DATA_REF_FIELDS,
 )
 abstract class _DataRefModel extends Model {
   const _DataRefModel();

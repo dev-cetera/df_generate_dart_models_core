@@ -16,26 +16,27 @@ part '_referenced_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+const REFERENCED_MODEL_FIELDS = {
+  Field(
+    fieldPath: ['id'],
+    fieldType: String,
+    nullable: false,
+    primary: true,
+    description: 'The unique identifier for the document, serving as its primary key.',
+  ),
+  Field(
+    fieldPath: ['ref'],
+    fieldType: DataRefModel,
+    nullable: false,
+    primary: true,
+    description:
+        "A reference to this model that indicates the document's location within the database.",
+  ),
+};
+
 @GenerateDartModel(
   shouldInherit: true,
-  fields: {
-    Field(
-      fieldPath: ['id'],
-      fieldType: String,
-      nullable: false,
-      primary: true,
-      description:
-          'The unique identifier for the document, serving as its primary key.',
-    ),
-    Field(
-      fieldPath: ['ref'],
-      fieldType: DataRefModel,
-      nullable: false,
-      primary: true,
-      description:
-          "A reference to this model that indicates the document's location within the database.",
-    ),
-  },
+  fields: REFERENCED_MODEL_FIELDS,
 )
 abstract class _ReferencedModel extends Model {
   const _ReferencedModel();

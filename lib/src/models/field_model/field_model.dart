@@ -16,57 +16,57 @@ part '_field_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+const FIELD_MODEL_FIELDS = {
+  Field(
+    fieldPath: ['fieldPath'],
+    fieldType: List<String>,
+    nullable: true,
+    description: 'The path of the field within the model, represented as a list of strings.',
+  ),
+  Field(
+    fieldPath: ['fieldType'],
+    fieldType: dynamic,
+    nullable: true,
+    description: 'The data type of the field, such as "String", "int", or any dynamic type.',
+  ),
+  Field(
+    fieldPath: ['nullable'],
+    fieldType: bool,
+    nullable: true,
+    description: 'Whether the field can hold a null value.',
+  ),
+  Field(
+    fieldPath: ['children'],
+    fieldType: List<FieldModel>,
+    nullable: true,
+    description:
+        '[Unimplemented] Children of this field, allowing for nested fields or complex structures.',
+  ),
+  Field(
+    fieldPath: ['primary'],
+    fieldType: bool,
+    nullable: true,
+    description:
+        '[Unimplemented] Whether this field serves as a primary identifier, typically in database contexts.',
+  ),
+  Field(
+    fieldPath: ['fallback'],
+    fieldType: Object,
+    nullable: true,
+    description:
+        '[Unimplemented] The default/fallback value for the field, to use in cases where the value is null',
+  ),
+  Field(
+    fieldPath: ['description'],
+    fieldType: String,
+    nullable: true,
+    description: "A brief comment or explanation for the field's purpose.",
+  ),
+};
+
 @GenerateDartModel(
   shouldInherit: true,
-  fields: {
-    Field(
-      fieldPath: ['fieldPath'],
-      fieldType: List<String>,
-      nullable: true,
-      description:
-          'The path of the field within the model, represented as a list of strings.',
-    ),
-    Field(
-      fieldPath: ['fieldType'],
-      fieldType: dynamic,
-      nullable: true,
-      description:
-          'The data type of the field, such as "String", "int", or any dynamic type.',
-    ),
-    Field(
-      fieldPath: ['nullable'],
-      fieldType: bool,
-      nullable: true,
-      description: 'Whether the field can hold a null value.',
-    ),
-    Field(
-      fieldPath: ['children'],
-      fieldType: List<FieldModel>,
-      nullable: true,
-      description:
-          '[Unimplemented] Children of this field, allowing for nested fields or complex structures.',
-    ),
-    Field(
-      fieldPath: ['primary'],
-      fieldType: bool,
-      nullable: true,
-      description:
-          '[Unimplemented] Whether this field serves as a primary identifier, typically in database contexts.',
-    ),
-    Field(
-      fieldPath: ['fallback'],
-      fieldType: Object,
-      nullable: true,
-      description:
-          '[Unimplemented] The default/fallback value for the field, to use in cases where the value is null',
-    ),
-    Field(
-      fieldPath: ['description'],
-      fieldType: String,
-      nullable: true,
-      description: "A brief comment or explanation for the field's purpose.",
-    ),
-  },
+  fields: FIELD_MODEL_FIELDS,
 )
 
 /// Represents a field, its name, type, and its nullability. Similar to
