@@ -166,8 +166,6 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     }
   }
 
-
-
   /// Constructs a new instance of [___CLASS_NAME___],
   /// from the query parameters of [uri]. Throws if the conversion
   /// fails.
