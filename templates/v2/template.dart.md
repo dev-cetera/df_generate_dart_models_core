@@ -36,7 +36,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
   /// Constructs a new instance of [___CLASS_NAME___]
   /// from optional and required parameters.
   const ___CLASS_NAME___({
-    ___STRICT_PARAMS___
+    ___PARAMS___
   }) ___SUPER_CONSTRUCTOR___;
 
   /// Construcs a new instance of [___CLASS_NAME___],
