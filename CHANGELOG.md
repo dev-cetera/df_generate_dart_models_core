@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.5]
+
+- Released @ 10/2024 (UTC)
+- fix: Add missing code in field_model
+
 ## [0.5.4]
 
 - Released @ 10/2024 (UTC)
