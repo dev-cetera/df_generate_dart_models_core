@@ -65,7 +65,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     try {
       return fromOrNull(another)!;
     } catch (e) {
-      assert(false, '___CLASS_NAME___.from: $e');
+      assert(false, '$___CLASS_NAME___.from: $e');
       rethrow;
     }
   }
@@ -89,7 +89,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     try {
       return ofOrNull(another)!;
     } catch (e) {
-      assert(false, '___CLASS_NAME___.of: $e');
+      assert(false, '$___CLASS_NAME___.of: $e');
       rethrow;
     }
   }
@@ -113,7 +113,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
-     assert(false, '___CLASS_NAME___.fromJsonString: $e');
+     assert(false, '$___CLASS_NAME___.fromJsonString: $e');
       rethrow;
     }
   }
@@ -145,7 +145,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     try {
       return fromJsonOrNull(json)!;
     } catch (e) {
-      assert(false, '___CLASS_NAME___.fromJson: $e');
+      assert(false, '$___CLASS_NAME___.fromJson: $e');
       rethrow;
     }
   }
@@ -175,7 +175,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
-      assert(false, '___CLASS_NAME___.fromUri: $e');
+      assert(false, '$___CLASS_NAME___.fromUri: $e');
       rethrow;
     }
   }
@@ -208,7 +208,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
-      assert(false, '___CLASS_NAME___.toJson: $e');
+      assert(false, '$___CLASS_NAME___.toJson: $e');
       rethrow;
     }
   }
