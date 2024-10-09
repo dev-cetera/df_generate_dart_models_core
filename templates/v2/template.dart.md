@@ -129,7 +129,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
         return ___CLASS_NAME___.fromJson(decoded);
       } else {
-        return const ___CLASS_NAME___.assertRequired();
+        return ___CLASS_NAME___.assertRequired();
       }
     } catch (_) {
       return null;
@@ -190,7 +190,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
       if (uri != null && uri.path == CLASS_NAME) {
         return ___CLASS_NAME___.fromJson(uri.queryParameters);
       } else {
-        return const ___CLASS_NAME___.assertRequired();
+        return ___CLASS_NAME___.assertRequired();
       }
     } catch (_) {
       return null;
