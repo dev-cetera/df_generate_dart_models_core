@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.3]
+
+- Released @ 10/2024 (UTC)
+- chore: Regenerate models and add descriptive comments to fields
+
 ## [0.5.2]
 
 - Released @ 10/2024 (UTC)
