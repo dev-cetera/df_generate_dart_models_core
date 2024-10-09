@@ -23,29 +23,13 @@ part '_field_model.g.dart';
       fieldPath: ['fieldPath'],
       fieldType: List<String>,
       nullable: true,
-      description:
-          'The path of the field within the model, represented as a list of strings.',
+      description: 'The path of the field within the model, represented as a list of strings.',
     ),
     Field(
       fieldPath: ['fieldType'],
       fieldType: dynamic,
       nullable: true,
-      description:
-          'The data type of the field, such as "String", "int", or any dynamic type.',
-    ),
-    Field(
-      fieldPath: ['primary'],
-      fieldType: bool,
-      nullable: true,
-      description:
-          'Unimplemented: Whether this field serves as a primary identifier, typically in database contexts.',
-    ),
-    Field(
-      fieldPath: ['fallback'],
-      fieldType: Object,
-      nullable: true,
-      description:
-          'Unimplemented: The default/fallback value for the field, to use in cases where the value is null',
+      description: 'The data type of the field, such as "String", "int", or any dynamic type.',
     ),
     Field(
       fieldPath: ['nullable'],
@@ -58,7 +42,21 @@ part '_field_model.g.dart';
       fieldType: List<FieldModel>,
       nullable: true,
       description:
-          'Unimplemented: Children of this field, allowing for nested fields or complex structures.',
+          '[Unimplemented] Children of this field, allowing for nested fields or complex structures.',
+    ),
+    Field(
+      fieldPath: ['primary'],
+      fieldType: bool,
+      nullable: true,
+      description:
+          '[Unimplemented] Whether this field serves as a primary identifier, typically in database contexts.',
+    ),
+    Field(
+      fieldPath: ['fallback'],
+      fieldType: Object,
+      nullable: true,
+      description:
+          '[Unimplemented] The default/fallback value for the field, to use in cases where the value is null',
     ),
     Field(
       fieldPath: ['description'],
@@ -83,6 +81,7 @@ abstract class _FieldModel extends BaseModel {
         fieldPath: (this as FieldModel).fieldPath,
         fieldType: (this as FieldModel).fieldType,
         nullable: (this as FieldModel).nullable,
+        description: (this as FieldModel).description,
       );
 }
 
@@ -93,6 +92,7 @@ typedef TFieldRecord = ({
   List<String>? fieldPath,
   String? fieldType,
   bool? nullable,
+  String? description,
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
@@ -101,6 +101,7 @@ extension ToClassOnTFieldRecordExtension on TFieldRecord {
         fieldPath: fieldPath,
         fieldType: fieldType,
         nullable: nullable,
+        description: description,
       );
 }
 
@@ -116,10 +117,12 @@ final class FieldUtils {
       final fieldPath = fieldPathOrNull(unknown)!;
       final fieldType = fieldTypeOrNull(unknown) ?? 'dynamic';
       final nullable = nullableOrNull(unknown);
+      final description = descriptionOrNull(unknown);
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
         nullable: nullable,
+        description: description,
       );
     } catch (_) {
       return null;
@@ -162,6 +165,20 @@ final class FieldUtils {
     } catch (_) {
       try {
         return unknown.$3 as bool?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] or similar and
+  /// tries to get the [description] property, or returns `null`.
+  static String? descriptionOrNull(dynamic unknown) {
+    try {
+      return unknown.description as String;
+    } catch (_) {
+      try {
+        return unknown.$4 as String;
       } catch (_) {
         return null;
       }
