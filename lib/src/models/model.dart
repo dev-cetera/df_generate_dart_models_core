@@ -70,13 +70,6 @@ class Model extends BaseModel {
   //
   //
 
-  DataRefModel? get ref =>
-      DataRefModel.fromJsonOrNull(letMapOrNull<String, dynamic>(_data['ref']));
-
-  //
-  //
-  //
-
   @override
   int get hashCode => toString().hashCode;
 
