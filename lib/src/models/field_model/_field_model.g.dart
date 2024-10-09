@@ -32,8 +32,11 @@ class FieldModel extends _FieldModel {
 
   final List<String>? fieldPath;
   final dynamic? fieldType;
+  final bool? primary;
+  final Object? fallback;
   final bool? nullable;
-  final FieldModel? child;
+  final List<FieldModel>? children;
+  final String? description;
 
   //
   //
@@ -42,30 +45,42 @@ class FieldModel extends _FieldModel {
   const FieldModel({
     this.fieldPath,
     required this.fieldType,
+    this.primary,
+    this.fallback,
     this.nullable,
-    this.child,
+    this.children,
+    this.description,
   });
 
   const FieldModel.c2({
     this.fieldPath,
     this.fieldType,
+    this.primary,
+    this.fallback,
     this.nullable,
-    this.child,
+    this.children,
+    this.description,
   });
 
   factory FieldModel.c3({
     List<String>? fieldPath,
     dynamic? fieldType,
+    bool? primary,
+    Object? fallback,
     bool? nullable,
-    FieldModel? child,
+    List<FieldModel>? children,
+    String? description,
   }) {
     assert(fieldType != null);
 
     return FieldModel(
       fieldPath: fieldPath,
       fieldType: fieldType,
+      primary: primary,
+      fallback: fallback,
       nullable: nullable,
-      child: child,
+      children: children,
+      description: description,
     );
   }
 
@@ -154,16 +169,29 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType = otherData?['fieldType'];
+      final primary = letAsOrNull<bool>(otherData?['primary']);
+      final fallback = otherData?['fallback'];
       final nullable = letAsOrNull<bool>(otherData?['nullable']);
-      final child = () {
-        final a = letMapOrNull<String, dynamic>(otherData?['child']);
-        return a != null ? FieldModel.fromJson(a) : null;
-      }();
+      final children = letListOrNull<dynamic>(otherData?['children'])
+          ?.map(
+            (p0) => () {
+              final a = letMapOrNull<String, dynamic>(p0);
+              return a != null ? FieldModel.fromJson(a) : null;
+            }(),
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
+      final description =
+          otherData?['description']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
+        primary: primary,
+        fallback: fallback,
         nullable: nullable,
-        child: child,
+        children: children,
+        description: description,
       );
     } catch (e) {
       return null;
@@ -212,13 +240,25 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType0 = fieldType;
+      final primary0 = primary;
+      final fallback0 = fallback;
       final nullable0 = nullable;
-      final child0 = child?.toJson();
+      final children0 = children
+          ?.map(
+            (p0) => p0?.toJson(),
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
+      final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
+        'primary': primary0,
         'nullable': nullable0,
         'fieldType': fieldType0,
         'fieldPath': fieldPath0,
-        'child': child0,
+        'fallback': fallback0,
+        'description': description0,
+        'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -249,14 +289,20 @@ class FieldModel extends _FieldModel {
   FieldModel copyWith({
     List<String>? fieldPath,
     dynamic? fieldType,
+    bool? primary,
+    Object? fallback,
     bool? nullable,
-    FieldModel? child,
+    List<FieldModel>? children,
+    String? description,
   }) {
     return FieldModel.c2(
       fieldPath: fieldPath ?? this.fieldPath,
       fieldType: fieldType ?? this.fieldType,
+      primary: primary ?? this.primary,
+      fallback: fallback ?? this.fallback,
       nullable: nullable ?? this.nullable,
-      child: child ?? this.child,
+      children: children ?? this.children,
+      description: description ?? this.description,
     );
   }
 
@@ -267,14 +313,20 @@ class FieldModel extends _FieldModel {
   FieldModel copyWithout({
     bool fieldPath = true,
     bool fieldType = true,
+    bool primary = true,
+    bool fallback = true,
     bool nullable = true,
-    bool child = true,
+    bool children = true,
+    bool description = true,
   }) {
     return FieldModel.c2(
       fieldPath: fieldPath ? this.fieldPath : null,
       fieldType: fieldType ? this.fieldType : null,
+      primary: primary ? this.primary : null,
+      fallback: fallback ? this.fallback : null,
       nullable: nullable ? this.nullable : null,
-      child: child ? this.child : null,
+      children: children ? this.children : null,
+      description: description ? this.description : null,
     );
   }
 
@@ -290,13 +342,25 @@ class FieldModel extends _FieldModel {
   @pragma('vm:prefer-inline')
   dynamic get fieldTypeField => this.fieldType!;
 
+  // primary.
+  @pragma('vm:prefer-inline')
+  bool? get primaryField => this.primary;
+
+  // fallback.
+  @pragma('vm:prefer-inline')
+  Object? get fallbackField => this.fallback;
+
   // nullable.
   @pragma('vm:prefer-inline')
   bool? get nullableField => this.nullable;
 
-  // child.
+  // children.
   @pragma('vm:prefer-inline')
-  FieldModel? get childField => this.child;
+  List<FieldModel>? get childrenField => this.children;
+
+  // description.
+  @pragma('vm:prefer-inline')
+  String? get descriptionField => this.description;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -304,6 +368,9 @@ class FieldModel extends _FieldModel {
 abstract final class FieldModelFieldNames {
   static const fieldPath = 'fieldPath';
   static const fieldType = 'fieldType';
+  static const primary = 'primary';
+  static const fallback = 'fallback';
   static const nullable = 'nullable';
-  static const child = 'child';
+  static const children = 'children';
+  static const description = 'description';
 }

@@ -12,20 +12,30 @@
 
 import '/df_generate_dart_models_core.dart';
 
-part '_generate_dart_model.g.dart';
+part '_referenced_model.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 @GenerateDartModel(
   shouldInherit: true,
   fields: {
-    ('className?', String),
-    ('fields?', Set<dynamic>),
-    ('shouldInherit?', bool),
-    ('inheritanceConstructor?', String),
-    ('keyStringCase?', String),
+    Field(
+      fieldPath: ['id'],
+      fieldType: String,
+      nullable: false,
+      primary: true,
+      description: 'The unique identifier for the document, serving as its primary key.',
+    ),
+    Field(
+      fieldPath: ['ref'],
+      fieldType: DataRefModel,
+      nullable: false,
+      primary: true,
+      description:
+          "A reference to this model that indicates the document's location within the database.",
+    ),
   },
 )
-abstract class _GenerateDartModel extends Model {
-  const _GenerateDartModel();
+abstract class _ReferencedModel extends Model {
+  const _ReferencedModel();
 }

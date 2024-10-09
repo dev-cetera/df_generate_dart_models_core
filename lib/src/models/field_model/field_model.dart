@@ -19,16 +19,51 @@ part '_field_model.g.dart';
 @GenerateDartModel(
   shouldInherit: true,
   fields: {
-    /// The name of the field.
-    ('fieldPath?', List<String>),
-
-    /// The type of the field, e.g. 'String'.
-    ('fieldType?', dynamic),
-
-    /// Whether [fieldType] is nullable or not.
-    ('nullable?', bool),
-
-    ('child?', FieldModel),
+    Field(
+      fieldPath: ['fieldPath'],
+      fieldType: List<String>,
+      nullable: true,
+      description: 'The path of the field within the model, represented as a list of strings.',
+    ),
+    Field(
+      fieldPath: ['fieldType'],
+      fieldType: dynamic,
+      nullable: true,
+      description: 'The data type of the field, such as "String", "int", or any dynamic type.',
+    ),
+    Field(
+      fieldPath: ['primary'],
+      fieldType: bool,
+      nullable: true,
+      description:
+          '[Unimplemented] Whether this field serves as a primary identifier, typically in database contexts.',
+    ),
+    Field(
+      fieldPath: ['fallback'],
+      fieldType: Object,
+      nullable: true,
+      description:
+          '[Unimplemented] The default/fallback value for the field, to use in cases where the value is null',
+    ),
+    Field(
+      fieldPath: ['nullable'],
+      fieldType: bool,
+      nullable: true,
+      description: 'Whether the field can hold a null value.',
+    ),
+    Field(
+      fieldPath: ['children'],
+      fieldType: List<FieldModel>,
+      nullable: true,
+      description:
+          '[Unimplemented] Children of this field, allowing for nested fields or complex structures.',
+    ),
+    Field(
+      fieldPath: ['description'],
+      fieldType: String,
+      nullable: true,
+      description: "A brief comment or explanation for the field's purpose.",
+    ),
   },
 )
 

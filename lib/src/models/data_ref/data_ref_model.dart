@@ -19,8 +19,20 @@ part '_data_ref_model.g.dart';
 @GenerateDartModel(
   shouldInherit: true,
   fields: {
-    ('id?', String),
-    ('collection?', List<String>),
+    Field(
+      fieldPath: ['id'],
+      fieldType: String,
+      nullable: true,
+      description:
+          'The document ID within the database. If null, the reference points to a collection instead of a specific document.',
+    ),
+    Field(
+      fieldPath: ['collection'],
+      fieldType: List<String>,
+      nullable: false,
+      description:
+          'A list representing the hierarchical path where the document or collection resides.',
+    ),
   },
 )
 abstract class _DataRefModel extends Model {
@@ -30,39 +42,35 @@ abstract class _DataRefModel extends Model {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension DataRefModelExtension on DataRefModel {
-  /// The collection path of the model for databases like Firestore.
+  /// The full collection path of the model for databases like Firestore.
   String? get collectionPath => collection?.join('/');
 
-  /// The document path of the model for databases like Firestore.
+  /// The full document path of the model for databases like Firestore.
   String get docPath => doc.join('/');
 
-  /// The table name of the model for databases like SQL.
+  /// The table name of the model for SQL-style databases.
   String? get tableName => collection?.lastOrNull;
 
-  /// The document path of the model.
+  /// The full document path of the model, as a list of strings.
   List<String> get doc => [...?collection, id].nonNulls.toList();
 
   /// Adds two [DataRefModel] objects.
   DataRefModel operator +(DataRefModel other) {
     final temp = [...doc, ...other.doc];
-    if (temp.isNotEmpty) {
-      final length = temp.length;
-      if (length.isEven) {
-        final collection = temp.sublist(0, length - 1);
-        final id = temp.last;
-        return DataRefModel(
-          id: id,
-          collection: collection,
-        );
-      } else {
-        final collection = temp;
-        return DataRefModel(
-          id: null,
-          collection: collection,
-        );
-      }
+    final length = temp.length;
+    if (length.isEven) {
+      final collection = temp.sublist(0, length - 1);
+      final id = temp.last;
+      return DataRefModel(
+        id: id,
+        collection: collection,
+      );
     } else {
-      return const DataRefModel();
+      final collection = temp;
+      return DataRefModel(
+        id: null,
+        collection: collection,
+      );
     }
   }
 }

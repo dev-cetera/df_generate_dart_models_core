@@ -39,7 +39,7 @@ class DataRefModel extends _DataRefModel {
 
   const DataRefModel({
     this.id,
-    this.collection,
+    required this.collection,
   });
 
   const DataRefModel.c2({
@@ -51,6 +51,7 @@ class DataRefModel extends _DataRefModel {
     String? id,
     List<String>? collection,
   }) {
+    assert(collection != null);
     return DataRefModel(
       id: id,
       collection: collection,
@@ -257,7 +258,7 @@ class DataRefModel extends _DataRefModel {
 
   // collection.
   @pragma('vm:prefer-inline')
-  List<String>? get collectionField => this.collection;
+  List<String> get collectionField => this.collection!;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

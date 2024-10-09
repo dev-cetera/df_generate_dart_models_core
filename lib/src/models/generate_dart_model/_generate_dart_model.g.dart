@@ -35,6 +35,7 @@ class GenerateDartModel extends _GenerateDartModel {
   final bool? shouldInherit;
   final String? inheritanceConstructor;
   final String? keyStringCase;
+  final String? description;
 
   //
   //
@@ -46,6 +47,7 @@ class GenerateDartModel extends _GenerateDartModel {
     this.shouldInherit,
     this.inheritanceConstructor,
     this.keyStringCase,
+    this.description,
   });
 
   const GenerateDartModel.c2({
@@ -54,6 +56,7 @@ class GenerateDartModel extends _GenerateDartModel {
     this.shouldInherit,
     this.inheritanceConstructor,
     this.keyStringCase,
+    this.description,
   });
 
   factory GenerateDartModel.c3({
@@ -62,6 +65,7 @@ class GenerateDartModel extends _GenerateDartModel {
     bool? shouldInherit,
     String? inheritanceConstructor,
     String? keyStringCase,
+    String? description,
   }) {
     return GenerateDartModel(
       className: className,
@@ -69,6 +73,7 @@ class GenerateDartModel extends _GenerateDartModel {
       shouldInherit: shouldInherit,
       inheritanceConstructor: inheritanceConstructor,
       keyStringCase: keyStringCase,
+      description: description,
     );
   }
 
@@ -162,12 +167,15 @@ class GenerateDartModel extends _GenerateDartModel {
           otherData?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
       final keyStringCase =
           otherData?['keyStringCase']?.toString().trim().nullIfEmpty;
+      final description =
+          otherData?['description']?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
         className: className,
         fields: fields,
         shouldInherit: shouldInherit,
         inheritanceConstructor: inheritanceConstructor,
         keyStringCase: keyStringCase,
+        description: description,
       );
     } catch (e) {
       return null;
@@ -220,11 +228,13 @@ class GenerateDartModel extends _GenerateDartModel {
       final inheritanceConstructor0 =
           inheritanceConstructor?.trim().nullIfEmpty;
       final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
+      final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
         'shouldInherit': shouldInherit0,
         'keyStringCase': keyStringCase0,
         'inheritanceConstructor': inheritanceConstructor0,
         'fields': fields0,
+        'description': description0,
         'className': className0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
@@ -259,6 +269,7 @@ class GenerateDartModel extends _GenerateDartModel {
     bool? shouldInherit,
     String? inheritanceConstructor,
     String? keyStringCase,
+    String? description,
   }) {
     return GenerateDartModel.c2(
       className: className ?? this.className,
@@ -267,6 +278,7 @@ class GenerateDartModel extends _GenerateDartModel {
       inheritanceConstructor:
           inheritanceConstructor ?? this.inheritanceConstructor,
       keyStringCase: keyStringCase ?? this.keyStringCase,
+      description: description ?? this.description,
     );
   }
 
@@ -280,6 +292,7 @@ class GenerateDartModel extends _GenerateDartModel {
     bool shouldInherit = true,
     bool inheritanceConstructor = true,
     bool keyStringCase = true,
+    bool description = true,
   }) {
     return GenerateDartModel.c2(
       className: className ? this.className : null,
@@ -288,6 +301,7 @@ class GenerateDartModel extends _GenerateDartModel {
       inheritanceConstructor:
           inheritanceConstructor ? this.inheritanceConstructor : null,
       keyStringCase: keyStringCase ? this.keyStringCase : null,
+      description: description ? this.description : null,
     );
   }
 
@@ -314,6 +328,10 @@ class GenerateDartModel extends _GenerateDartModel {
   // keyStringCase.
   @pragma('vm:prefer-inline')
   String? get keyStringCaseField => this.keyStringCase;
+
+  // description.
+  @pragma('vm:prefer-inline')
+  String? get descriptionField => this.description;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -324,4 +342,5 @@ abstract final class GenerateDartModelFieldNames {
   static const shouldInherit = 'shouldInherit';
   static const inheritanceConstructor = 'inheritanceConstructor';
   static const keyStringCase = 'keyStringCase';
+  static const description = 'description';
 }
