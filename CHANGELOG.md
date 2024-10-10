@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.8]
+
+- Released @ 10/2024 (UTC)
+- fix Change the children property of FieldModel to a Map
+
 ## [0.5.7]
 
 - Released @ 10/2024 (UTC)
