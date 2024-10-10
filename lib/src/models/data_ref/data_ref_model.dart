@@ -147,8 +147,8 @@ DataRefModel? dataRefFromString(String? input) {
 
   final endsWithSlash = input.endsWith('/');
 
-  final isCollectionPath = endsWithSlash && segments.length.isEven;
-  final isDocumentPath = !endsWithSlash && segments.length.isOdd;
+  final isCollectionPath = endsWithSlash && segments.length.isOdd;
+  final isDocumentPath = !endsWithSlash && segments.length.isEven;
 
   if (!isCollectionPath && !isDocumentPath) {
     throw ArgumentError(
