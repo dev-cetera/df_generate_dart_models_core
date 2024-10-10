@@ -8,7 +8,7 @@
 //.title~
 
 // --- PUBLIC FILES ---
-export 'types.dart';
+export 'string_case_type_constants.dart';
 export 'models/base_model.dart';
 export 'models/model.dart';
 export 'models/data_ref/data_ref_model.dart';

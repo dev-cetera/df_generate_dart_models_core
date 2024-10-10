@@ -21,15 +21,14 @@ const REFERENCED_MODEL_FIELDS = {
     fieldPath: ['id'],
     fieldType: String,
     nullable: false,
-    primary: true,
-    description:
-        'The unique identifier for the document, serving as its primary key.',
+    primaryKey: true,
+    description: 'The unique identifier for the document, serving as its primary key.',
   ),
   Field(
     fieldPath: ['ref'],
     fieldType: DataRefModel,
     nullable: false,
-    primary: true,
+    primaryKey: true,
     description:
         "A reference to this model that indicates the document's location within the database.",
   ),

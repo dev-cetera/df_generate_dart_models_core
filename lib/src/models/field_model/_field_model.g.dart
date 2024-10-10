@@ -7,6 +7,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
 // ignore_for_file: require_trailing_commas
@@ -36,17 +37,20 @@ class FieldModel extends _FieldModel {
   /// The data type of the field, such as "String", "int", or any dynamic type.
   final dynamic? fieldType;
 
-  /// Unimplemented: Whether this field serves as a primary identifier, typically in database contexts.
-  final bool? primary;
-
-  /// Unimplemented: The default/fallback value for the field, to use in cases where the value is null
-  final Object? fallback;
-
   /// Whether the field can hold a null value.
   final bool? nullable;
 
-  /// Unimplemented: Children of this field, allowing for nested fields or complex structures.
+  /// [Unimplemented] Children of this field, allowing for nested fields or complex structures.
   final List<FieldModel>? children;
+
+  /// [Unimplemented] Whether this field serves as a primary key.
+  final bool? primaryKey;
+
+  /// [Unimplemented] Whether this field serves as a foreign key.
+  final bool? foreignKey;
+
+  /// [Unimplemented] The default/fallback value for the field, to use in cases where the value is null
+  final Object? fallback;
 
   /// A brief comment or explanation for the field's purpose.
   final String? description;
@@ -56,10 +60,11 @@ class FieldModel extends _FieldModel {
   const FieldModel({
     this.fieldPath,
     required this.fieldType,
-    this.primary,
-    this.fallback,
     this.nullable,
     this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
     this.description,
   });
 
@@ -68,10 +73,11 @@ class FieldModel extends _FieldModel {
   const FieldModel.optional({
     this.fieldPath,
     this.fieldType,
-    this.primary,
-    this.fallback,
     this.nullable,
     this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
     this.description,
   });
 
@@ -80,10 +86,11 @@ class FieldModel extends _FieldModel {
   factory FieldModel.assertRequired({
     List<String>? fieldPath,
     dynamic? fieldType,
-    bool? primary,
-    Object? fallback,
     bool? nullable,
     List<FieldModel>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
     String? description,
   }) {
     assert(fieldType != null);
@@ -91,10 +98,11 @@ class FieldModel extends _FieldModel {
     return FieldModel(
       fieldPath: fieldPath,
       fieldType: fieldType,
-      primary: primary,
-      fallback: fallback,
       nullable: nullable,
       children: children,
+      primaryKey: primaryKey,
+      foreignKey: foreignKey,
+      fallback: fallback,
       description: description,
     );
   }
@@ -206,8 +214,6 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType = json?['fieldType'];
-      final primary = letAsOrNull<bool>(json?['primary']);
-      final fallback = json?['fallback'];
       final nullable = letAsOrNull<bool>(json?['nullable']);
       final children = letListOrNull<dynamic>(json?['children'])
           ?.map(
@@ -219,14 +225,18 @@ class FieldModel extends _FieldModel {
           .nonNulls
           .nullIfEmpty
           ?.toList();
+      final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
+      final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
+      final fallback = json?['fallback'];
       final description = json?['description']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
-        primary: primary,
-        fallback: fallback,
         nullable: nullable,
         children: children,
+        primaryKey: primaryKey,
+        foreignKey: foreignKey,
+        fallback: fallback,
         description: description,
       );
     } catch (e) {
@@ -278,8 +288,6 @@ class FieldModel extends _FieldModel {
           .nullIfEmpty
           ?.toList();
       final fieldType0 = fieldType;
-      final primary0 = primary;
-      final fallback0 = fallback;
       final nullable0 = nullable;
       final children0 = children
           ?.map(
@@ -288,10 +296,14 @@ class FieldModel extends _FieldModel {
           .nonNulls
           .nullIfEmpty
           ?.toList();
+      final primaryKey0 = primaryKey;
+      final foreignKey0 = foreignKey;
+      final fallback0 = fallback;
       final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
-        'primary': primary0,
+        'primaryKey': primaryKey0,
         'nullable': nullable0,
+        'foreignKey': foreignKey0,
         'fieldType': fieldType0,
         'fieldPath': fieldPath0,
         'fallback': fallback0,
@@ -320,19 +332,21 @@ class FieldModel extends _FieldModel {
   FieldModel copyWith({
     List<String>? fieldPath,
     dynamic? fieldType,
-    bool? primary,
-    Object? fallback,
     bool? nullable,
     List<FieldModel>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
     String? description,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
       fieldType: fieldType ?? this.fieldType,
-      primary: primary ?? this.primary,
-      fallback: fallback ?? this.fallback,
       nullable: nullable ?? this.nullable,
       children: children ?? this.children,
+      primaryKey: primaryKey ?? this.primaryKey,
+      foreignKey: foreignKey ?? this.foreignKey,
+      fallback: fallback ?? this.fallback,
       description: description ?? this.description,
     );
   }
@@ -341,19 +355,21 @@ class FieldModel extends _FieldModel {
   FieldModel copyWithout({
     bool fieldPath = true,
     bool fieldType = true,
-    bool primary = true,
-    bool fallback = true,
     bool nullable = true,
     bool children = true,
+    bool primaryKey = true,
+    bool foreignKey = true,
+    bool fallback = true,
     bool description = true,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ? this.fieldPath : null,
       fieldType: fieldType ? this.fieldType : null,
-      primary: primary ? this.primary : null,
-      fallback: fallback ? this.fallback : null,
       nullable: nullable ? this.nullable : null,
       children: children ? this.children : null,
+      primaryKey: primaryKey ? this.primaryKey : null,
+      foreignKey: foreignKey ? this.foreignKey : null,
+      fallback: fallback ? this.fallback : null,
       description: description ? this.description : null,
     );
   }
@@ -370,18 +386,6 @@ class FieldModel extends _FieldModel {
   @pragma('vm:prefer-inline')
   dynamic get fieldType$ => fieldType!;
 
-  /// Returns the value of the [primary] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  bool? get primary$ => primary;
-
-  /// Returns the value of the [fallback] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  Object? get fallback$ => fallback;
-
   /// Returns the value of the [nullable] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
@@ -393,6 +397,24 @@ class FieldModel extends _FieldModel {
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
   List<FieldModel>? get children$ => children;
+
+  /// Returns the value of the [primaryKey] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  bool? get primaryKey$ => primaryKey;
+
+  /// Returns the value of the [foreignKey] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  bool? get foreignKey$ => foreignKey;
+
+  /// Returns the value of the [fallback] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  Object? get fallback$ => fallback;
 
   /// Returns the value of the [description] field.
   /// If the field is nullable, the return value may be null; otherwise, it
@@ -410,17 +432,20 @@ abstract final class FieldModelFieldNames {
   /// The field name of [FieldModel.fieldType].
   static const fieldType = 'fieldType';
 
-  /// The field name of [FieldModel.primary].
-  static const primary = 'primary';
-
-  /// The field name of [FieldModel.fallback].
-  static const fallback = 'fallback';
-
   /// The field name of [FieldModel.nullable].
   static const nullable = 'nullable';
 
   /// The field name of [FieldModel.children].
   static const children = 'children';
+
+  /// The field name of [FieldModel.primaryKey].
+  static const primaryKey = 'primaryKey';
+
+  /// The field name of [FieldModel.foreignKey].
+  static const foreignKey = 'foreignKey';
+
+  /// The field name of [FieldModel.fallback].
+  static const fallback = 'fallback';
 
   /// The field name of [FieldModel.description].
   static const description = 'description';
