@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.4]
+
+- Released @ 10/2024 (UTC)
+- fix: Fix error again with dataRefFromString
+
 ## [0.6.3]
 
 - Released @ 10/2024 (UTC)
