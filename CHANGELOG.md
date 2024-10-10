@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.2]
+
+- Released @ 10/2024 (UTC)
+- fix: Fix bug with DataRef path method
+
 ## [0.6.1]
 
 - Released @ 10/2024 (UTC)

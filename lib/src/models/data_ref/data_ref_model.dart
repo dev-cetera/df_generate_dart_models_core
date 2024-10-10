@@ -138,7 +138,8 @@ DataRefModel? dataRefFromString(String? input) {
   if (input == null) {
     return null;
   }
-  final segments = input.split('/').where((segment) => segment.isNotEmpty).toList();
+  final segments =
+      input.split('/').where((segment) => segment.isNotEmpty).toList();
 
   if (segments.isEmpty) {
     throw ArgumentError('[dataRefFromString] Input cannot be an empty path.');
