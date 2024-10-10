@@ -1,10 +1,14 @@
 # Changelog
 
+## [0.6.1]
+
+- Released @ 10/2024 (UTC)
+- chore: Allow dataRefFromString function to take null input
+
 ## [0.6.0]
 
 - Released @ 10/2024 (UTC)
 - breaking: Incorporate better error handling in DataRefModel and improve methods
-- chore: Allow dataRefFromString function to take null input
 
 ## [0.5.8]
 
