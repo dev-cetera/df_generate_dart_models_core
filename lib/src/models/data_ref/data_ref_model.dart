@@ -138,32 +138,23 @@ DataRefModel? dataRefFromString(String? input) {
   if (input == null) {
     return null;
   }
-  final segments =
-      input.split('/').where((segment) => segment.isNotEmpty).toList();
+
+  final segments = input.split('/').where((e) => e.isNotEmpty).toList();
 
   if (segments.isEmpty) {
     throw ArgumentError('[dataRefFromString] Input cannot be an empty path.');
   }
 
-  // Check if the path ends with a '/'.
   final endsWithSlash = input.endsWith('/');
 
-  // Error if path ends with '/' but has an even number of segments (invalid collection path).
-  if (endsWithSlash && segments.length.isEven) {
+  final isCollectionPath = endsWithSlash && segments.length.isEven;
+  final isDocumentPath = !endsWithSlash && segments.length.isOdd;
+
+  if (!isCollectionPath && !isDocumentPath) {
     throw ArgumentError(
-      '[dataRefFromString] Invalid collection path: Collection paths must have an odd number of segments.',
+      '[dataRefFromString] Invalid path: Path must end with "/" for collection paths, or not end with "/" for document paths.',
     );
   }
-
-  // Error if path does not end with '/' but has an odd number of segments (invalid document path).
-  if (!endsWithSlash && segments.length.isEven) {
-    throw ArgumentError(
-      '[dataRefFromString] Invalid document path: Document paths must have an even number of segments.',
-    );
-  }
-
-  // If the path has an odd number of segments, or if it ends with '/', it's a collection path.
-  final isDocumentPath = segments.length.isOdd && !endsWithSlash;
 
   // The last segment is the ID if it's a document path.
   final id = isDocumentPath ? segments.removeLast() : null;
