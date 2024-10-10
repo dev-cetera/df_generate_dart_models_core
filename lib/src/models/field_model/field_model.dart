@@ -21,15 +21,13 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['fieldPath'],
     fieldType: List<String>,
     nullable: true,
-    description:
-        'The path of the field within the model, represented as a list of strings.',
+    description: 'The path of the field within the model, represented as a list of strings.',
   ),
   Field(
     fieldPath: ['fieldType'],
     fieldType: dynamic,
     nullable: true,
-    description:
-        'The data type of the field, such as "String", "int", or any dynamic type.',
+    description: 'The data type of the field, such as "String", "int", or any dynamic type.',
   ),
   Field(
     fieldPath: ['nullable'],
@@ -39,10 +37,9 @@ const FIELD_MODEL_FIELDS = {
   ),
   Field(
     fieldPath: ['children'],
-    fieldType: List<FieldModel>,
+    fieldType: List<Map<String, dynamic>>,
     nullable: true,
-    description:
-        'Children of this field, allowing for nested fields or complex structures.',
+    description: 'Children of this field, allowing for nested fields or complex structures.',
   ),
   Field(
     fieldPath: ['primaryKey'],
@@ -105,7 +102,7 @@ typedef TFieldRecord = ({
   List<String>? fieldPath,
   String? fieldType,
   bool? nullable,
-  List<FieldModel>? children,
+  List<Map<String, dynamic>>? children,
   bool? primaryKey,
   bool? foreignKey,
   Object? fallback,
@@ -202,12 +199,12 @@ final class FieldUtils {
 
   /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
   /// the `children` property, or returns `null`.
-  static List<FieldModel>? childrenOrNull(dynamic unknown) {
+  static List<Map<String, dynamic>>? childrenOrNull(dynamic unknown) {
     try {
-      return (unknown.children as List<FieldModel>);
+      return (unknown.children as List<Map<String, dynamic>>);
     } catch (_) {
       try {
-        return unknown.$4 as List<FieldModel>;
+        return unknown.$4 as List<Map<String, dynamic>>;
       } catch (_) {
         return null;
       }

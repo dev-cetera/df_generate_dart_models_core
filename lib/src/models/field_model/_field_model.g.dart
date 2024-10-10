@@ -40,16 +40,16 @@ class FieldModel extends _FieldModel {
   /// Whether the field can hold a null value.
   final bool? nullable;
 
-  /// [Unimplemented] Children of this field, allowing for nested fields or complex structures.
-  final List<FieldModel>? children;
+  /// Children of this field, allowing for nested fields or complex structures.
+  final List<Map<String, dynamic>>? children;
 
-  /// [Unimplemented] Whether this field serves as a primary key.
+  /// Whether this field serves as a primary key.
   final bool? primaryKey;
 
-  /// [Unimplemented] Whether this field serves as a foreign key.
+  /// Whether this field serves as a foreign key.
   final bool? foreignKey;
 
-  /// [Unimplemented] The default/fallback value for the field, to use in cases where the value is null
+  /// The default/fallback value for the field, to use in cases where the value is null.
   final Object? fallback;
 
   /// A brief comment or explanation for the field's purpose.
@@ -87,7 +87,7 @@ class FieldModel extends _FieldModel {
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
-    List<FieldModel>? children,
+    List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
     Object? fallback,
@@ -217,10 +217,15 @@ class FieldModel extends _FieldModel {
       final nullable = letAsOrNull<bool>(json?['nullable']);
       final children = letListOrNull<dynamic>(json?['children'])
           ?.map(
-            (p0) => () {
-              final a = letMapOrNull<String, dynamic>(p0);
-              return a != null ? FieldModel.fromJson(a) : null;
-            }(),
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.toString().trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
           )
           .nonNulls
           .nullIfEmpty
@@ -291,7 +296,15 @@ class FieldModel extends _FieldModel {
       final nullable0 = nullable;
       final children0 = children
           ?.map(
-            (p0) => p0?.toJson(),
+            (p0) => p0
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
           )
           .nonNulls
           .nullIfEmpty
@@ -333,7 +346,7 @@ class FieldModel extends _FieldModel {
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
-    List<FieldModel>? children,
+    List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
     Object? fallback,
@@ -396,7 +409,7 @@ class FieldModel extends _FieldModel {
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
-  List<FieldModel>? get children$ => children;
+  List<Map<String, dynamic>>? get children$ => children;
 
   /// Returns the value of the [primaryKey] field.
   /// If the field is nullable, the return value may be null; otherwise, it
