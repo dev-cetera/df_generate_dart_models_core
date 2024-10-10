@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.7]
+
+- Released @ 10/2024 (UTC)
+- chore: Improve FieldModel to hold more information to allow for more complex generation
+
 ## [0.5.6]
 
 - Released @ 10/2024 (UTC)
