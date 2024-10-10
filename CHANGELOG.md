@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.0]
+
+- Released @ 10/2024 (UTC)
+- breaking: Incorporate better error handling in DataRefModel and improve methods
+
 ## [0.5.8]
 
 - Released @ 10/2024 (UTC)

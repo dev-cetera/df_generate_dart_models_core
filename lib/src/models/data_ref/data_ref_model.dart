@@ -136,7 +136,8 @@ extension DataRefModelExtension on DataRefModel {
 /// '/', it represents a collection path, otherwise, it represents a document
 /// path.
 DataRefModel dataRefFromString(String input) {
-  final segments = input.split('/').where((segment) => segment.isNotEmpty).toList();
+  final segments =
+      input.split('/').where((segment) => segment.isNotEmpty).toList();
 
   if (segments.isEmpty) {
     throw ArgumentError('[dataRefFromString] Input cannot be an empty path.');
@@ -148,13 +149,13 @@ DataRefModel dataRefFromString(String input) {
   // Error if path ends with '/' but has an even number of segments (invalid collection path).
   if (endsWithSlash && segments.length.isEven) {
     throw ArgumentError(
-        '[dataRefFromString] Invalid collection path: Collection paths must have an odd number of segments.');
+        '[dataRefFromString] Invalid collection path: Collection paths must have an odd number of segments.',);
   }
 
   // Error if path does not end with '/' but has an odd number of segments (invalid document path).
   if (!endsWithSlash && segments.length.isEven) {
     throw ArgumentError(
-        '[dataRefFromString] Invalid document path: Document paths must have an even number of segments.');
+        '[dataRefFromString] Invalid document path: Document paths must have an even number of segments.',);
   }
 
   // If the path has an odd number of segments, or if it ends with '/', it's a collection path.
