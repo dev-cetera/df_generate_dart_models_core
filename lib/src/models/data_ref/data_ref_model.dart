@@ -46,7 +46,7 @@ abstract class _DataRefModel extends Model {
 extension DataRefModelExtension on DataRefModel {
   /// The full collection path of the reference, always ending in "/".
   String? get collectionPath {
-    if (collection == null) {
+    if (collection == null || collection!.isEmpty) {
       return null;
     }
     // Collection segments must be odd
@@ -61,13 +61,12 @@ extension DataRefModelExtension on DataRefModel {
   /// The full path of the reference. If it ends with "/", it's a path to a
   /// collection, otherwise it's a path to a document.
   String get path {
-    final pathSegments = [collectionPath, id].nonNulls;
-    if (pathSegments.isEmpty) {
+    if (collectionPath == null) {
       throw StateError(
-        '[DataRefModelExtension] Invalid path: Path cannot be empty.',
+        '[DataRefModelExtension] Invalid path: Collection path cannot be empty.',
       );
     }
-    return pathSegments.join('/');
+    return '$collectionPath${id ?? ''}';
   }
 
   /// The table name, i.e. the last element in [collection].
@@ -139,8 +138,7 @@ DataRefModel? dataRefFromString(String? input) {
   if (input == null) {
     return null;
   }
-  final segments =
-      input.split('/').where((segment) => segment.isNotEmpty).toList();
+  final segments = input.split('/').where((segment) => segment.isNotEmpty).toList();
 
   if (segments.isEmpty) {
     throw ArgumentError('[dataRefFromString] Input cannot be an empty path.');
