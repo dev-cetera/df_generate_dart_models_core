@@ -1,0 +1,43 @@
+```dart
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// GENERATED - DO NOT MODIFY BY HAND
+// See: https://github.com/robmllze/df_generate_dart_models
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
+
+/// ___DESCRIPTION___
+class ___CLASS_NAME___ {
+  //
+  //
+  //
+
+  ___FIELD_DECLARATIONS___
+
+  /// Constructs a new instance of [___CLASS_NAME___]
+  /// from optional and required parameters.
+  const ___CLASS_NAME___({
+    ___PARAMS___
+  });
+
+  /// Creates a copy of this instance, replacing the specified fields.
+  ___CLASS_NAME___ copyWith({
+    ___COPY_WITH_PARAMS___
+  }) {
+    return ___CLASS_NAME___(
+      ___COPY_WITH_ARGS___
+    );
+  }
+
+  /// Creates a copy of this instance, removing the specified fields.
+  ___CLASS_NAME___ copyWithout({
+    ___COPY_WITHOUT_PARAMS___
+  }) {
+    return ___CLASS_NAME___(
+      ___COPY_WITHOUT_ARGS___
+    );
+  }
+}
+```
