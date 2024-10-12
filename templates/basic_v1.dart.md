@@ -48,5 +48,7 @@ class ___CLASS_NAME___ extends ___SUPER_CLASS_NAME___ {
       ___COPY_WITHOUT_ARGS___
     );
   }
+
+  ___GETTERS___
 }
 ```
