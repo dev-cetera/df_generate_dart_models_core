@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.5]
+
+- Released @ 10/2024 (UTC)
+- chore: Add basic model template
+
 ## [0.6.4]
 
 - Released @ 10/2024 (UTC)
