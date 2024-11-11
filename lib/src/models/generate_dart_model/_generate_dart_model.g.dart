@@ -7,6 +7,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
 // ignore_for_file: require_trailing_commas
@@ -196,7 +197,8 @@ class GenerateDartModel extends _GenerateDartModel {
           )
           .nonNulls
           .nullIfEmpty
-          ?.toSet();
+          ?.toSet()
+          .unmodifiable;
       final shouldInherit = letAsOrNull<bool>(json?['shouldInherit']);
       final inheritanceConstructor =
           json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;

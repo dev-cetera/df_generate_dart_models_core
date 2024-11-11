@@ -212,7 +212,8 @@ class FieldModel extends _FieldModel {
           )
           .nonNulls
           .nullIfEmpty
-          ?.toList();
+          ?.toList()
+          .unmodifiable;
       final fieldType = json?['fieldType'];
       final nullable = letAsOrNull<bool>(json?['nullable']);
       final children = letListOrNull<dynamic>(json?['children'])
@@ -225,11 +226,13 @@ class FieldModel extends _FieldModel {
                   ),
                 )
                 .nonNulls
-                .nullIfEmpty,
+                .nullIfEmpty
+                ?.unmodifiable,
           )
           .nonNulls
           .nullIfEmpty
-          ?.toList();
+          ?.toList()
+          .unmodifiable;
       final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
       final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
       final fallback = json?['fallback'];

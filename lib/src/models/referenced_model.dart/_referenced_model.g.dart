@@ -7,6 +7,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// ignore_for_file: annotate_overrides
 // ignore_for_file: invalid_null_aware_operator
 // ignore_for_file: overridden_fields
 // ignore_for_file: require_trailing_commas
@@ -164,10 +165,7 @@ class ReferencedModel extends _ReferencedModel {
   ) {
     try {
       final id = json?['id']?.toString().trim().nullIfEmpty;
-      final ref = () {
-        final a = letMapOrNull<String, dynamic>(json?['ref']);
-        return a != null ? DataRefModel.fromJson(a) : null;
-      }();
+      final ref = dataRefFromString(json?['ref']?.toString());
       return ReferencedModel(
         id: id,
         ref: ref,
@@ -214,7 +212,7 @@ class ReferencedModel extends _ReferencedModel {
   }) {
     try {
       final id0 = id?.trim().nullIfEmpty;
-      final ref0 = ref?.toJson();
+      final ref0 = ref?.path;
       final withNulls = {
         'ref': ref0,
         'id': id0,
