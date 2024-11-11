@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.6]
+
+- Released @ 10/2024 (UTC)
+- refactor: Rename data to rootData in Model
+
 ## [0.6.5]
 
 - Released @ 10/2024 (UTC)

@@ -12,7 +12,7 @@
 
 name: df_generate_dart_models_core
 description: A package that provides core dependencies for models generated with df_generate_dart_models.
-version: 0.6.5
+version: 0.6.6
 repository: https://github.com/robmllze/df_generate_dart_models_core
 funding:
   - https://www.buymeacoffee.com/robmllze
@@ -31,9 +31,9 @@ environment:
 ## -----------------------------------------------------------------------------
 
 dependencies:
-  df_collection: ^0.6.0
+  df_collection: ^0.6.1
   df_string: ^0.2.2
-  df_type: ^0.6.1
+  df_type: ^0.6.2
 
 ## -----------------------------------------------------------------------------
 
