@@ -237,7 +237,7 @@ extension ___CLASS_NAME___X on ___CLASS_NAME___ {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  ___CLASS_NAME___ copyWith(___CLASS_NAME___ src, {
+  ___CLASS_NAME___ copyWith({
     ___COPY_WITH_PARAMS___
   }) {
     return ___CLASS_NAME___.assertRequired(
@@ -246,7 +246,7 @@ extension ___CLASS_NAME___X on ___CLASS_NAME___ {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  ___CLASS_NAME___ copyWithout(___CLASS_NAME___ src, {
+  ___CLASS_NAME___ copyWithout({
     ___COPY_WITHOUT_PARAMS___
   }) {
     return ___CLASS_NAME___.assertRequired(
