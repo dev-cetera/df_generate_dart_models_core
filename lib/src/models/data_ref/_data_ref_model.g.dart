@@ -237,35 +237,37 @@ class DataRefModel extends _DataRefModel {
   }
 
   @override
-  BaseModel mergeWith(
+  T mergeWith<T extends BaseModel>(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return DataRefModel.fromJson(data.cast());
+    return DataRefModel.fromJson(data.cast()) as T;
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  DataRefModel copyWithDataRefModelProperties({
+  static DataRefModel copyWith(
+    DataRefModel src, {
     String? id,
     List<String>? collection,
   }) {
     return DataRefModel.assertRequired(
-      id: id ?? this.id,
-      collection: collection ?? this.collection,
+      id: id ?? src.id,
+      collection: collection ?? src.collection,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  DataRefModel copyWithoutDataRefModelProperties({
+  static DataRefModel copyWithout(
+    DataRefModel src, {
     bool id = true,
     bool collection = true,
   }) {
     return DataRefModel.assertRequired(
-      id: id ? this.id : null,
-      collection: collection ? this.collection : null,
+      id: id ? src.id : null,
+      collection: collection ? src.collection : null,
     );
   }
 

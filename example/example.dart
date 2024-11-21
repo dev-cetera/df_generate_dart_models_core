@@ -1,5 +1,3 @@
-// Example of a generated model:
-
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
@@ -17,12 +15,16 @@
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
 
+// This line is not actually in the generated code.
 import 'package:df_generate_dart_models_core/df_generate_dart_models_core.dart';
+
+// This line is in the generated code.
+//part of 'field_model.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Generated class for [_FieldModel].
-class FieldModel extends Model /* _FieldModel */ {
+class FieldModel extends Model {
   //
   //
   //
@@ -42,16 +44,16 @@ class FieldModel extends Model /* _FieldModel */ {
   /// Whether the field can hold a null value.
   final bool? nullable;
 
-  /// [Unimplemented] Children of this field, allowing for nested fields or complex structures.
-  final List<FieldModel>? children;
+  /// Children of this field, allowing for nested fields or complex structures.
+  final List<Map<String, dynamic>>? children;
 
-  /// [Unimplemented] Whether this field serves as a primary key.
+  /// Whether this field serves as a primary key.
   final bool? primaryKey;
 
-  /// [Unimplemented] Whether this field serves as a foreign key.
+  /// Whether this field serves as a foreign key.
   final bool? foreignKey;
 
-  /// [Unimplemented] The default/fallback value for the field, to use in cases where the value is null
+  /// The default/fallback value for the field, to use in cases where the value is null.
   final Object? fallback;
 
   /// A brief comment or explanation for the field's purpose.
@@ -89,7 +91,7 @@ class FieldModel extends Model /* _FieldModel */ {
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
-    List<FieldModel>? children,
+    List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
     Object? fallback,
@@ -214,19 +216,27 @@ class FieldModel extends Model /* _FieldModel */ {
           )
           .nonNulls
           .nullIfEmpty
-          ?.toList();
+          ?.toList()
+          .unmodifiable;
       final fieldType = json?['fieldType'];
       final nullable = letAsOrNull<bool>(json?['nullable']);
       final children = letListOrNull<dynamic>(json?['children'])
           ?.map(
-            (p0) => () {
-              final a = letMapOrNull<String, dynamic>(p0);
-              return a != null ? FieldModel.fromJson(a) : null;
-            }(),
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.toString().trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty
+                ?.unmodifiable,
           )
           .nonNulls
           .nullIfEmpty
-          ?.toList();
+          ?.toList()
+          .unmodifiable;
       final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
       final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
       final fallback = json?['fallback'];
@@ -293,7 +303,15 @@ class FieldModel extends Model /* _FieldModel */ {
       final nullable0 = nullable;
       final children0 = children
           ?.map(
-            (p0) => p0?.toJson(),
+            (p0) => p0
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
           )
           .nonNulls
           .nullIfEmpty
@@ -320,41 +338,43 @@ class FieldModel extends Model /* _FieldModel */ {
   }
 
   @override
-  BaseModel mergeWith(
+  T mergeWith<T extends BaseModel>(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return FieldModel.fromJson(data.cast());
+    return FieldModel.fromJson(data.cast()) as T;
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  FieldModel copyWithFieldModelProperties({
+  static FieldModel copyWith(
+    FieldModel src, {
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
-    List<FieldModel>? children,
+    List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
     Object? fallback,
     String? description,
   }) {
     return FieldModel.assertRequired(
-      fieldPath: fieldPath ?? this.fieldPath,
-      fieldType: fieldType ?? this.fieldType,
-      nullable: nullable ?? this.nullable,
-      children: children ?? this.children,
-      primaryKey: primaryKey ?? this.primaryKey,
-      foreignKey: foreignKey ?? this.foreignKey,
-      fallback: fallback ?? this.fallback,
-      description: description ?? this.description,
+      fieldPath: fieldPath ?? src.fieldPath,
+      fieldType: fieldType ?? src.fieldType,
+      nullable: nullable ?? src.nullable,
+      children: children ?? src.children,
+      primaryKey: primaryKey ?? src.primaryKey,
+      foreignKey: foreignKey ?? src.foreignKey,
+      fallback: fallback ?? src.fallback,
+      description: description ?? src.description,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  FieldModel copyWithoutFieldModelProperties({
+  static FieldModel copyWithout(
+    FieldModel src, {
     bool fieldPath = true,
     bool fieldType = true,
     bool nullable = true,
@@ -365,14 +385,14 @@ class FieldModel extends Model /* _FieldModel */ {
     bool description = true,
   }) {
     return FieldModel.assertRequired(
-      fieldPath: fieldPath ? this.fieldPath : null,
-      fieldType: fieldType ? this.fieldType : null,
-      nullable: nullable ? this.nullable : null,
-      children: children ? this.children : null,
-      primaryKey: primaryKey ? this.primaryKey : null,
-      foreignKey: foreignKey ? this.foreignKey : null,
-      fallback: fallback ? this.fallback : null,
-      description: description ? this.description : null,
+      fieldPath: fieldPath ? src.fieldPath : null,
+      fieldType: fieldType ? src.fieldType : null,
+      nullable: nullable ? src.nullable : null,
+      children: children ? src.children : null,
+      primaryKey: primaryKey ? src.primaryKey : null,
+      foreignKey: foreignKey ? src.foreignKey : null,
+      fallback: fallback ? src.fallback : null,
+      description: description ? src.description : null,
     );
   }
 
@@ -398,7 +418,7 @@ class FieldModel extends Model /* _FieldModel */ {
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
-  List<FieldModel>? get children$ => children;
+  List<Map<String, dynamic>>? get children$ => children;
 
   /// Returns the value of the [primaryKey] field.
   /// If the field is nullable, the return value may be null; otherwise, it

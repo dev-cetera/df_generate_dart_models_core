@@ -225,35 +225,37 @@ class ReferencedModel extends _ReferencedModel {
   }
 
   @override
-  BaseModel mergeWith(
+  T mergeWith<T extends BaseModel>(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return ReferencedModel.fromJson(data.cast());
+    return ReferencedModel.fromJson(data.cast()) as T;
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  static ReferencedModel copyWith(ReferencedModel other, {
+  static ReferencedModel copyWith(
+    ReferencedModel src, {
     String? id,
     DataRefModel? ref,
   }) {
     return ReferencedModel.assertRequired(
-      id: id ?? other.id,
-      ref: ref ?? other.ref,
+      id: id ?? src.id,
+      ref: ref ?? src.ref,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  ReferencedModel copyWithoutReferencedModelProperties({
+  static ReferencedModel copyWithout(
+    ReferencedModel src, {
     bool id = true,
     bool ref = true,
   }) {
     return ReferencedModel.assertRequired(
-      id: id ? this.id : null,
-      ref: ref ? this.ref : null,
+      id: id ? src.id : null,
+      ref: ref ? src.ref : null,
     );
   }
 

@@ -283,18 +283,19 @@ class GenerateDartModel extends _GenerateDartModel {
   }
 
   @override
-  BaseModel mergeWith(
+  T mergeWith<T extends BaseModel>(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return GenerateDartModel.fromJson(data.cast());
+    return GenerateDartModel.fromJson(data.cast()) as T;
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  GenerateDartModel copyWithGenerateDartModelProperties({
+  static GenerateDartModel copyWith(
+    GenerateDartModel src, {
     String? className,
     Set<dynamic>? fields,
     bool? shouldInherit,
@@ -303,18 +304,19 @@ class GenerateDartModel extends _GenerateDartModel {
     String? description,
   }) {
     return GenerateDartModel.assertRequired(
-      className: className ?? this.className,
-      fields: fields ?? this.fields,
-      shouldInherit: shouldInherit ?? this.shouldInherit,
+      className: className ?? src.className,
+      fields: fields ?? src.fields,
+      shouldInherit: shouldInherit ?? src.shouldInherit,
       inheritanceConstructor:
-          inheritanceConstructor ?? this.inheritanceConstructor,
-      keyStringCase: keyStringCase ?? this.keyStringCase,
-      description: description ?? this.description,
+          inheritanceConstructor ?? src.inheritanceConstructor,
+      keyStringCase: keyStringCase ?? src.keyStringCase,
+      description: description ?? src.description,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  GenerateDartModel copyWithoutGenerateDartModelProperties({
+  static GenerateDartModel copyWithout(
+    GenerateDartModel src, {
     bool className = true,
     bool fields = true,
     bool shouldInherit = true,
@@ -323,13 +325,13 @@ class GenerateDartModel extends _GenerateDartModel {
     bool description = true,
   }) {
     return GenerateDartModel.assertRequired(
-      className: className ? this.className : null,
-      fields: fields ? this.fields : null,
-      shouldInherit: shouldInherit ? this.shouldInherit : null,
+      className: className ? src.className : null,
+      fields: fields ? src.fields : null,
+      shouldInherit: shouldInherit ? src.shouldInherit : null,
       inheritanceConstructor:
-          inheritanceConstructor ? this.inheritanceConstructor : null,
-      keyStringCase: keyStringCase ? this.keyStringCase : null,
-      description: description ? this.description : null,
+          inheritanceConstructor ? src.inheritanceConstructor : null,
+      keyStringCase: keyStringCase ? src.keyStringCase : null,
+      description: description ? src.description : null,
     );
   }
 
