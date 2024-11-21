@@ -20,7 +20,7 @@ part of 'referenced_model.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Generated class for [_ReferencedModel].
-class ReferencedModel extends _ReferencedModel {
+class ReferencedModel extends Model {
   //
   //
   //
@@ -31,37 +31,29 @@ class ReferencedModel extends _ReferencedModel {
   @override
   String get $className => CLASS_NAME;
 
-  /// The unique identifier for the document, serving as its primary key.
-  final String? id;
-
-  /// A reference to this model that indicates the document's location within the database.
-  final DataRefModel? ref;
+  
 
   /// Constructs a new instance of [ReferencedModel]
   /// from optional and required parameters.
   const ReferencedModel({
-    required this.id,
-    required this.ref,
-  });
+    
+  }) ;
 
   /// Construcs a new instance of [ReferencedModel],
   /// forcing all parameters to be optional.
   const ReferencedModel.optional({
-    this.id,
-    this.ref,
-  });
+    
+  }) ;
+
 
   /// Constructs a new instance of [ReferencedModel],
   /// and asserts that all required parameters are not null.
   factory ReferencedModel.assertRequired({
-    String? id,
-    DataRefModel? ref,
+    
   }) {
-    assert(id != null);
-    assert(ref != null);
-    return ReferencedModel(
-      id: id,
-      ref: ref,
+    
+    return const ReferencedModel(
+      
     );
   }
 
@@ -87,6 +79,7 @@ class ReferencedModel extends _ReferencedModel {
   ) {
     return fromJsonOrNull(another?.toJson())!;
   }
+
 
   /// Constructs a new instance of [ReferencedModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
@@ -120,7 +113,7 @@ class ReferencedModel extends _ReferencedModel {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
-      assert(false, '$ReferencedModel.fromJsonString: $e');
+     assert(false, '$ReferencedModel.fromJsonString: $e');
       rethrow;
     }
   }
@@ -164,11 +157,9 @@ class ReferencedModel extends _ReferencedModel {
     Map<String, dynamic>? json,
   ) {
     try {
-      final id = json?['id']?.toString().trim().nullIfEmpty;
-      final ref = dataRefFromString(json?['ref']?.toString());
-      return ReferencedModel(
-        id: id,
-        ref: ref,
+      
+      return const ReferencedModel(
+        
       );
     } catch (e) {
       return null;
@@ -211,11 +202,9 @@ class ReferencedModel extends _ReferencedModel {
     bool includeNulls = false,
   }) {
     try {
-      final id0 = id?.trim().nullIfEmpty;
-      final ref0 = ref?.path;
+      
       final withNulls = {
-        'ref': ref0,
-        'id': id0,
+        
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -224,60 +213,45 @@ class ReferencedModel extends _ReferencedModel {
     }
   }
 
-  @override
-  T mergeWith<T extends BaseModel>(
+  
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+abstract final class ReferencedModelFieldNames {
+  
+}
+
+extension ReferencedModelX on ReferencedModel {
+  /// Creates a copy of this instance, merging another model's fields into
+  /// this model's fields.
+  ReferencedModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return ReferencedModel.fromJson(data.cast()) as T;
+    return ReferencedModel.fromJson(data.cast());
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  static ReferencedModel copyWith(
-    ReferencedModel src, {
-    String? id,
-    DataRefModel? ref,
+  ReferencedModel copyWith(ReferencedModel src, {
+    
   }) {
+    final src = this;
     return ReferencedModel.assertRequired(
-      id: id ?? this.id,
-      ref: ref ?? this.ref,
+      
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  static ReferencedModel copyWithout(
-    ReferencedModel src, {
-    bool id = true,
-    bool ref = true,
+  ReferencedModel copyWithout(ReferencedModel src, {
+    
   }) {
+    final src = this;
     return ReferencedModel.assertRequired(
-      id: id ? this.id : null,
-      ref: ref ? this.ref : null,
+      
     );
   }
-
-  /// Returns the value of the [id] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  String get id$ => id!;
-
-  /// Returns the value of the [ref] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  DataRefModel get ref$ => ref!;
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-abstract final class ReferencedModelFieldNames {
-  /// The field name of [ReferencedModel.id].
-  static const id = 'id';
-
-  /// The field name of [ReferencedModel.ref].
-  static const ref = 'ref';
 }

@@ -96,21 +96,6 @@ class Model extends BaseModel {
   //
 
   @override
-  T mergeWith<T extends BaseModel>(
-    BaseModel? other, {
-    bool deepMerge = false,
-  }) {
-    final a = toJson();
-    final b = other?.toJson() ?? {};
-    final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return Model.fromJson(data.cast()) as T;
-  }
-
-  //
-  //
-  //
-
-  @override
   String get $className => 'Model';
 
   //

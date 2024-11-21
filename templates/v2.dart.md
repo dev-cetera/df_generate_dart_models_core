@@ -240,7 +240,6 @@ extension ___CLASS_NAME___X on ___CLASS_NAME___ {
   ___CLASS_NAME___ copyWith(___CLASS_NAME___ src, {
     ___COPY_WITH_PARAMS___
   }) {
-    final src = this;
     return ___CLASS_NAME___.assertRequired(
       ___COPY_WITH_ARGS___
     );
@@ -250,7 +249,6 @@ extension ___CLASS_NAME___X on ___CLASS_NAME___ {
   ___CLASS_NAME___ copyWithout(___CLASS_NAME___ src, {
     ___COPY_WITHOUT_PARAMS___
   }) {
-    final src = this;
     return ___CLASS_NAME___.assertRequired(
       ___COPY_WITHOUT_ARGS___
     );

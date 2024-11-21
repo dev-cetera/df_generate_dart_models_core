@@ -20,7 +20,7 @@ part of 'data_ref_model.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Generated class for [_DataRefModel].
-class DataRefModel extends _DataRefModel {
+class DataRefModel extends Model {
   //
   //
   //
@@ -31,36 +31,29 @@ class DataRefModel extends _DataRefModel {
   @override
   String get $className => CLASS_NAME;
 
-  /// The document ID within the database. If null, the reference points to a collection instead of a specific document.
-  final String? id;
-
-  /// A list representing the hierarchical path where the document or collection resides.
-  final List<String>? collection;
+  
 
   /// Constructs a new instance of [DataRefModel]
   /// from optional and required parameters.
   const DataRefModel({
-    this.id,
-    required this.collection,
-  });
+    
+  }) ;
 
   /// Construcs a new instance of [DataRefModel],
   /// forcing all parameters to be optional.
   const DataRefModel.optional({
-    this.id,
-    this.collection,
-  });
+    
+  }) ;
+
 
   /// Constructs a new instance of [DataRefModel],
   /// and asserts that all required parameters are not null.
   factory DataRefModel.assertRequired({
-    String? id,
-    List<String>? collection,
+    
   }) {
-    assert(collection != null);
-    return DataRefModel(
-      id: id,
-      collection: collection,
+    
+    return const DataRefModel(
+      
     );
   }
 
@@ -86,6 +79,7 @@ class DataRefModel extends _DataRefModel {
   ) {
     return fromJsonOrNull(another?.toJson())!;
   }
+
 
   /// Constructs a new instance of [DataRefModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
@@ -119,7 +113,7 @@ class DataRefModel extends _DataRefModel {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
-      assert(false, '$DataRefModel.fromJsonString: $e');
+     assert(false, '$DataRefModel.fromJsonString: $e');
       rethrow;
     }
   }
@@ -163,18 +157,9 @@ class DataRefModel extends _DataRefModel {
     Map<String, dynamic>? json,
   ) {
     try {
-      final id = json?['id']?.toString().trim().nullIfEmpty;
-      final collection = letListOrNull<dynamic>(json?['collection'])
-          ?.map(
-            (p0) => p0?.toString().trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList()
-          .unmodifiable;
-      return DataRefModel(
-        id: id,
-        collection: collection,
+      
+      return const DataRefModel(
+        
       );
     } catch (e) {
       return null;
@@ -217,17 +202,9 @@ class DataRefModel extends _DataRefModel {
     bool includeNulls = false,
   }) {
     try {
-      final id0 = id?.trim().nullIfEmpty;
-      final collection0 = collection
-          ?.map(
-            (p0) => p0?.trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
+      
       final withNulls = {
-        'id': id0,
-        'collection': collection0,
+        
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -236,60 +213,45 @@ class DataRefModel extends _DataRefModel {
     }
   }
 
-  @override
-  T mergeWith<T extends BaseModel>(
+  
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+abstract final class DataRefModelFieldNames {
+  
+}
+
+extension DataRefModelX on DataRefModel {
+  /// Creates a copy of this instance, merging another model's fields into
+  /// this model's fields.
+  DataRefModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return DataRefModel.fromJson(data.cast()) as T;
+    return DataRefModel.fromJson(data.cast());
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  static DataRefModel copyWith(
-    DataRefModel src, {
-    String? id,
-    List<String>? collection,
+  DataRefModel copyWith(DataRefModel src, {
+    
   }) {
+    final src = this;
     return DataRefModel.assertRequired(
-      id: id ?? this.id,
-      collection: collection ?? this.collection,
+      
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  static DataRefModel copyWithout(
-    DataRefModel src, {
-    bool id = true,
-    bool collection = true,
+  DataRefModel copyWithout(DataRefModel src, {
+    
   }) {
+    final src = this;
     return DataRefModel.assertRequired(
-      id: id ? this.id : null,
-      collection: collection ? this.collection : null,
+      
     );
   }
-
-  /// Returns the value of the [id] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  String? get id$ => id;
-
-  /// Returns the value of the [collection] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  List<String> get collection$ => collection!;
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-abstract final class DataRefModelFieldNames {
-  /// The field name of [DataRefModel.id].
-  static const id = 'id';
-
-  /// The field name of [DataRefModel.collection].
-  static const collection = 'collection';
 }

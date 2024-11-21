@@ -64,14 +64,6 @@ abstract mixin class BaseModel {
   //
   //
 
-  /// Returns a new copy of the BaseModel with the fields updated from the
-  /// [other] BaseModel. Set [deepMerge] to `true` to merge nested objects.
-  T mergeWith<T extends BaseModel>(BaseModel? other, {bool deepMerge = false});
-
-  //
-  //
-  //
-
   /// Converts the current [BaseModel] to a [Uri] that can be used as a
   /// distinct identifier. The model must not be too large to avoid exceeding
   /// the maximum length of a URL.
