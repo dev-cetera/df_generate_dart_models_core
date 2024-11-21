@@ -20,7 +20,8 @@ class Model extends BaseModel {
   //
 
   final Map<String, dynamic>? _rootData;
-  Map<String, dynamic> get rootData => _rootData != null ? Map.unmodifiable(_rootData) : toJson();
+  Map<String, dynamic> get rootData =>
+      _rootData != null ? Map.unmodifiable(_rootData) : toJson();
 
   //
   //
