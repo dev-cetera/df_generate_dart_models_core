@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.2]
+
+- Released @ 11/2024 (UTC)
+- fix: Fix models
+
 ## [0.8.1]
 
 - Released @ 11/2024 (UTC)
