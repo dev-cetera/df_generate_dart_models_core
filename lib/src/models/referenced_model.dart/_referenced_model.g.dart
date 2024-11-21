@@ -236,13 +236,13 @@ class ReferencedModel extends _ReferencedModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  ReferencedModel copyWithReferencedModelProperties({
+  static ReferencedModel copyWith(ReferencedModel other, {
     String? id,
     DataRefModel? ref,
   }) {
     return ReferencedModel.assertRequired(
-      id: id ?? this.id,
-      ref: ref ?? this.ref,
+      id: id ?? other.id,
+      ref: ref ?? other.ref,
     );
   }
 

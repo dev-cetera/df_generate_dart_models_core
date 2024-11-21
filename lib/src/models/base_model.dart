@@ -14,7 +14,7 @@ import '/df_generate_dart_models_core.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class BaseModel {
+abstract mixin class BaseModel {
   //
   //
   //
