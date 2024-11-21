@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.1]
+
+- Released @ 11/2024 (UTC)
+- chore: Improve generated output and templates
+
 ## [0.8.0]
 
 - Released @ 11/2024 (UTC)
