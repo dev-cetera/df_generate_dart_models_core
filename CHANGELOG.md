@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.0]
+
+- Released @ 11/2024 (UTC)
+- breaking: Improve generated model
+
 ## [0.7.0]
 
 - Released @ 11/2024 (UTC)
