@@ -424,8 +424,7 @@ extension FieldModelX on FieldModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  FieldModel copyWith(
-    FieldModel src, {
+  FieldModel copyWith({
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
@@ -448,8 +447,7 @@ extension FieldModelX on FieldModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  FieldModel copyWithout(
-    FieldModel src, {
+  FieldModel copyWithout({
     bool fieldPath = true,
     bool fieldType = true,
     bool nullable = true,

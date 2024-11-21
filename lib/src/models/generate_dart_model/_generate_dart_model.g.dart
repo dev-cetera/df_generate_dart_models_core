@@ -355,8 +355,7 @@ extension GenerateDartModelX on GenerateDartModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  GenerateDartModel copyWith(
-    GenerateDartModel src, {
+  GenerateDartModel copyWith({
     String? className,
     Set<dynamic>? fields,
     bool? shouldInherit,
@@ -376,8 +375,7 @@ extension GenerateDartModelX on GenerateDartModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  GenerateDartModel copyWithout(
-    GenerateDartModel src, {
+  GenerateDartModel copyWithout({
     bool className = true,
     bool fields = true,
     bool shouldInherit = true,

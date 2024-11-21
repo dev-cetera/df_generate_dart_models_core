@@ -273,8 +273,7 @@ extension DataRefModelX on DataRefModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  DataRefModel copyWith(
-    DataRefModel src, {
+  DataRefModel copyWith({
     String? id,
     List<String>? collection,
   }) {
@@ -285,8 +284,7 @@ extension DataRefModelX on DataRefModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  DataRefModel copyWithout(
-    DataRefModel src, {
+  DataRefModel copyWithout({
     bool id = true,
     bool collection = true,
   }) {

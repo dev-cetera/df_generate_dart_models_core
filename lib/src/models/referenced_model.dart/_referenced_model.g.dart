@@ -261,8 +261,7 @@ extension ReferencedModelX on ReferencedModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  ReferencedModel copyWith(
-    ReferencedModel src, {
+  ReferencedModel copyWith({
     String? id,
     DataRefModel? ref,
   }) {
@@ -273,8 +272,7 @@ extension ReferencedModelX on ReferencedModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  ReferencedModel copyWithout(
-    ReferencedModel src, {
+  ReferencedModel copyWithout({
     bool id = true,
     bool ref = true,
   }) {
