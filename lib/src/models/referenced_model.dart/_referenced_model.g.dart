@@ -242,8 +242,8 @@ class ReferencedModel extends _ReferencedModel {
     DataRefModel? ref,
   }) {
     return ReferencedModel.assertRequired(
-      id: id ?? src.id,
-      ref: ref ?? src.ref,
+      id: id ?? this.id,
+      ref: ref ?? this.ref,
     );
   }
 
@@ -254,8 +254,8 @@ class ReferencedModel extends _ReferencedModel {
     bool ref = true,
   }) {
     return ReferencedModel.assertRequired(
-      id: id ? src.id : null,
-      ref: ref ? src.ref : null,
+      id: id ? this.id : null,
+      ref: ref ? this.ref : null,
     );
   }
 

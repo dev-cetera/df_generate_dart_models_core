@@ -304,13 +304,13 @@ class GenerateDartModel extends _GenerateDartModel {
     String? description,
   }) {
     return GenerateDartModel.assertRequired(
-      className: className ?? src.className,
-      fields: fields ?? src.fields,
-      shouldInherit: shouldInherit ?? src.shouldInherit,
+      className: className ?? this.className,
+      fields: fields ?? this.fields,
+      shouldInherit: shouldInherit ?? this.shouldInherit,
       inheritanceConstructor:
-          inheritanceConstructor ?? src.inheritanceConstructor,
-      keyStringCase: keyStringCase ?? src.keyStringCase,
-      description: description ?? src.description,
+          inheritanceConstructor ?? this.inheritanceConstructor,
+      keyStringCase: keyStringCase ?? this.keyStringCase,
+      description: description ?? this.description,
     );
   }
 
@@ -325,13 +325,13 @@ class GenerateDartModel extends _GenerateDartModel {
     bool description = true,
   }) {
     return GenerateDartModel.assertRequired(
-      className: className ? src.className : null,
-      fields: fields ? src.fields : null,
-      shouldInherit: shouldInherit ? src.shouldInherit : null,
+      className: className ? this.className : null,
+      fields: fields ? this.fields : null,
+      shouldInherit: shouldInherit ? this.shouldInherit : null,
       inheritanceConstructor:
-          inheritanceConstructor ? src.inheritanceConstructor : null,
-      keyStringCase: keyStringCase ? src.keyStringCase : null,
-      description: description ? src.description : null,
+          inheritanceConstructor ? this.inheritanceConstructor : null,
+      keyStringCase: keyStringCase ? this.keyStringCase : null,
+      description: description ? this.description : null,
     );
   }
 

@@ -357,14 +357,14 @@ class FieldModel extends _FieldModel {
     String? description,
   }) {
     return FieldModel.assertRequired(
-      fieldPath: fieldPath ?? src.fieldPath,
-      fieldType: fieldType ?? src.fieldType,
-      nullable: nullable ?? src.nullable,
-      children: children ?? src.children,
-      primaryKey: primaryKey ?? src.primaryKey,
-      foreignKey: foreignKey ?? src.foreignKey,
-      fallback: fallback ?? src.fallback,
-      description: description ?? src.description,
+      fieldPath: fieldPath ?? this.fieldPath,
+      fieldType: fieldType ?? this.fieldType,
+      nullable: nullable ?? this.nullable,
+      children: children ?? this.children,
+      primaryKey: primaryKey ?? this.primaryKey,
+      foreignKey: foreignKey ?? this.foreignKey,
+      fallback: fallback ?? this.fallback,
+      description: description ?? this.description,
     );
   }
 
@@ -381,14 +381,14 @@ class FieldModel extends _FieldModel {
     bool description = true,
   }) {
     return FieldModel.assertRequired(
-      fieldPath: fieldPath ? src.fieldPath : null,
-      fieldType: fieldType ? src.fieldType : null,
-      nullable: nullable ? src.nullable : null,
-      children: children ? src.children : null,
-      primaryKey: primaryKey ? src.primaryKey : null,
-      foreignKey: foreignKey ? src.foreignKey : null,
-      fallback: fallback ? src.fallback : null,
-      description: description ? src.description : null,
+      fieldPath: fieldPath ? this.fieldPath : null,
+      fieldType: fieldType ? this.fieldType : null,
+      nullable: nullable ? this.nullable : null,
+      children: children ? this.children : null,
+      primaryKey: primaryKey ? this.primaryKey : null,
+      foreignKey: foreignKey ? this.foreignKey : null,
+      fallback: fallback ? this.fallback : null,
+      description: description ? this.description : null,
     );
   }
 

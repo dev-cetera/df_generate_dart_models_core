@@ -12,7 +12,7 @@
 
 name: df_generate_dart_models_core
 description: A package that provides core dependencies for models generated with df_generate_dart_models.
-version: 0.8.0
+version: 0.8.1
 repository: https://github.com/DevCetra/df_generate_dart_models_core
 funding:
   - https://www.buymeacoffee.com/robmllze

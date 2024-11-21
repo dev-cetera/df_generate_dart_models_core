@@ -254,8 +254,8 @@ class DataRefModel extends _DataRefModel {
     List<String>? collection,
   }) {
     return DataRefModel.assertRequired(
-      id: id ?? src.id,
-      collection: collection ?? src.collection,
+      id: id ?? this.id,
+      collection: collection ?? this.collection,
     );
   }
 
@@ -266,8 +266,8 @@ class DataRefModel extends _DataRefModel {
     bool collection = true,
   }) {
     return DataRefModel.assertRequired(
-      id: id ? src.id : null,
-      collection: collection ? src.collection : null,
+      id: id ? this.id : null,
+      collection: collection ? this.collection : null,
     );
   }
 
