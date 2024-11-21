@@ -19,8 +19,8 @@ class Model extends BaseModel {
   //
   //
 
-  final Map<String, dynamic> _rootData;
-  Map<String, dynamic> get rootData => Map.unmodifiable(_rootData);
+  final Map<String, dynamic>? _rootData;
+  Map<String, dynamic> get rootData => _rootData != null ? Map.unmodifiable(_rootData) : toJson();
 
   //
   //
@@ -88,7 +88,7 @@ class Model extends BaseModel {
   Map<String, dynamic> toJson({
     bool includeNulls = false,
   }) {
-    return includeNulls ? _rootData : _rootData.nonNulls;
+    return (includeNulls ? _rootData : _rootData?.nonNulls) ?? {};
   }
 
   //
