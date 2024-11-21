@@ -96,7 +96,7 @@ class Model extends BaseModel {
   //
 
   @override
-  Model mergeWith(
+  BaseModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {

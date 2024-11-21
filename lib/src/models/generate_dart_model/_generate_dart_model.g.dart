@@ -283,7 +283,7 @@ class GenerateDartModel extends _GenerateDartModel {
   }
 
   @override
-  GenerateDartModel mergeWith(
+  BaseModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
@@ -294,7 +294,7 @@ class GenerateDartModel extends _GenerateDartModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  GenerateDartModel copyWith({
+  GenerateDartModel copyWithGenerateDartModelProperties({
     String? className,
     Set<dynamic>? fields,
     bool? shouldInherit,
@@ -314,7 +314,7 @@ class GenerateDartModel extends _GenerateDartModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  GenerateDartModel copyWithout({
+  GenerateDartModel copyWithoutGenerateDartModelProperties({
     bool className = true,
     bool fields = true,
     bool shouldInherit = true,

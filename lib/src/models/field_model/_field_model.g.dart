@@ -334,7 +334,7 @@ class FieldModel extends _FieldModel {
   }
 
   @override
-  FieldModel mergeWith(
+  BaseModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
@@ -345,7 +345,7 @@ class FieldModel extends _FieldModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  FieldModel copyWith({
+  FieldModel copyWithFieldModelProperties({
     List<String>? fieldPath,
     dynamic? fieldType,
     bool? nullable,
@@ -368,7 +368,7 @@ class FieldModel extends _FieldModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  FieldModel copyWithout({
+  FieldModel copyWithoutFieldModelProperties({
     bool fieldPath = true,
     bool fieldType = true,
     bool nullable = true,

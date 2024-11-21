@@ -225,7 +225,7 @@ class ReferencedModel extends _ReferencedModel {
   }
 
   @override
-  ReferencedModel mergeWith(
+  BaseModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
@@ -236,7 +236,7 @@ class ReferencedModel extends _ReferencedModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  ReferencedModel copyWith({
+  ReferencedModel copyWithReferencedModelProperties({
     String? id,
     DataRefModel? ref,
   }) {
@@ -247,7 +247,7 @@ class ReferencedModel extends _ReferencedModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  ReferencedModel copyWithout({
+  ReferencedModel copyWithoutReferencedModelProperties({
     bool id = true,
     bool ref = true,
   }) {

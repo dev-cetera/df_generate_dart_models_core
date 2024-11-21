@@ -237,7 +237,7 @@ class DataRefModel extends _DataRefModel {
   }
 
   @override
-  DataRefModel mergeWith(
+  BaseModel mergeWith(
     BaseModel? other, {
     bool deepMerge = false,
   }) {
@@ -248,7 +248,7 @@ class DataRefModel extends _DataRefModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  DataRefModel copyWith({
+  DataRefModel copyWithDataRefModelProperties({
     String? id,
     List<String>? collection,
   }) {
@@ -259,7 +259,7 @@ class DataRefModel extends _DataRefModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  DataRefModel copyWithout({
+  DataRefModel copyWithoutDataRefModelProperties({
     bool id = true,
     bool collection = true,
   }) {
