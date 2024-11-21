@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.7.0]
+
+- Released @ 11/2024 (UTC)
+- breaking: Add support for better polymorphism
+
 ## [0.6.10]
 
 - Released @ 11/2024 (UTC)
