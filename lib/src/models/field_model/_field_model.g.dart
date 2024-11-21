@@ -20,7 +20,7 @@ part of 'field_model.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Generated class for [_FieldModel].
-class FieldModel extends Model {
+class FieldModel extends _FieldModel {
   //
   //
   //
@@ -31,29 +31,79 @@ class FieldModel extends Model {
   @override
   String get $className => CLASS_NAME;
 
-  
+  /// The path of the field within the model, represented as a list of strings.
+  final List<String>? fieldPath;
+
+  /// The data type of the field, such as "String", "int", or any dynamic type.
+  final dynamic? fieldType;
+
+  /// Whether the field can hold a null value.
+  final bool? nullable;
+
+  /// Children of this field, allowing for nested fields or complex structures.
+  final List<Map<String, dynamic>>? children;
+
+  /// Whether this field serves as a primary key.
+  final bool? primaryKey;
+
+  /// Whether this field serves as a foreign key.
+  final bool? foreignKey;
+
+  /// The default/fallback value for the field, to use in cases where the value is null.
+  final Object? fallback;
+
+  /// A brief comment or explanation for the field's purpose.
+  final String? description;
 
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
   const FieldModel({
-    
-  }) ;
+    this.fieldPath,
+    required this.fieldType,
+    this.nullable,
+    this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
+    this.description,
+  });
 
   /// Construcs a new instance of [FieldModel],
   /// forcing all parameters to be optional.
   const FieldModel.optional({
-    
-  }) ;
-
+    this.fieldPath,
+    this.fieldType,
+    this.nullable,
+    this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
+    this.description,
+  });
 
   /// Constructs a new instance of [FieldModel],
   /// and asserts that all required parameters are not null.
   factory FieldModel.assertRequired({
-    
+    List<String>? fieldPath,
+    dynamic? fieldType,
+    bool? nullable,
+    List<Map<String, dynamic>>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
+    String? description,
   }) {
-    
-    return const FieldModel(
-      
+    assert(fieldType != null);
+
+    return FieldModel(
+      fieldPath: fieldPath,
+      fieldType: fieldType,
+      nullable: nullable,
+      children: children,
+      primaryKey: primaryKey,
+      foreignKey: foreignKey,
+      fallback: fallback,
+      description: description,
     );
   }
 
@@ -79,7 +129,6 @@ class FieldModel extends Model {
   ) {
     return fromJsonOrNull(another?.toJson())!;
   }
-
 
   /// Constructs a new instance of [FieldModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
@@ -113,7 +162,7 @@ class FieldModel extends Model {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
-     assert(false, '$FieldModel.fromJsonString: $e');
+      assert(false, '$FieldModel.fromJsonString: $e');
       rethrow;
     }
   }
@@ -157,9 +206,46 @@ class FieldModel extends Model {
     Map<String, dynamic>? json,
   ) {
     try {
-      
-      return const FieldModel(
-        
+      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])
+          ?.map(
+            (p0) => p0?.toString().trim().nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
+      final fieldType = json?['fieldType'];
+      final nullable = letAsOrNull<bool>(json?['nullable']);
+      final children = letListOrNull<dynamic>(json?['children'])
+          ?.map(
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.toString().trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty
+                ?.unmodifiable,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
+      final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
+      final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
+      final fallback = json?['fallback'];
+      final description = json?['description']?.toString().trim().nullIfEmpty;
+      return FieldModel(
+        fieldPath: fieldPath,
+        fieldType: fieldType,
+        nullable: nullable,
+        children: children,
+        primaryKey: primaryKey,
+        foreignKey: foreignKey,
+        fallback: fallback,
+        description: description,
       );
     } catch (e) {
       return null;
@@ -202,9 +288,43 @@ class FieldModel extends Model {
     bool includeNulls = false,
   }) {
     try {
-      
+      final fieldPath0 = fieldPath
+          ?.map(
+            (p0) => p0?.trim().nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
+      final fieldType0 = fieldType;
+      final nullable0 = nullable;
+      final children0 = children
+          ?.map(
+            (p0) => p0
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
+      final primaryKey0 = primaryKey;
+      final foreignKey0 = foreignKey;
+      final fallback0 = fallback;
+      final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
-        
+        'primaryKey': primaryKey0,
+        'nullable': nullable0,
+        'foreignKey': foreignKey0,
+        'fieldType': fieldType0,
+        'fieldPath': fieldPath0,
+        'fallback': fallback0,
+        'description': description0,
+        'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -213,13 +333,81 @@ class FieldModel extends Model {
     }
   }
 
-  
+  /// Returns the value of the [fieldPath] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  List<String>? get fieldPath$ => fieldPath;
+
+  /// Returns the value of the [fieldType] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  dynamic get fieldType$ => fieldType!;
+
+  /// Returns the value of the [nullable] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  bool? get nullable$ => nullable;
+
+  /// Returns the value of the [children] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  List<Map<String, dynamic>>? get children$ => children;
+
+  /// Returns the value of the [primaryKey] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  bool? get primaryKey$ => primaryKey;
+
+  /// Returns the value of the [foreignKey] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  bool? get foreignKey$ => foreignKey;
+
+  /// Returns the value of the [fallback] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  Object? get fallback$ => fallback;
+
+  /// Returns the value of the [description] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  String? get description$ => description;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 abstract final class FieldModelFieldNames {
-  
+  /// The field name of [FieldModel.fieldPath].
+  static const fieldPath = 'fieldPath';
+
+  /// The field name of [FieldModel.fieldType].
+  static const fieldType = 'fieldType';
+
+  /// The field name of [FieldModel.nullable].
+  static const nullable = 'nullable';
+
+  /// The field name of [FieldModel.children].
+  static const children = 'children';
+
+  /// The field name of [FieldModel.primaryKey].
+  static const primaryKey = 'primaryKey';
+
+  /// The field name of [FieldModel.foreignKey].
+  static const foreignKey = 'foreignKey';
+
+  /// The field name of [FieldModel.fallback].
+  static const fallback = 'fallback';
+
+  /// The field name of [FieldModel.description].
+  static const description = 'description';
 }
 
 extension FieldModelX on FieldModel {
@@ -236,22 +424,50 @@ extension FieldModelX on FieldModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  FieldModel copyWith(FieldModel src, {
-    
+  FieldModel copyWith(
+    FieldModel src, {
+    List<String>? fieldPath,
+    dynamic? fieldType,
+    bool? nullable,
+    List<Map<String, dynamic>>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
+    String? description,
   }) {
-    final src = this;
     return FieldModel.assertRequired(
-      
+      fieldPath: fieldPath ?? this.fieldPath,
+      fieldType: fieldType ?? this.fieldType,
+      nullable: nullable ?? this.nullable,
+      children: children ?? this.children,
+      primaryKey: primaryKey ?? this.primaryKey,
+      foreignKey: foreignKey ?? this.foreignKey,
+      fallback: fallback ?? this.fallback,
+      description: description ?? this.description,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  FieldModel copyWithout(FieldModel src, {
-    
+  FieldModel copyWithout(
+    FieldModel src, {
+    bool fieldPath = true,
+    bool fieldType = true,
+    bool nullable = true,
+    bool children = true,
+    bool primaryKey = true,
+    bool foreignKey = true,
+    bool fallback = true,
+    bool description = true,
   }) {
-    final src = this;
     return FieldModel.assertRequired(
-      
+      fieldPath: fieldPath ? this.fieldPath : null,
+      fieldType: fieldType ? this.fieldType : null,
+      nullable: nullable ? this.nullable : null,
+      children: children ? this.children : null,
+      primaryKey: primaryKey ? this.primaryKey : null,
+      foreignKey: foreignKey ? this.foreignKey : null,
+      fallback: fallback ? this.fallback : null,
+      description: description ? this.description : null,
     );
   }
 }

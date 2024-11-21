@@ -1,3 +1,4 @@
+```dart
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
@@ -15,16 +16,12 @@
 // ignore_for_file: unnecessary_null_comparison
 // ignore_for_file: unnecessary_question_mark
 
-// This line is not actually in the generated code.
-import 'package:df_generate_dart_models_core/df_generate_dart_models_core.dart';
-
-// This line is in the generated code.
-//part of 'field_model.dart';
+part of 'example.md';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Generated class for [_FieldModel].
-class FieldModel extends Model {
+class FieldModel extends _FieldModel {
   //
   //
   //
@@ -337,65 +334,6 @@ class FieldModel extends Model {
     }
   }
 
-  @override
-  T mergeWith<T extends BaseModel>(
-    BaseModel? other, {
-    bool deepMerge = false,
-  }) {
-    final a = toJson();
-    final b = other?.toJson() ?? {};
-    final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
-    return FieldModel.fromJson(data.cast()) as T;
-  }
-
-  /// Creates a copy of this instance, replacing the specified fields.
-  static FieldModel copyWith(
-    FieldModel src, {
-    List<String>? fieldPath,
-    dynamic? fieldType,
-    bool? nullable,
-    List<Map<String, dynamic>>? children,
-    bool? primaryKey,
-    bool? foreignKey,
-    Object? fallback,
-    String? description,
-  }) {
-    return FieldModel.assertRequired(
-      fieldPath: fieldPath ?? src.fieldPath,
-      fieldType: fieldType ?? src.fieldType,
-      nullable: nullable ?? src.nullable,
-      children: children ?? src.children,
-      primaryKey: primaryKey ?? src.primaryKey,
-      foreignKey: foreignKey ?? src.foreignKey,
-      fallback: fallback ?? src.fallback,
-      description: description ?? src.description,
-    );
-  }
-
-  /// Creates a copy of this instance, removing the specified fields.
-  static FieldModel copyWithout(
-    FieldModel src, {
-    bool fieldPath = true,
-    bool fieldType = true,
-    bool nullable = true,
-    bool children = true,
-    bool primaryKey = true,
-    bool foreignKey = true,
-    bool fallback = true,
-    bool description = true,
-  }) {
-    return FieldModel.assertRequired(
-      fieldPath: fieldPath ? src.fieldPath : null,
-      fieldType: fieldType ? src.fieldType : null,
-      nullable: nullable ? src.nullable : null,
-      children: children ? src.children : null,
-      primaryKey: primaryKey ? src.primaryKey : null,
-      foreignKey: foreignKey ? src.foreignKey : null,
-      fallback: fallback ? src.fallback : null,
-      description: description ? src.description : null,
-    );
-  }
-
   /// Returns the value of the [fieldPath] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
@@ -472,3 +410,66 @@ abstract final class FieldModelFieldNames {
   /// The field name of [FieldModel.description].
   static const description = 'description';
 }
+
+extension FieldModelX on FieldModel {
+  /// Creates a copy of this instance, merging another model's fields into
+  /// this model's fields.
+  FieldModel mergeWith(
+    BaseModel? other, {
+    bool deepMerge = false,
+  }) {
+    final a = toJson();
+    final b = other?.toJson() ?? {};
+    final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
+    return FieldModel.fromJson(data.cast());
+  }
+
+  /// Creates a copy of this instance, replacing the specified fields.
+  FieldModel copyWith(
+    FieldModel src, {
+    List<String>? fieldPath,
+    dynamic? fieldType,
+    bool? nullable,
+    List<Map<String, dynamic>>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
+    String? description,
+  }) {
+    return FieldModel.assertRequired(
+      fieldPath: fieldPath ?? this.fieldPath,
+      fieldType: fieldType ?? this.fieldType,
+      nullable: nullable ?? this.nullable,
+      children: children ?? this.children,
+      primaryKey: primaryKey ?? this.primaryKey,
+      foreignKey: foreignKey ?? this.foreignKey,
+      fallback: fallback ?? this.fallback,
+      description: description ?? this.description,
+    );
+  }
+
+  /// Creates a copy of this instance, removing the specified fields.
+  FieldModel copyWithout(
+    FieldModel src, {
+    bool fieldPath = true,
+    bool fieldType = true,
+    bool nullable = true,
+    bool children = true,
+    bool primaryKey = true,
+    bool foreignKey = true,
+    bool fallback = true,
+    bool description = true,
+  }) {
+    return FieldModel.assertRequired(
+      fieldPath: fieldPath ? this.fieldPath : null,
+      fieldType: fieldType ? this.fieldType : null,
+      nullable: nullable ? this.nullable : null,
+      children: children ? this.children : null,
+      primaryKey: primaryKey ? this.primaryKey : null,
+      foreignKey: foreignKey ? this.foreignKey : null,
+      fallback: fallback ? this.fallback : null,
+      description: description ? this.description : null,
+    );
+  }
+}
+```
