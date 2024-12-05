@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.11]
+
+- Released @ 12/2024 (UTC)
+- refactor: Remove extract_insights_from_file.dart
+
 ## [0.8.10]
 
 - Released @ 12/2024 (UTC)
