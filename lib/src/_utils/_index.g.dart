@@ -10,7 +10,6 @@
 export 'dart_type_code_mapper.dart';
 export 'dart_obj_to_string_list.dart';
 export 'dart_field.dart';
-export 'extract_insights_from_file.dart';
 export 'dart_obj_to_object.dart';
 export 'decompose_dart_collection_type.dart';
 export 'dart_from_record_on_dart_object_x.dart';
