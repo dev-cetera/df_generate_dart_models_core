@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.10]
+
+- Released @ 12/2024 (UTC)
+- chore: Remove templates folder
+
 ## [0.8.9]
 
 - Released @ 12/2024 (UTC)
