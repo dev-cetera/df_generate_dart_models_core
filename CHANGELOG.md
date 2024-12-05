@@ -3,7 +3,7 @@
 ## [0.8.9]
 
 - Released @ 12/2024 (UTC)
-- feat: Add new library: df_generate_dart_models_utils
+- feat: Add new library: df_generate_dart_models_core_utils
 
 ## [0.8.3]
 
