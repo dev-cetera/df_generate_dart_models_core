@@ -10,15 +10,12 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:analyzer/dart/constant/value.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-List<String>? dartObjToStringList(DartObject? obj) {
-  final a = obj?.toStringValue();
+List<String>? dartObjToStringList(dynamic dartObj) {
+  final a = dartObj?.toStringValue() as String?;
   if (a != null) {
     return [a];
   }
-  final b = obj?.toListValue()?.map((e) => e.toStringValue()).nonNulls.toList();
+  final b = dartObj?.toListValue()?.map((dynamic e) => e.toStringValue()).nonNulls.toList()
+      as List<String>?;
   return b;
 }

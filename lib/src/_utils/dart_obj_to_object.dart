@@ -10,35 +10,31 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:analyzer/dart/constant/value.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-Object? dartObjToObject(DartObject? dartObject) {
-  if (dartObject != null) {
+Object? dartObjToObject(dynamic dartObj) {
+  if (dartObj != null) {
     try {
-      return dartObject.toStringValue()!;
+      return dartObj.toStringValue()!;
     } catch (_) {}
     try {
-      return dartObject.toIntValue()!;
+      return dartObj.toIntValue()!;
     } catch (_) {}
 
     try {
-      return dartObject.toBoolValue()!;
+      return dartObj.toBoolValue()!;
     } catch (_) {}
     try {
-      return dartObject.toDoubleValue()!;
+      return dartObj.toDoubleValue()!;
     } catch (_) {}
     try {
-      return dartObject.toListValue()!.map((e) => dartObjToObject(e));
+      return dartObj.toListValue()!.map((dynamic e) => dartObjToObject(e));
     } catch (_) {}
     try {
-      return dartObject.toSetValue()!.map((e) => dartObjToObject(e));
+      return dartObj.toSetValue()!.map((dynamic e) => dartObjToObject(e));
     } catch (_) {}
     try {
-      return dartObject
+      return dartObj
           .toMapValue()!
-          .map((k, v) => MapEntry(dartObjToObject(k), dartObjToObject(v)));
+          .map((dynamic k, dynamic v) => MapEntry(dartObjToObject(k), dartObjToObject(v)));
     } catch (_) {}
   }
   return null;

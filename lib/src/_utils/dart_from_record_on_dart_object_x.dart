@@ -10,7 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:analyzer/dart/constant/value.dart';
+// Let's avoid depending on the analyzer package.
+//import 'package:analyzer/dart/constant/value.dart';
 
 import 'dart_obj_to_string_list.dart';
 import 'dart_obj_to_object.dart';
@@ -18,27 +19,28 @@ import '../models/field_model/field_model.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension DartFromRecordOnDartObjectX on DartObject {
+typedef _DartObject = dynamic;
+//typedef _DartObject = DartObject;
+
+extension type DartFromRecordOnDartObjectX(_DartObject dartObj) {
   //
   //
   //
 
-  /// Returns `fieldName` property from `this` [DartObject] record if it matches
-  /// the structure of [TFieldRecord] or `null`.
+  /// Returns `fieldName` property from [dartObj] if it matches the structure of
+  /// [TFieldRecord] or `null`.
   List<String>? fieldPathFromRecord() {
-    return _rawFieldPathFromRecord()
-        ?.map((e) => e.replaceAll('?', ''))
-        .toList();
+    return _rawFieldPathFromRecord()?.map((e) => e.replaceAll('?', '')).toList();
   }
 
   List<String>? _rawFieldPathFromRecord() {
-    final a = dartObjToStringList(getField('\$1'));
-    final b = dartObjToStringList(getField(FieldModelFieldNames.fieldPath));
+    final a = dartObjToStringList(dartObj.getField('\$1'));
+    final b = dartObjToStringList(dartObj.getField(FieldModelFieldNames.fieldPath));
     return (a ?? b)?.toList();
   }
 
-  /// Returns the `fieldType` property from `this` DartObject record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `fieldType` property from [dartObj] if it matches the structure
+  /// of [TFieldRecord] or `null`.
   String? fieldTypeFromRecord() {
     final raw = _rawFieldTypeFromRecord();
     if (raw != null) {
@@ -48,64 +50,64 @@ extension DartFromRecordOnDartObjectX on DartObject {
   }
 
   String? _rawFieldTypeFromRecord() {
-    final a = getField('\$2')?.toStringValue();
-    final b = getField('\$2')?.toTypeValue()?.getDisplayString();
-    final c = getField(FieldModelFieldNames.fieldType)?.toStringValue();
-    final d = getField(FieldModelFieldNames.fieldType)
-        ?.toTypeValue()
-        ?.getDisplayString();
+    final a = dartObj.getField('\$2')?.toStringValue() as String?;
+    final b = dartObj.getField('\$2')?.toTypeValue()?.getDisplayString() as String?;
+    final c = dartObj.getField(FieldModelFieldNames.fieldType)?.toStringValue() as String?;
+    final d =
+        dartObj.getField(FieldModelFieldNames.fieldType)?.toTypeValue()?.getDisplayString() as String?;
     return a ?? b ?? c ?? d;
   }
 
-  /// Returns the `nullable` property from `this` [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `nullable` property from [dartObj] if it matches thestructure of
+  /// [TFieldRecord] or `null`.
   bool? nullableFromRecord() {
     if (fieldTypeFromRecord() == 'dynamic') {
       return false;
     }
 
-    final a = getField(FieldModelFieldNames.nullable)?.toBoolValue();
-    final b = getField('\$3')?.toBoolValue();
+    final a = dartObj.getField(FieldModelFieldNames.nullable)?.toBoolValue() as bool?;
+    final b = dartObj.getField('\$3')?.toBoolValue() as bool?;
     final c = _rawFieldPathFromRecord()?.any((e) => e.contains('?'));
     final d = _rawFieldTypeFromRecord()?.endsWith('?');
     return a ?? b ?? ((c ?? false) || (d ?? false));
   }
 
-  /// Returns the `children` property from `this` [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `children` property from [dartObj] if it matches the structure of
+  /// [TFieldRecord] or `null`.
   List<Map<String, dynamic>>? childrenFromRecord() {
-    return getField(FieldModelFieldNames.children)
+    return dartObj
+        .getField(FieldModelFieldNames.children)
         ?.toListValue()
         ?.map(
-          (e) => e
+          (dynamic e) => e
               .toMapValue()!
-              .map((k, v) => MapEntry(k!.toStringValue()!, dartObjToObject(v))),
+              .map((dynamic k, dynamic v) => MapEntry(k!.toStringValue()!, dartObjToObject(v))),
         )
-        .toList();
+        .toList() as List<Map<String, dynamic>>?;
   }
 
-  /// Returns the `primaryKey` property from `this` [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `primaryKey` property from [dartObj] if it matches the structure
+  /// of [TFieldRecord] or `null`.
   bool? primaryKeyFromRecord() {
-    return getField(FieldModelFieldNames.primaryKey)?.toBoolValue();
+    return dartObj.getField(FieldModelFieldNames.primaryKey)?.toBoolValue() as bool?;
   }
 
-  /// Returns the `foreignKey` property from `this` [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `foreignKey` property from [dartObj] if it matches the
+  /// structure of [TFieldRecord] or `null`.
   bool? foreignKeyFromRecord() {
-    return getField(FieldModelFieldNames.foreignKey)?.toBoolValue();
+    return dartObj.getField(FieldModelFieldNames.foreignKey)?.toBoolValue() as bool?;
   }
 
-  /// Retrieves the `fallback` property from this [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or returns `null`.
+  /// Retrieves the `fallback` property from this `DartObject` if it matches
+  /// the structure of [TFieldRecord] or returns `null`.
   Object? fallbackFromRecord() {
-    final fallbackField = getField(FieldModelFieldNames.fallback);
+    final fallbackField = dartObj.getField(FieldModelFieldNames.fallback);
     return dartObjToObject(fallbackField);
   }
 
-  /// Returns the `description` property from `this` [DartObject] record if it
-  /// matches the structure of [TFieldRecord] or `null`.
+  /// Returns the `description` property from [dartObj] record if it matches the
+  /// structure of [TFieldRecord] or `null`.
   String? descriptionFromRecord() {
-    return getField(FieldModelFieldNames.description)?.toStringValue();
+    return dartObj.getField(FieldModelFieldNames.description)?.toStringValue() as String?;
   }
 }
