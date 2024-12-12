@@ -15,7 +15,10 @@ List<String>? dartObjToStringList(dynamic dartObj) {
   if (a != null) {
     return [a];
   }
-  final b = dartObj?.toListValue()?.map((dynamic e) => e.toStringValue()).nonNulls.toList()
-      as List<String>?;
+  final b = dartObj
+      ?.toListValue()
+      ?.map((dynamic e) => e.toStringValue())
+      .nonNulls
+      .toList() as List<String>?;
   return b;
 }
