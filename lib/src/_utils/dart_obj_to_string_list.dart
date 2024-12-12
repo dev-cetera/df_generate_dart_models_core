@@ -10,6 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// ignore_for_file: inference_failure_on_untyped_parameter
+
 List<String>? dartObjToStringList(dynamic dartObj) {
   final a = dartObj?.toStringValue() as String?;
   if (a != null) {
@@ -17,8 +19,10 @@ List<String>? dartObjToStringList(dynamic dartObj) {
   }
   final b = dartObj
       ?.toListValue()
-      ?.map((dynamic e) => e.toStringValue())
-      .nonNulls
-      .toList() as List<String>?;
-  return b;
+      ?.map((e) => e.toStringValue())
+      .where((e) => e != null)
+      .map((e) => e!) as Iterable?;
+
+  final c = b?.map((e) => e.toString()).toList();
+  return c;
 }
