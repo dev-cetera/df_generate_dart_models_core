@@ -32,8 +32,10 @@ Object? dartObjToObject(dynamic dartObj) {
       return dartObj.toSetValue()!.map((dynamic e) => dartObjToObject(e));
     } catch (_) {}
     try {
-      return dartObj.toMapValue()!.map((dynamic k, dynamic v) =>
-          MapEntry(dartObjToObject(k), dartObjToObject(v)),);
+      return dartObj.toMapValue()!.map(
+            (dynamic k, dynamic v) =>
+                MapEntry(dartObjToObject(k), dartObjToObject(v)),
+          );
     } catch (_) {}
   }
   return null;

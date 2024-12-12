@@ -87,8 +87,10 @@ extension type DartFromRecordOnDartObjectX(_DartObject dartObj) {
         .getField(FieldModelFieldNames.children)
         ?.toListValue()
         ?.map(
-          (dynamic e) => e.toMapValue()!.map((dynamic k, dynamic v) =>
-              MapEntry(k!.toStringValue()!, dartObjToObject(v)),),
+          (dynamic e) => e.toMapValue()!.map(
+                (dynamic k, dynamic v) =>
+                    MapEntry(k!.toStringValue()!, dartObjToObject(v)),
+              ),
         )
         .toList() as List<Map<String, dynamic>>?;
   }
