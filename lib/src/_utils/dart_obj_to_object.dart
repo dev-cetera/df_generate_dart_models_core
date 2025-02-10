@@ -33,7 +33,8 @@ Object? dartObjToObject(dynamic dartObj) {
     } catch (_) {}
     try {
       return dartObj.toMapValue()!.map(
-            (dynamic k, dynamic v) => MapEntry(dartObjToObject(k), dartObjToObject(v)),
+            (dynamic k, dynamic v) =>
+                MapEntry(dartObjToObject(k), dartObjToObject(v)),
           );
     } catch (_) {}
   }
