@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. The use of this
+// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
 // source code is governed by an MIT-style license described in the LICENSE
 // file located in this project's root directory.
 //
@@ -108,8 +108,7 @@ final class DartField extends Field {
     ].any((e) => e == true);
   }
 
-  bool? get _isFieldNameNullable =>
-      super.fieldPath?.any((e) => e.contains('?'));
+  bool? get _isFieldNameNullable => super.fieldPath?.any((e) => e.contains('?'));
 
   bool? get _isFieldTypeNullable => super.fieldType?.endsWith('?') == true;
 

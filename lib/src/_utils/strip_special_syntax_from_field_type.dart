@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. The use of this
+// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
 // source code is governed by an MIT-style license described in the LICENSE
 // file located in this project's root directory.
 //
@@ -56,10 +56,7 @@ String stripSpecialSyntaxFromFieldType(String fieldType) {
   // brackets back to angle brackets and pluses back to commas.
   // This is likely to restore generic type syntax closer to standard Dart or TypeScript formats.
   String step4(String input) {
-    return input
-        .replaceAll('[', '<')
-        .replaceAll(']', '>')
-        .replaceAll('+', ', ');
+    return input.replaceAll('[', '<').replaceAll(']', '>').replaceAll('+', ', ');
   }
 
   // Apply all transformations sequentially to the input String.

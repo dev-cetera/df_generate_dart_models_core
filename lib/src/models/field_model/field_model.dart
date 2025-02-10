@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by DevCetra.com & contributors. The use of this
+// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
 // source code is governed by an MIT-style license described in the LICENSE
 // file located in this project's root directory.
 //
@@ -21,15 +21,13 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['fieldPath'],
     fieldType: List<String>,
     nullable: true,
-    description:
-        'The path of the field within the model, represented as a list of strings.',
+    description: 'The path of the field within the model, represented as a list of strings.',
   ),
   Field(
     fieldPath: ['fieldType'],
     fieldType: dynamic,
     nullable: true,
-    description:
-        'The data type of the field, such as "String", "int", or any dynamic type.',
+    description: 'The data type of the field, such as "String", "int", or any dynamic type.',
   ),
   Field(
     fieldPath: ['nullable'],
@@ -41,8 +39,7 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['children'],
     fieldType: List<Map<String, dynamic>>,
     nullable: true,
-    description:
-        'Children of this field, allowing for nested fields or complex structures.',
+    description: 'Children of this field, allowing for nested fields or complex structures.',
   ),
   Field(
     fieldPath: ['primaryKey'],

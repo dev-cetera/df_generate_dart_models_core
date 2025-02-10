@@ -2,7 +2,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // GENERATED - DO NOT MODIFY BY HAND
-// See: https://github.com/DevCetra/df_generate_dart_models
+// See: https://github.com/dev-cetera/df_generate_dart_models
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
@@ -200,10 +200,8 @@ class GenerateDartModel extends _GenerateDartModel {
           ?.toSet()
           .unmodifiable;
       final shouldInherit = letAsOrNull<bool>(json?['shouldInherit']);
-      final inheritanceConstructor =
-          json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
-      final keyStringCase =
-          json?['keyStringCase']?.toString().trim().nullIfEmpty;
+      final inheritanceConstructor = json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
+      final keyStringCase = json?['keyStringCase']?.toString().trim().nullIfEmpty;
       final description = json?['description']?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
         className: className,
@@ -263,8 +261,7 @@ class GenerateDartModel extends _GenerateDartModel {
           .nullIfEmpty
           ?.toList();
       final shouldInherit0 = shouldInherit;
-      final inheritanceConstructor0 =
-          inheritanceConstructor?.trim().nullIfEmpty;
+      final inheritanceConstructor0 = inheritanceConstructor?.trim().nullIfEmpty;
       final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
       final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
@@ -367,8 +364,7 @@ extension GenerateDartModelX on GenerateDartModel {
       className: className ?? this.className,
       fields: fields ?? this.fields,
       shouldInherit: shouldInherit ?? this.shouldInherit,
-      inheritanceConstructor:
-          inheritanceConstructor ?? this.inheritanceConstructor,
+      inheritanceConstructor: inheritanceConstructor ?? this.inheritanceConstructor,
       keyStringCase: keyStringCase ?? this.keyStringCase,
       description: description ?? this.description,
     );
@@ -387,8 +383,7 @@ extension GenerateDartModelX on GenerateDartModel {
       className: className ? this.className : null,
       fields: fields ? this.fields : null,
       shouldInherit: shouldInherit ? this.shouldInherit : null,
-      inheritanceConstructor:
-          inheritanceConstructor ? this.inheritanceConstructor : null,
+      inheritanceConstructor: inheritanceConstructor ? this.inheritanceConstructor : null,
       keyStringCase: keyStringCase ? this.keyStringCase : null,
       description: description ? this.description : null,
     );
