@@ -93,9 +93,7 @@ class GenerateDartModel extends _GenerateDartModel {
 
   /// Constructs a new instance of [GenerateDartModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory GenerateDartModel.from(
-    BaseModel another,
-  ) {
+  factory GenerateDartModel.from(BaseModel another) {
     try {
       return fromOrNull(another)!;
     } catch (e) {
@@ -108,17 +106,13 @@ class GenerateDartModel extends _GenerateDartModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static GenerateDartModel? fromOrNull(
-    BaseModel? another,
-  ) {
+  static GenerateDartModel? fromOrNull(BaseModel? another) {
     return fromJsonOrNull(another?.toJson())!;
   }
 
   /// Constructs a new instance of [GenerateDartModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory GenerateDartModel.of(
-    GenerateDartModel another,
-  ) {
+  factory GenerateDartModel.of(GenerateDartModel another) {
     try {
       return ofOrNull(another)!;
     } catch (e) {
@@ -131,18 +125,14 @@ class GenerateDartModel extends _GenerateDartModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static GenerateDartModel? ofOrNull(
-    GenerateDartModel? other,
-  ) {
+  static GenerateDartModel? ofOrNull(GenerateDartModel? other) {
     return fromJsonOrNull(other?.toJson());
   }
 
   /// Constructs a new instance of [GenerateDartModel],
   /// from [jsonString], which must be a valid JSON String. Throws if the
   /// conversion fails.
-  factory GenerateDartModel.fromJsonString(
-    String jsonString,
-  ) {
+  factory GenerateDartModel.fromJsonString(String jsonString) {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
@@ -154,9 +144,7 @@ class GenerateDartModel extends _GenerateDartModel {
   /// Constructs a new instance of [GenerateDartModel],
   /// from [jsonString], which must be a valid JSON String. Returns `null` if
   /// [jsonString] is `null` or if the conversion fails.
-  static GenerateDartModel? fromJsonStringOrNull(
-    String? jsonString,
-  ) {
+  static GenerateDartModel? fromJsonStringOrNull(String? jsonString) {
     try {
       if (jsonString!.isNotEmpty) {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
@@ -172,9 +160,7 @@ class GenerateDartModel extends _GenerateDartModel {
   /// Constructs a new instance of [GenerateDartModel],
   /// from [json], which must be a valid JSON object. Throws if the conversion
   /// fails.
-  factory GenerateDartModel.fromJson(
-    Map<String, dynamic>? json,
-  ) {
+  factory GenerateDartModel.fromJson(Map<String, dynamic>? json) {
     try {
       return fromJsonOrNull(json)!;
     } catch (e) {
@@ -186,19 +172,13 @@ class GenerateDartModel extends _GenerateDartModel {
   /// Constructs a new instance of [GenerateDartModel],
   /// from [json], which must be a valid JSON object. Returns `null` if
   /// [json] is `null` or if the conversion fails.
-  static GenerateDartModel? fromJsonOrNull(
-    Map<String, dynamic>? json,
-  ) {
+  static GenerateDartModel? fromJsonOrNull(Map<String, dynamic>? json) {
     try {
       final className = json?['className']?.toString().trim().nullIfEmpty;
-      final fields = letSetOrNull<dynamic>(json?['fields'])
-          ?.map(
-            (p0) => p0,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toSet()
-          .unmodifiable;
+      final fields =
+          letSetOrNull<dynamic>(
+            json?['fields'],
+          )?.map((p0) => p0).nonNulls.nullIfEmpty?.toSet().unmodifiable;
       final shouldInherit = letAsOrNull<bool>(json?['shouldInherit']);
       final inheritanceConstructor =
           json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
@@ -221,9 +201,7 @@ class GenerateDartModel extends _GenerateDartModel {
   /// Constructs a new instance of [GenerateDartModel],
   /// from the query parameters of [uri]. Throws if the conversion
   /// fails.
-  factory GenerateDartModel.fromUri(
-    Uri? uri,
-  ) {
+  factory GenerateDartModel.fromUri(Uri? uri) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
@@ -235,9 +213,7 @@ class GenerateDartModel extends _GenerateDartModel {
   /// Constructs a new instance of [GenerateDartModel],
   /// from the query parameters of [uri]. Returns `null` if [uri] is `null` or
   /// if the conversion fails.
-  static GenerateDartModel? fromUriOrNull(
-    Uri? uri,
-  ) {
+  static GenerateDartModel? fromUriOrNull(Uri? uri) {
     try {
       if (uri != null && uri.path == CLASS_NAME) {
         return GenerateDartModel.fromJson(uri.queryParameters);
@@ -250,18 +226,10 @@ class GenerateDartModel extends _GenerateDartModel {
   }
 
   @override
-  Map<String, dynamic> toJson({
-    bool includeNulls = false,
-  }) {
+  Map<String, dynamic> toJson({bool includeNulls = false}) {
     try {
       final className0 = className?.trim().nullIfEmpty;
-      final fields0 = fields
-          ?.map(
-            (p0) => p0,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
+      final fields0 = fields?.map((p0) => p0).nonNulls.nullIfEmpty?.toList();
       final shouldInherit0 = shouldInherit;
       final inheritanceConstructor0 =
           inheritanceConstructor?.trim().nullIfEmpty;
@@ -344,10 +312,7 @@ abstract final class GenerateDartModelFieldNames {
 extension GenerateDartModelX on GenerateDartModel {
   /// Creates a copy of this instance, merging another model's fields into
   /// this model's fields.
-  GenerateDartModel mergeWith(
-    BaseModel? other, {
-    bool deepMerge = false,
-  }) {
+  GenerateDartModel mergeWith(BaseModel? other, {bool deepMerge = false}) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;

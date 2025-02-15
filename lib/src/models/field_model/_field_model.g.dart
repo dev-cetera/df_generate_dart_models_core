@@ -109,9 +109,7 @@ class FieldModel extends _FieldModel {
 
   /// Constructs a new instance of [FieldModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory FieldModel.from(
-    BaseModel another,
-  ) {
+  factory FieldModel.from(BaseModel another) {
     try {
       return fromOrNull(another)!;
     } catch (e) {
@@ -124,17 +122,13 @@ class FieldModel extends _FieldModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static FieldModel? fromOrNull(
-    BaseModel? another,
-  ) {
+  static FieldModel? fromOrNull(BaseModel? another) {
     return fromJsonOrNull(another?.toJson())!;
   }
 
   /// Constructs a new instance of [FieldModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory FieldModel.of(
-    FieldModel another,
-  ) {
+  factory FieldModel.of(FieldModel another) {
     try {
       return ofOrNull(another)!;
     } catch (e) {
@@ -147,18 +141,14 @@ class FieldModel extends _FieldModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static FieldModel? ofOrNull(
-    FieldModel? other,
-  ) {
+  static FieldModel? ofOrNull(FieldModel? other) {
     return fromJsonOrNull(other?.toJson());
   }
 
   /// Constructs a new instance of [FieldModel],
   /// from [jsonString], which must be a valid JSON String. Throws if the
   /// conversion fails.
-  factory FieldModel.fromJsonString(
-    String jsonString,
-  ) {
+  factory FieldModel.fromJsonString(String jsonString) {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
@@ -170,9 +160,7 @@ class FieldModel extends _FieldModel {
   /// Constructs a new instance of [FieldModel],
   /// from [jsonString], which must be a valid JSON String. Returns `null` if
   /// [jsonString] is `null` or if the conversion fails.
-  static FieldModel? fromJsonStringOrNull(
-    String? jsonString,
-  ) {
+  static FieldModel? fromJsonStringOrNull(String? jsonString) {
     try {
       if (jsonString!.isNotEmpty) {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
@@ -188,9 +176,7 @@ class FieldModel extends _FieldModel {
   /// Constructs a new instance of [FieldModel],
   /// from [json], which must be a valid JSON object. Throws if the conversion
   /// fails.
-  factory FieldModel.fromJson(
-    Map<String, dynamic>? json,
-  ) {
+  factory FieldModel.fromJson(Map<String, dynamic>? json) {
     try {
       return fromJsonOrNull(json)!;
     } catch (e) {
@@ -202,37 +188,34 @@ class FieldModel extends _FieldModel {
   /// Constructs a new instance of [FieldModel],
   /// from [json], which must be a valid JSON object. Returns `null` if
   /// [json] is `null` or if the conversion fails.
-  static FieldModel? fromJsonOrNull(
-    Map<String, dynamic>? json,
-  ) {
+  static FieldModel? fromJsonOrNull(Map<String, dynamic>? json) {
     try {
-      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])
-          ?.map(
-            (p0) => p0?.toString().trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList()
-          .unmodifiable;
+      final fieldPath =
+          letListOrNull<dynamic>(json?['fieldPath'])
+              ?.map((p0) => p0?.toString().trim().nullIfEmpty)
+              .nonNulls
+              .nullIfEmpty
+              ?.toList()
+              .unmodifiable;
       final fieldType = json?['fieldType'];
       final nullable = letAsOrNull<bool>(json?['nullable']);
-      final children = letListOrNull<dynamic>(json?['children'])
-          ?.map(
-            (p0) => letMapOrNull<dynamic, dynamic>(p0)
-                ?.map(
-                  (p0, p1) => MapEntry(
-                    p0?.toString().trim().nullIfEmpty,
-                    p1,
-                  ),
-                )
-                .nonNulls
-                .nullIfEmpty
-                ?.unmodifiable,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList()
-          .unmodifiable;
+      final children =
+          letListOrNull<dynamic>(json?['children'])
+              ?.map(
+                (p0) =>
+                    letMapOrNull<dynamic, dynamic>(p0)
+                        ?.map(
+                          (p0, p1) =>
+                              MapEntry(p0?.toString().trim().nullIfEmpty, p1),
+                        )
+                        .nonNulls
+                        .nullIfEmpty
+                        ?.unmodifiable,
+              )
+              .nonNulls
+              .nullIfEmpty
+              ?.toList()
+              .unmodifiable;
       final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
       final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
       final fallback = json?['fallback'];
@@ -255,9 +238,7 @@ class FieldModel extends _FieldModel {
   /// Constructs a new instance of [FieldModel],
   /// from the query parameters of [uri]. Throws if the conversion
   /// fails.
-  factory FieldModel.fromUri(
-    Uri? uri,
-  ) {
+  factory FieldModel.fromUri(Uri? uri) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
@@ -269,9 +250,7 @@ class FieldModel extends _FieldModel {
   /// Constructs a new instance of [FieldModel],
   /// from the query parameters of [uri]. Returns `null` if [uri] is `null` or
   /// if the conversion fails.
-  static FieldModel? fromUriOrNull(
-    Uri? uri,
-  ) {
+  static FieldModel? fromUriOrNull(Uri? uri) {
     try {
       if (uri != null && uri.path == CLASS_NAME) {
         return FieldModel.fromJson(uri.queryParameters);
@@ -284,34 +263,28 @@ class FieldModel extends _FieldModel {
   }
 
   @override
-  Map<String, dynamic> toJson({
-    bool includeNulls = false,
-  }) {
+  Map<String, dynamic> toJson({bool includeNulls = false}) {
     try {
-      final fieldPath0 = fieldPath
-          ?.map(
-            (p0) => p0?.trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
+      final fieldPath0 =
+          fieldPath
+              ?.map((p0) => p0?.trim().nullIfEmpty)
+              .nonNulls
+              .nullIfEmpty
+              ?.toList();
       final fieldType0 = fieldType;
       final nullable0 = nullable;
-      final children0 = children
-          ?.map(
-            (p0) => p0
-                ?.map(
-                  (p0, p1) => MapEntry(
-                    p0?.trim().nullIfEmpty,
-                    p1,
-                  ),
-                )
-                .nonNulls
-                .nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList();
+      final children0 =
+          children
+              ?.map(
+                (p0) =>
+                    p0
+                        ?.map((p0, p1) => MapEntry(p0?.trim().nullIfEmpty, p1))
+                        .nonNulls
+                        .nullIfEmpty,
+              )
+              .nonNulls
+              .nullIfEmpty
+              ?.toList();
       final primaryKey0 = primaryKey;
       final foreignKey0 = foreignKey;
       final fallback0 = fallback;
@@ -413,10 +386,7 @@ abstract final class FieldModelFieldNames {
 extension FieldModelX on FieldModel {
   /// Creates a copy of this instance, merging another model's fields into
   /// this model's fields.
-  FieldModel mergeWith(
-    BaseModel? other, {
-    bool deepMerge = false,
-  }) {
+  FieldModel mergeWith(BaseModel? other, {bool deepMerge = false}) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;

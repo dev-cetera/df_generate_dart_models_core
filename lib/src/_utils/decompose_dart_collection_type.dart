@@ -36,7 +36,14 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
   String? decompose(String input) {
     // Find all collection type expressions from the input.
     const A = r'[\w\-\*\|\?]+';
-    const B = r'\b(' '$A' r')\<((' '$A' r')(\,' '$A' r')*)\>(\?)?';
+    const B =
+        r'\b('
+        '$A'
+        r')\<(('
+        '$A'
+        r')(\,'
+        '$A'
+        r')*)\>(\?)?';
     final matches = RegExp(B).allMatches(input);
 
     // Map each map to its primary type and its subtypes.
@@ -48,14 +55,11 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
           .split(','); // e.g. ["String", "int"] in "List<String,int>"
       final nullableSymbol = e.group(5) ?? ''; // '?' or ""
       final index = e.start; // index in [input] where the match starts
-      return MapEntry(
-        index,
-        [
-          longType,
-          '$shortType$nullableSymbol',
-          ...subtypes,
-        ],
-      );
+      return MapEntry(index, [
+        longType,
+        '$shortType$nullableSymbol',
+        ...subtypes,
+      ]);
     });
 
     // Add the mapping entries to final mapping.
@@ -79,12 +83,12 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
   }
 
   // Sort the entries and extract values for return
-  final sortedMapping = mapping.entries.toList()
-    ..sort((a, b) {
-      final aIndex = a.key;
-      final bIndex = b.key;
-      return aIndex.compareTo(bIndex);
-    });
+  final sortedMapping =
+      mapping.entries.toList()..sort((a, b) {
+        final aIndex = a.key;
+        final bIndex = b.key;
+        return aIndex.compareTo(bIndex);
+      });
   final values = sortedMapping.map((e) => e.value);
   return values;
 }

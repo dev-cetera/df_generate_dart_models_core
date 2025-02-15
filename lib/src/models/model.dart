@@ -29,9 +29,8 @@ class Model extends BaseModel {
 
   const Model([this._rootData = const {}]);
 
-  const Model.fromJson([
-    Map<String, dynamic>? otherData,
-  ]) : _rootData = otherData ?? const {};
+  const Model.fromJson([Map<String, dynamic>? otherData])
+    : _rootData = otherData ?? const {};
 
   factory Model.from(BaseModel? other) {
     return Model(other?.toJson() ?? {});
@@ -41,9 +40,7 @@ class Model extends BaseModel {
     return Model(other.toJson());
   }
 
-  factory Model.fromJsonString(
-    String source,
-  ) {
+  factory Model.fromJsonString(String source) {
     try {
       return fromJsonStringOrNull(source)!;
     } catch (e) {
@@ -52,9 +49,7 @@ class Model extends BaseModel {
     }
   }
 
-  static Model? fromJsonStringOrNull(
-    String? source,
-  ) {
+  static Model? fromJsonStringOrNull(String? source) {
     try {
       if (source!.isNotEmpty) {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
@@ -86,9 +81,7 @@ class Model extends BaseModel {
   //
 
   @override
-  Map<String, dynamic> toJson({
-    bool includeNulls = false,
-  }) {
+  Map<String, dynamic> toJson({bool includeNulls = false}) {
     return (includeNulls ? _rootData : _rootData?.nonNulls) ?? {};
   }
 
@@ -104,9 +97,7 @@ class Model extends BaseModel {
   //
 
   /// Returns a new list from [source] by removing duplicate keys equal to 'ref'.
-  static List<T> removeDuplicateRefs<T extends Model>(
-    Iterable<T> source,
-  ) {
+  static List<T> removeDuplicateRefs<T extends Model>(Iterable<T> source) {
     return removeDuplicateProperties(source, 'ref');
   }
 

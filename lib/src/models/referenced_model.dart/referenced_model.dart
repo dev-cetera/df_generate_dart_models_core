@@ -35,10 +35,7 @@ const REFERENCED_MODEL_FIELDS = {
   ),
 };
 
-@GenerateDartModel(
-  shouldInherit: true,
-  fields: REFERENCED_MODEL_FIELDS,
-)
+@GenerateDartModel(shouldInherit: true, fields: REFERENCED_MODEL_FIELDS)
 abstract class _ReferencedModel extends Model {
   const _ReferencedModel();
 }

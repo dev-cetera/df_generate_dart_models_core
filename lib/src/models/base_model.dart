@@ -40,9 +40,7 @@ abstract mixin class BaseModel {
   //
 
   /// Returns a Json i.e. `Map<String, dynamic>` representation of the BaseModel.
-  Map<String, dynamic> toJson({
-    bool includeNulls = false,
-  });
+  Map<String, dynamic> toJson({bool includeNulls = false});
 
   //
   //
@@ -50,9 +48,7 @@ abstract mixin class BaseModel {
 
   /// Returns a Json i.e. `Map<String, dynamic>` representation of the BaseModel,
   /// with the keys sorted alphabetically.
-  Map<String, dynamic> sortedJson({
-    bool includeNulls = false,
-  }) {
+  Map<String, dynamic> sortedJson({bool includeNulls = false}) {
     final a = toJson(includeNulls: includeNulls);
     final b = a.keys.toList(growable: false)
       ..sort((k1, k2) => k1.compareTo(k2));

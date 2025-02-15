@@ -60,10 +60,7 @@ const GENERATE_DART_MODEL_FIELDS = {
   ),
 };
 
-@GenerateDartModel(
-  shouldInherit: true,
-  fields: GENERATE_DART_MODEL_FIELDS,
-)
+@GenerateDartModel(shouldInherit: true, fields: GENERATE_DART_MODEL_FIELDS)
 abstract class _GenerateDartModel extends Model {
   const _GenerateDartModel();
 }

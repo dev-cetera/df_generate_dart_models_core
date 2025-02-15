@@ -27,47 +27,36 @@ class DartTypeCodeMapper {
   //
   //
 
-  const DartTypeCodeMapper(
-    this.mappers,
-  );
+  const DartTypeCodeMapper(this.mappers);
 
   //
   //
   //
 
-  String map({
-    required String fieldName,
-    required String fieldTypeCode,
-  }) {
+  String map({required String fieldName, required String fieldTypeCode}) {
     var result = mapCollection(
       fieldName: fieldName,
       genericTypeCode: fieldTypeCode,
     );
     if (result == '#x0') {
-      result = mapObject(
-        fieldName: fieldName,
-        fieldTypeCode: fieldTypeCode,
-      );
+      result = mapObject(fieldName: fieldName, fieldTypeCode: fieldTypeCode);
     }
     return result;
   }
 
-//
-//
-//
+  //
+  //
+  //
 
-  String mapObject({
-    required String fieldName,
-    required String fieldTypeCode,
-  }) {
+  String mapObject({required String fieldName, required String fieldTypeCode}) {
     final formula =
         buildObjectMapper(fieldTypeCode, fieldName, mappers) ?? '#x0';
     return formula;
   }
 
-//
-//
-//
+  //
+  //
+  //
 
   String mapCollection({
     required String fieldName,

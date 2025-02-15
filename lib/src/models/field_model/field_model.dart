@@ -71,11 +71,7 @@ const FIELD_MODEL_FIELDS = {
   ),
 };
 
-@GenerateDartModel(
-  shouldInherit: true,
-  fields: FIELD_MODEL_FIELDS,
-)
-
+@GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
 abstract class _FieldModel extends BaseModel {
@@ -87,43 +83,44 @@ abstract class _FieldModel extends BaseModel {
 
   /// Converts this to a [TFieldRecord].
   TFieldRecord get toRecord => (
-        fieldPath: (this as FieldModel).fieldPath,
-        fieldType: (this as FieldModel).fieldType,
-        nullable: (this as FieldModel).nullable,
-        children: (this as FieldModel).children,
-        primaryKey: (this as FieldModel).primaryKey,
-        foreignKey: (this as FieldModel).foreignKey,
-        fallback: (this as FieldModel).fallback,
-        description: (this as FieldModel).description,
-      );
+    fieldPath: (this as FieldModel).fieldPath,
+    fieldType: (this as FieldModel).fieldType,
+    nullable: (this as FieldModel).nullable,
+    children: (this as FieldModel).children,
+    primaryKey: (this as FieldModel).primaryKey,
+    foreignKey: (this as FieldModel).foreignKey,
+    fallback: (this as FieldModel).fallback,
+    description: (this as FieldModel).description,
+  );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// A record representing a field. Similar to [FieldModel].
-typedef TFieldRecord = ({
-  List<String>? fieldPath,
-  String? fieldType,
-  bool? nullable,
-  List<Map<String, dynamic>>? children,
-  bool? primaryKey,
-  bool? foreignKey,
-  Object? fallback,
-  String? description,
-});
+typedef TFieldRecord =
+    ({
+      List<String>? fieldPath,
+      String? fieldType,
+      bool? nullable,
+      List<Map<String, dynamic>>? children,
+      bool? primaryKey,
+      bool? foreignKey,
+      Object? fallback,
+      String? description,
+    });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
   /// Converts this to a [FieldModel].
   FieldModel get toClass => FieldModel(
-        fieldPath: fieldPath,
-        fieldType: fieldType,
-        nullable: nullable,
-        children: children,
-        primaryKey: primaryKey,
-        foreignKey: foreignKey,
-        fallback: fallback,
-        description: description,
-      );
+    fieldPath: fieldPath,
+    fieldType: fieldType,
+    nullable: nullable,
+    children: children,
+    primaryKey: primaryKey,
+    foreignKey: foreignKey,
+    fallback: fallback,
+    description: description,
+  );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

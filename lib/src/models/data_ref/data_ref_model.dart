@@ -33,10 +33,7 @@ const DATA_REF_FIELDS = {
   ),
 };
 
-@GenerateDartModel(
-  shouldInherit: true,
-  fields: DATA_REF_FIELDS,
-)
+@GenerateDartModel(shouldInherit: true, fields: DATA_REF_FIELDS)
 abstract class _DataRefModel extends Model {
   const _DataRefModel();
 }
@@ -110,10 +107,7 @@ extension DataRefModelExtension on DataRefModel {
         );
       }
       final id = temp.last;
-      return DataRefModel(
-        id: id,
-        collection: collection,
-      );
+      return DataRefModel(id: id, collection: collection);
     } else {
       final collection = temp;
       if (collection.length.isEven) {
@@ -121,10 +115,7 @@ extension DataRefModelExtension on DataRefModel {
           '[DataRefModelExtension] Invalid collection path: Collection must have an odd number of segments.',
         );
       }
-      return DataRefModel(
-        id: null,
-        collection: collection,
-      );
+      return DataRefModel(id: null, collection: collection);
     }
   }
 }
@@ -159,10 +150,7 @@ DataRefModel? dataRefFromString(String? input) {
   // The last segment is the ID if it's a document path.
   final id = isDocumentPath ? segments.removeLast() : null;
 
-  return DataRefModel(
-    id: id,
-    collection: segments,
-  );
+  return DataRefModel(id: id, collection: segments);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
