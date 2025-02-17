@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.3]
+
+- Released @ 2/2025 (UTC)
+- chore: Update toString method of models
+
 ## [0.9.2]
 
 - Released @ 2/2025 (UTC)
