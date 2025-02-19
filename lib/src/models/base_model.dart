@@ -29,8 +29,12 @@ abstract mixin class BaseModel {
 
   /// Returns a JSON string representation of the BaseModel.
   String toJsonString() {
-    final encoder = const JsonEncoder.withIndent('  ');
-    return encoder.convert(sortedJson());
+    try {
+      final encoder = const JsonEncoder.withIndent('  ');
+      return encoder.convert(sortedJson());
+    } catch (e) {
+      return '{"e": "${e.safeToString()}"}';
+    }
   }
 
   //
@@ -55,8 +59,7 @@ abstract mixin class BaseModel {
   /// with the keys sorted alphabetically.
   Map<String, dynamic> sortedJson({bool includeNulls = false}) {
     final a = toJson(includeNulls: includeNulls);
-    final b = a.keys.toList(growable: false)
-      ..sort((k1, k2) => k1.compareTo(k2));
+    final b = a.keys.toList(growable: false)..sort((k1, k2) => k1.compareTo(k2));
     final c = {for (var k in b) k: a[k] as dynamic};
     return c;
   }
