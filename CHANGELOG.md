@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.6]
+
+- Released @ 3/2025 (UTC)
+- feat: Add utility methods to DataRefModel
+
 ## [0.9.5]
 
 - Released @ 3/2025 (UTC)
