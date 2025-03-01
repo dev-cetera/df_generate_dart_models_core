@@ -41,6 +41,19 @@ abstract class _DataRefModel extends Model {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension DataRefModelExtension on DataRefModel {
+  /// Returns true [collection] is not `null`, does not contain only empty strings, and is not empty.
+  bool get hasValidCollection =>
+      (collection != null && collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
+
+  /// Returns true [id] is not `null` and is not empty.
+  bool get hasValidId => id != null && id!.trim().isEmpty;
+
+  // Returns true if the reference points only to a collection and not a document.
+  bool get isOnlyCollectionRef => hasValidCollection && !hasValidId;
+
+  // Returns true if the reference points to a document.
+  bool get isDocumentRef => hasValidCollection && hasValidId;
+
   /// Returns the parent segments of the collection path. This is the collection
   /// path without the last segment.
   List<String> get parentSegments {
