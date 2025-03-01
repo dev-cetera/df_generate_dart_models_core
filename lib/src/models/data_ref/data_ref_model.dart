@@ -41,6 +41,24 @@ abstract class _DataRefModel extends Model {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension DataRefModelExtension on DataRefModel {
+  /// Returns the parent segments of the collection path. This is the collection
+  /// path without the last segment.
+  List<String> get parentSegments {
+    if (collection == null || collection!.isEmpty) return [];
+    return collection!.sublist(0, collection!.length - 1);
+  }
+
+  /// Returns the parent path of the collection path. This is the collection
+  /// path without the last segment.
+  String get parentPath => parentSegments.join('/');
+
+  /// Returns the collection ID, which is the last segment in the collection
+  /// path.
+  String get collectionId {
+    if (collection == null || collection!.isEmpty) return '';
+    return collection!.last;
+  }
+
   /// The full collection path of the reference, always ending in "/".
   String? get collectionPath {
     if (collection == null || collection!.isEmpty) {
