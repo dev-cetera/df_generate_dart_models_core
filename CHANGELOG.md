@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.5]
+
+- Released @ 3/2025 (UTC)
+- feat: Add parentSegments, parentPath and collectionId to DataRefModel
+
 ## [0.9.4]
 
 - Released @ 2/2025 (UTC)
