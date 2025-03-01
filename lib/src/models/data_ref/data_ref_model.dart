@@ -19,7 +19,7 @@ part '_data_ref_model.g.dart';
 const DATA_REF_FIELDS = {
   Field(
     fieldPath: ['id'],
-    // TODO: Create a T_NO_SPACES_STRING
+    // TODO: Create a T_NO_SPACES_STRING and T_TRIMMED_STRING and T_TRIMMED_STRING_LOWERCASE, etc.
     fieldType: String,
     nullable: true,
     description:
