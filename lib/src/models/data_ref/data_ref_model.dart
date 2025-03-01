@@ -19,6 +19,7 @@ part '_data_ref_model.g.dart';
 const DATA_REF_FIELDS = {
   Field(
     fieldPath: ['id'],
+    // TODO: Create a T_NO_SPACES_STRING
     fieldType: String,
     nullable: true,
     description:
@@ -43,8 +44,7 @@ abstract class _DataRefModel extends Model {
 extension DataRefModelExtension on DataRefModel {
   /// Returns true [collection] is not `null`, does not contain only empty strings, and is not empty.
   bool get hasValidCollection =>
-      (collection != null &&
-          collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
+      (collection != null && collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
 
   /// Returns true [id] is not `null` and is not empty.
   bool get hasValidId => id != null && id!.trim().isEmpty;
