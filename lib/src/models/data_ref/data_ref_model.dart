@@ -10,6 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import 'package:equatable/equatable.dart' show EquatableMixin;
+
 import '/df_generate_dart_models_core.dart';
 
 part '_data_ref_model.g.dart';
@@ -35,8 +37,22 @@ const DATA_REF_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: DATA_REF_FIELDS)
-abstract class _DataRefModel extends Model {
+abstract class _DataRefModel extends ThisModel<DataRefModel> with EquatableMixin {
   const _DataRefModel();
+
+  //
+  //
+  //
+
+  @override
+  List<Object?> get props => [...?model.collection, model.id];
+
+  //
+  //
+  //
+
+  @override
+  bool? get stringify => false;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -44,8 +60,7 @@ abstract class _DataRefModel extends Model {
 extension DataRefModelExtension on DataRefModel {
   /// Returns true [collection] is not `null`, does not contain only empty strings, and is not empty.
   bool get hasValidCollection =>
-      (collection != null &&
-          collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
+      (collection != null && collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
 
   /// Returns true [id] is not `null` and is not empty.
   bool get hasValidId => id != null && id!.trim().isEmpty;
