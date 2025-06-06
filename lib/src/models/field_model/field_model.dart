@@ -97,17 +97,16 @@ abstract class _FieldModel extends BaseModel {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// A record representing a field. Similar to [FieldModel].
-typedef TFieldRecord =
-    ({
-      List<String>? fieldPath,
-      String? fieldType,
-      bool? nullable,
-      List<Map<String, dynamic>>? children,
-      bool? primaryKey,
-      bool? foreignKey,
-      Object? fallback,
-      String? description,
-    });
+typedef TFieldRecord = ({
+  List<String>? fieldPath,
+  String? fieldType,
+  bool? nullable,
+  List<Map<String, dynamic>>? children,
+  bool? primaryKey,
+  bool? foreignKey,
+  Object? fallback,
+  String? description,
+});
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
   /// Converts this to a [FieldModel].

@@ -190,32 +190,28 @@ class FieldModel extends _FieldModel {
   /// [json] is `null` or if the conversion fails.
   static FieldModel? fromJsonOrNull(Map<String, dynamic>? json) {
     try {
-      final fieldPath =
-          letListOrNull<dynamic>(json?['fieldPath'])
-              ?.map((p0) => p0?.toString().trim().nullIfEmpty)
-              .nonNulls
-              .nullIfEmpty
-              ?.toList()
-              .unmodifiable;
+      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])
+          ?.map((p0) => p0?.toString().trim().nullIfEmpty)
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
       final fieldType = json?['fieldType'];
       final nullable = letAsOrNull<bool>(json?['nullable']);
-      final children =
-          letListOrNull<dynamic>(json?['children'])
-              ?.map(
-                (p0) =>
-                    letMapOrNull<dynamic, dynamic>(p0)
-                        ?.map(
-                          (p0, p1) =>
-                              MapEntry(p0?.toString().trim().nullIfEmpty, p1),
-                        )
-                        .nonNulls
-                        .nullIfEmpty
-                        ?.unmodifiable,
-              )
-              .nonNulls
-              .nullIfEmpty
-              ?.toList()
-              .unmodifiable;
+      final children = letListOrNull<dynamic>(json?['children'])
+          ?.map(
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(p0?.toString().trim().nullIfEmpty, p1),
+                )
+                .nonNulls
+                .nullIfEmpty
+                ?.unmodifiable,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
       final primaryKey = letAsOrNull<bool>(json?['primaryKey']);
       final foreignKey = letAsOrNull<bool>(json?['foreignKey']);
       final fallback = json?['fallback'];
@@ -265,26 +261,23 @@ class FieldModel extends _FieldModel {
   @override
   Map<String, dynamic> toJson({bool includeNulls = false}) {
     try {
-      final fieldPath0 =
-          fieldPath
-              ?.map((p0) => p0?.trim().nullIfEmpty)
-              .nonNulls
-              .nullIfEmpty
-              ?.toList();
+      final fieldPath0 = fieldPath
+          ?.map((p0) => p0?.trim().nullIfEmpty)
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
       final fieldType0 = fieldType;
       final nullable0 = nullable;
-      final children0 =
-          children
-              ?.map(
-                (p0) =>
-                    p0
-                        ?.map((p0, p1) => MapEntry(p0?.trim().nullIfEmpty, p1))
-                        .nonNulls
-                        .nullIfEmpty,
-              )
-              .nonNulls
-              .nullIfEmpty
-              ?.toList();
+      final children0 = children
+          ?.map(
+            (p0) => p0
+                ?.map((p0, p1) => MapEntry(p0?.trim().nullIfEmpty, p1))
+                .nonNulls
+                .nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
       final primaryKey0 = primaryKey;
       final foreignKey0 = foreignKey;
       final fallback0 = fallback;

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.9]
+
+- Released @ 6/2025 (UTC)
+- chore: Implement Equatable for DataRefModel and ReferencedModel
+
 ## [0.9.8]
 
 - Released @ 5/2025 (UTC)

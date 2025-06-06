@@ -147,19 +147,18 @@ final class DartField extends Field {
 /// - HashMap
 /// - LinkedHashMap
 String _expandDynamicTypes(String fieldTypeCode) {
-  for (final e
-      in {
-        'Map': 'Map<dynamic, dynamic>',
-        'List': 'List<dynamic>',
-        'Set': 'Set<dynamic>',
-        'Iterable': 'Iterable<dynamic>',
-        'Queue': 'Queue<dynamic>',
-        'LinkedList': 'LinkedList<dynamic>',
-        'HashSet': 'HashSet<dynamic>',
-        'LinkedHashSet': 'LinkedHashSet<dynamic>',
-        'HashMap': 'HashMap<dynamic, dynamic>',
-        'LinkedHashMap': 'LinkedHashMap<dynamic, dynamic>',
-      }.entries) {
+  for (final e in {
+    'Map': 'Map<dynamic, dynamic>',
+    'List': 'List<dynamic>',
+    'Set': 'Set<dynamic>',
+    'Iterable': 'Iterable<dynamic>',
+    'Queue': 'Queue<dynamic>',
+    'LinkedList': 'LinkedList<dynamic>',
+    'HashSet': 'HashSet<dynamic>',
+    'LinkedHashSet': 'LinkedHashSet<dynamic>',
+    'HashMap': 'HashMap<dynamic, dynamic>',
+    'LinkedHashMap': 'LinkedHashMap<dynamic, dynamic>',
+  }.entries) {
     final key = e.key;
     final value = e.value;
     // This regex looks for the key (like "Map") that is not immediately

@@ -83,12 +83,12 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
   }
 
   // Sort the entries and extract values for return
-  final sortedMapping =
-      mapping.entries.toList()..sort((a, b) {
-        final aIndex = a.key;
-        final bIndex = b.key;
-        return aIndex.compareTo(bIndex);
-      });
+  final sortedMapping = mapping.entries.toList()
+    ..sort((a, b) {
+      final aIndex = a.key;
+      final bIndex = b.key;
+      return aIndex.compareTo(bIndex);
+    });
   final values = sortedMapping.map((e) => e.value);
   return values;
 }

@@ -136,13 +136,12 @@ class DataRefModel extends _DataRefModel {
   static DataRefModel? fromJsonOrNull(Map<String, dynamic>? json) {
     try {
       final id = json?['id']?.toString().trim().nullIfEmpty;
-      final collection =
-          letListOrNull<dynamic>(json?['collection'])
-              ?.map((p0) => p0?.toString().trim().nullIfEmpty)
-              .nonNulls
-              .nullIfEmpty
-              ?.toList()
-              .unmodifiable;
+      final collection = letListOrNull<dynamic>(json?['collection'])
+          ?.map((p0) => p0?.toString().trim().nullIfEmpty)
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
       return DataRefModel(id: id, collection: collection);
     } catch (e) {
       return null;
@@ -180,12 +179,11 @@ class DataRefModel extends _DataRefModel {
   Map<String, dynamic> toJson({bool includeNulls = false}) {
     try {
       final id0 = id?.trim().nullIfEmpty;
-      final collection0 =
-          collection
-              ?.map((p0) => p0?.trim().nullIfEmpty)
-              .nonNulls
-              .nullIfEmpty
-              ?.toList();
+      final collection0 = collection
+          ?.map((p0) => p0?.trim().nullIfEmpty)
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
       final withNulls = {'id': id0, 'collection': collection0};
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
