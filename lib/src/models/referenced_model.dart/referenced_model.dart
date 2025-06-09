@@ -82,8 +82,8 @@ Iterable<T> uniqueRefs<T extends ReferencedModel>(Iterable<T> input) {
 
 /// A mixin on [ReferencedModel] that implements [EquatableMixin] to identify
 /// the model by [id] an [ref].
-mixin ReferencedModelEqualityMixin<T extends ReferencedModel> on ReferencedModel
-    implements EquatableMixin {
+mixin ReferencedModelEqualityMixin<T extends ReferencedModel>
+    implements ReferencedModel, EquatableMixin {
   //
   //
   //
