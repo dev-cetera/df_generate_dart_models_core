@@ -24,8 +24,7 @@ const REFERENCED_MODEL_FIELDS = {
     fieldType: String,
     nullable: false,
     primaryKey: true,
-    description:
-        'The unique identifier for the document, serving as its primary key.',
+    description: 'The unique identifier for the document, serving as its primary key.',
   ),
   Field(
     fieldPath: ['ref'],
@@ -89,6 +88,7 @@ mixin ReferencedModelEqualityMixin<T extends ReferencedModel> on ReferencedModel
   //
   //
 
+  @override
   @pragma('vm:prefer-inline')
   ReferencedModel get _model => this as ReferencedModel;
 
