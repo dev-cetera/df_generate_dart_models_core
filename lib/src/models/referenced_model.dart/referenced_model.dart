@@ -24,7 +24,8 @@ const REFERENCED_MODEL_FIELDS = {
     fieldType: String,
     nullable: false,
     primaryKey: true,
-    description: 'The unique identifier for the document, serving as its primary key.',
+    description:
+        'The unique identifier for the document, serving as its primary key.',
   ),
   Field(
     fieldPath: ['ref'],
@@ -45,7 +46,8 @@ abstract class _ReferencedModel extends Model with EquatableMixin {
   //
 
   ReferencedModel get _model =>
-      this as ReferencedModel; // Using ThisModel causes come conflicts! So doing this instead...
+      this
+          as ReferencedModel; // Using ThisModel causes come conflicts! So doing this instead...
 
   @override
   List<Object?> get props => [_model.id, _model.ref];
