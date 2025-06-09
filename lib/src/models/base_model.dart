@@ -59,8 +59,7 @@ abstract mixin class BaseModel {
   /// with the keys sorted alphabetically.
   Map<String, dynamic> sortedJson({bool includeNulls = false}) {
     final a = toJson(includeNulls: includeNulls);
-    final b = a.keys.toList(growable: false)
-      ..sort((k1, k2) => k1.compareTo(k2));
+    final b = a.keys.toList(growable: false)..sort((k1, k2) => k1.compareTo(k2));
     final c = {for (var k in b) k: a[k] as dynamic};
     return c;
   }
@@ -103,8 +102,13 @@ abstract mixin class BaseModel {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// A class that extends [BaseModel] and provides a reference to itself.
-abstract class ThisModel<T extends BaseModel> extends BaseModel {
+/// A class that extends [BaseModel] that provides a reference to itself.
+@Deprecated('Use ThisModelMixin instead.')
+abstract class ThisModel<T extends BaseModel> extends BaseModel with ThisModelMixin {
   const ThisModel();
+}
+
+/// A mixin on [BaseModel] that provides a reference to itself.
+mixin ThisModelMixin<T extends BaseModel> on BaseModel {
   T get model => this as T;
 }
