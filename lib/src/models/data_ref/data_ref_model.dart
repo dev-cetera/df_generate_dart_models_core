@@ -37,7 +37,8 @@ const DATA_REF_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: DATA_REF_FIELDS)
-abstract class _DataRefModel extends BaseModel with EquatableMixin, ThisModelMixin<DataRefModel> {
+abstract class _DataRefModel extends BaseModel
+    with EquatableMixin, ThisModelMixin<DataRefModel> {
   const _DataRefModel();
 
   //
