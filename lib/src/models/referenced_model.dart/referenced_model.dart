@@ -24,8 +24,7 @@ const REFERENCED_MODEL_FIELDS = {
     fieldType: String,
     nullable: false,
     primaryKey: true,
-    description:
-        'The unique identifier for the document, serving as its primary key.',
+    description: 'The unique identifier for the document, serving as its primary key.',
   ),
   Field(
     fieldPath: ['ref'],
@@ -38,17 +37,21 @@ const REFERENCED_MODEL_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: REFERENCED_MODEL_FIELDS)
-abstract class _ReferencedModel extends Model with EquatableMixin {
+abstract class _ReferencedModel extends Model implements EquatableMixin {
   const _ReferencedModel();
 
   //
   //
   //
 
-  ReferencedModel get _model =>
-      this
-          as ReferencedModel; // Using ThisModel causes come conflicts! So doing this instead...
+  @pragma('vm:prefer-inline')
+  ReferencedModel get _model => this as ReferencedModel;
 
+  //
+  //
+  //
+
+  @pragma('vm:prefer-inline')
   @override
   List<Object?> get props => [_model.id, _model.ref];
 
@@ -56,6 +59,7 @@ abstract class _ReferencedModel extends Model with EquatableMixin {
   //
   //
 
+  @pragma('vm:prefer-inline')
   @override
   bool? get stringify => false;
 }
@@ -72,4 +76,34 @@ Iterable<T> uniqueRefs<T extends ReferencedModel>(Iterable<T> input) {
       )
       .values
       .nonNulls;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// A mixin on [ReferencedModel] that implements [EquatableMixin] to identify
+/// the model by [id] an [ref].
+mixin ReferencedModelEqualityMixin<T extends ReferencedModel> on ReferencedModel
+    implements EquatableMixin {
+  //
+  //
+  //
+
+  @pragma('vm:prefer-inline')
+  ReferencedModel get _model => this as ReferencedModel;
+
+  //
+  //
+  //
+
+  @pragma('vm:prefer-inline')
+  @override
+  List<Object?> get props => [_model.id, _model.ref];
+
+  //
+  //
+  //
+
+  @pragma('vm:prefer-inline')
+  @override
+  bool? get stringify => false;
 }
