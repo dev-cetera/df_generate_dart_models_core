@@ -24,8 +24,7 @@ const REFERENCED_MODEL_FIELDS = {
     fieldType: String,
     nullable: false,
     primaryKey: true,
-    description:
-        'The unique identifier for the document, serving as its primary key.',
+    description: 'The unique identifier for the document, serving as its primary key.',
   ),
   Field(
     fieldPath: ['ref'],
@@ -38,16 +37,18 @@ const REFERENCED_MODEL_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: REFERENCED_MODEL_FIELDS)
-abstract class _ReferencedModel extends ThisModel<ReferencedModel>
-    with EquatableMixin {
+abstract class _ReferencedModel extends Model with EquatableMixin {
   const _ReferencedModel();
 
   //
   //
   //
 
+  ReferencedModel get _model =>
+      this as ReferencedModel; // Using ThisModel causes come conflicts! So doing this instead...
+
   @override
-  List<Object?> get props => [model.id, model.ref];
+  List<Object?> get props => [_model.id, _model.ref];
 
   //
   //
