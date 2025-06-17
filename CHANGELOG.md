@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.17]
+
+- Released @ 6/2025 (UTC)
+- Add more string types
+
 ## [0.9.16]
 
 - Released @ 6/2025 (UTC)
