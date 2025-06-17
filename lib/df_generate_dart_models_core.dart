@@ -13,7 +13,7 @@
 /// A package that provides core dependencies for models generated with df_generate_dart_models.
 library;
 
-export 'src/_index.g.dart';
+export 'src/_src.g.dart';
 
 export 'dart:convert' show jsonEncode, jsonDecode;
 

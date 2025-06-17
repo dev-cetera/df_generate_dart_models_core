@@ -18,4 +18,16 @@ const T_LOWER_KEBAB_CASE_STRING = 'LowerKebabCase-String';
 const T_UPPER_KEBAB_CASE_STRING = 'UpperKebabCase-String';
 const T_CAMEL_CASE_STRING = 'CamelCase-String';
 const T_PASCAL_CASE_STRING = 'PascalCase-String';
+
 const T_SEARCHABLE_STRING = 'Searchable-String';
+
+const T_NO_SPACES_STRING = 'NoSpaces-String';
+const T_TRIMMED_STRING = 'Trimmed-String';
+const T_TRIMMED_LOWER_CASE_STRING = 'TrimmedLowerCase-String';
+const T_TRIMMED_UPPER_CASE_STRING = 'TrimmedUpperCase-String';
+const T_TRIMMED_LOWER_SNAKE_CASE_STRING = 'TrimmedLowerSnakeCase-String';
+const T_TRIMMED_UPPER_SNAKE_CASE_STRING = 'TrimmedUpperSnakeCase-String';
+const T_TRIMMED_LOWER_KEBAB_CASE_STRING = 'TrimmedLowerKebabCase-String';
+const T_TRIMMED_UPPER_KEBAB_CASE_STRING = 'TrimmedUpperKebabCase-String';
+const T_TRIMMED_CAMEL_CASE_STRING = 'TrimmedCamelCase-String';
+const T_TRIMMED_PASCAL_CASE_STRING = 'TrimmedPascalCase-String';
