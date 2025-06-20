@@ -4,7 +4,7 @@
 Dart & Flutter Packages by dev-cetera.com & contributors.
 
 [![pub](https://img.shields.io/pub/v/df_generate_dart_models_core.svg)](https://pub.dev/packages/df_generate_dart_models_core)
-[![tag](https://img.shields.io/badge/tag-v0.9.20-purple)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.9.20)
+[![tag](https://img.shields.io/badge/tag-v0.9.21-purple)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.9.21)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dev-cetera/df_generate_dart_models_core/main/LICENSE)
 
 ---
@@ -49,4 +49,3 @@ If you're enjoying this package and find it valuable, consider showing your appr
 ## 🧑‍⚖️ License
 
 This project is released under the [MIT License](https://raw.githubusercontent.com/dev-cetera/df_generate_dart_models_core/main/LICENSE). See [LICENSE](https://raw.githubusercontent.com/dev-cetera/df_generate_dart_models_core/main/LICENSE) for more information.
-
