@@ -32,9 +32,9 @@ environment:
 ## -----------------------------------------------------------------------------
 
 dependencies:
-  df_collection: ^0.9.3
+  df_collection: ^0.9.4
   df_string: ^0.2.5
-  df_type: ^0.12.3
+  df_type: ^0.12.7
   df_gen_core: ^0.6.15
   equatable: ^2.0.7
 
