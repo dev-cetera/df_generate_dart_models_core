@@ -1,9 +1,10 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
-// source code is governed by an MIT-style license described in the LICENSE
-// file located in this project's root directory.
+// Copyright © dev-cetera.com & contributors.
+//
+// The use of this source code is governed by an MIT-style license described in
+// the LICENSE file located in this project's root directory.
 //
 // See: https://opensource.org/license/mit
 //
@@ -42,15 +43,13 @@ const GENERATE_DART_MODEL_FIELDS = {
     fieldPath: ['inheritanceConstructor'],
     fieldType: String,
     nullable: true,
-    description:
-        'The constructor from the superclass to use, if a custom one is required.',
+    description: 'The constructor from the superclass to use, if a custom one is required.',
   ),
   Field(
     fieldPath: ['keyStringCase'],
     fieldType: String,
     nullable: true,
-    description:
-        'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
+    description: 'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
   ),
   Field(
     fieldPath: ['description'],

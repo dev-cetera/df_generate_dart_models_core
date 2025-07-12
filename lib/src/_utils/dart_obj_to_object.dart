@@ -1,9 +1,10 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// Dart/Flutter (DF) Packages by dev-cetera.com & contributors. The use of this
-// source code is governed by an MIT-style license described in the LICENSE
-// file located in this project's root directory.
+// Copyright © dev-cetera.com & contributors.
+//
+// The use of this source code is governed by an MIT-style license described in
+// the LICENSE file located in this project's root directory.
 //
 // See: https://opensource.org/license/mit
 //
@@ -33,9 +34,8 @@ Object? dartObjToObject(dynamic dartObj) {
     } catch (_) {}
     try {
       return dartObj.toMapValue()!.map(
-        (dynamic k, dynamic v) =>
-            MapEntry(dartObjToObject(k), dartObjToObject(v)),
-      );
+            (dynamic k, dynamic v) => MapEntry(dartObjToObject(k), dartObjToObject(v)),
+          );
     } catch (_) {}
   }
   return null;
