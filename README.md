@@ -1,7 +1,7 @@
-[![banner](https://github.com/dev-cetera/df_generate_dart_models_core/blob/v0.9.22/doc/assets/banner.png?raw=true)](https://github.com/dev-cetera)
+[![banner](https://github.com/dev-cetera/df_generate_dart_models_core/blob/v0.9.23/doc/assets/banner.png?raw=true)](https://github.com/dev-cetera)
 
 [![pub](https://img.shields.io/pub/v/df_generate_dart_models_core.svg)](https://pub.dev/packages/df_generate_dart_models_core)
-[![tag](https://img.shields.io/badge/Tag-v0.9.22-purple?logo=github)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.9.22)
+[![tag](https://img.shields.io/badge/Tag-v0.9.23-purple?logo=github)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.9.23)
 [![buymeacoffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/dev_cetera)
 [![sponsor](https://img.shields.io/badge/Sponsor-grey?logo=github-sponsors&logoColor=pink)](https://github.com/sponsors/dev-cetera)
 [![patreon](https://img.shields.io/badge/Patreon-grey?logo=patreon)](https://www.patreon.com/t0mb3rr)
