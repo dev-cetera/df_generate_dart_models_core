@@ -22,13 +22,15 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['fieldPath'],
     fieldType: List<String>,
     nullable: true,
-    description: 'The path of the field within the model, represented as a list of strings.',
+    description:
+        'The path of the field within the model, represented as a list of strings.',
   ),
   Field(
     fieldPath: ['fieldType'],
     fieldType: dynamic,
     nullable: true,
-    description: 'The data type of the field, such as "String", "int", or any dynamic type.',
+    description:
+        'The data type of the field, such as "String", "int", or any dynamic type.',
   ),
   Field(
     fieldPath: ['nullable'],
@@ -40,7 +42,8 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['children'],
     fieldType: List<Map<String, dynamic>>,
     nullable: true,
-    description: 'Children of this field, allowing for nested fields or complex structures.',
+    description:
+        'Children of this field, allowing for nested fields or complex structures.',
   ),
   Field(
     fieldPath: ['primaryKey'],
@@ -70,7 +73,6 @@ const FIELD_MODEL_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
-
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
 abstract class _FieldModel extends BaseModel {
@@ -82,15 +84,15 @@ abstract class _FieldModel extends BaseModel {
 
   /// Converts this to a [TFieldRecord].
   TFieldRecord get toRecord => (
-        fieldPath: (this as FieldModel).fieldPath,
-        fieldType: (this as FieldModel).fieldType,
-        nullable: (this as FieldModel).nullable,
-        children: (this as FieldModel).children,
-        primaryKey: (this as FieldModel).primaryKey,
-        foreignKey: (this as FieldModel).foreignKey,
-        fallback: (this as FieldModel).fallback,
-        description: (this as FieldModel).description,
-      );
+    fieldPath: (this as FieldModel).fieldPath,
+    fieldType: (this as FieldModel).fieldType,
+    nullable: (this as FieldModel).nullable,
+    children: (this as FieldModel).children,
+    primaryKey: (this as FieldModel).primaryKey,
+    foreignKey: (this as FieldModel).foreignKey,
+    fallback: (this as FieldModel).fallback,
+    description: (this as FieldModel).description,
+  );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -110,15 +112,15 @@ typedef TFieldRecord = ({
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
   /// Converts this to a [FieldModel].
   FieldModel get toClass => FieldModel(
-        fieldPath: fieldPath,
-        fieldType: fieldType,
-        nullable: nullable,
-        children: children,
-        primaryKey: primaryKey,
-        foreignKey: foreignKey,
-        fallback: fallback,
-        description: description,
-      );
+    fieldPath: fieldPath,
+    fieldType: fieldType,
+    nullable: nullable,
+    children: children,
+    primaryKey: primaryKey,
+    foreignKey: foreignKey,
+    fallback: fallback,
+    description: description,
+  );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

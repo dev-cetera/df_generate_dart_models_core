@@ -37,7 +37,8 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
   String? decompose(String input) {
     // Find all collection type expressions from the input.
     const A = r'[\w\-\*\|\?]+';
-    const B = r'\b('
+    const B =
+        r'\b('
         '$A'
         r')\<(('
         '$A'
@@ -50,7 +51,9 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
     final mappingEntries = matches.map((e) {
       final longType = e.group(0)!; // e.g. "List<String,int>"
       final shortType = e.group(1)!; // // e.g. "List"
-      final subtypes = e.group(2)!.split(','); // e.g. ["String", "int"] in "List<String,int>"
+      final subtypes = e
+          .group(2)!
+          .split(','); // e.g. ["String", "int"] in "List<String,int>"
       final nullableSymbol = e.group(5) ?? ''; // '?' or ""
       final index = e.start; // index in [input] where the match starts
       return MapEntry(index, [

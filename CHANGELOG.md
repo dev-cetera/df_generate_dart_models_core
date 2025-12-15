@@ -2,7 +2,7 @@
 
 ## [0.9.22]
 
-- Released @ 7/2025 (UTC)
+- Released @ 12/2025 (UTC)
 - Update dependencies
 
 ## [0.9.21]

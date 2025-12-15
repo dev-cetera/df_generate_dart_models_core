@@ -21,7 +21,8 @@ class Model extends BaseModel {
   //
 
   final Map<String, dynamic>? _rootData;
-  Map<String, dynamic> get rootData => _rootData != null ? Map.unmodifiable(_rootData) : toJson();
+  Map<String, dynamic> get rootData =>
+      _rootData != null ? Map.unmodifiable(_rootData) : toJson();
 
   //
   //
@@ -29,7 +30,8 @@ class Model extends BaseModel {
 
   const Model([this._rootData = const {}]);
 
-  const Model.fromJson([Map<String, dynamic>? otherData]) : _rootData = otherData ?? const {};
+  const Model.fromJson([Map<String, dynamic>? otherData])
+    : _rootData = otherData ?? const {};
 
   factory Model.from(BaseModel? other) {
     return Model(other?.toJson() ?? {});

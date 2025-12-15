@@ -18,11 +18,13 @@ List<String>? dartObjToStringList(dynamic dartObj) {
   if (a != null) {
     return [a];
   }
-  final b = dartObj
-      ?.toListValue()
-      ?.map((e) => e.toStringValue())
-      .where((e) => e != null)
-      .map((e) => e!) as Iterable?;
+  final b =
+      dartObj
+              ?.toListValue()
+              ?.map((e) => e.toStringValue())
+              .where((e) => e != null)
+              .map((e) => e!)
+          as Iterable?;
 
   final c = b?.map((e) => e.toString()).toList();
   return c;

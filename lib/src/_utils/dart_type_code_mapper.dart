@@ -50,7 +50,8 @@ class DartTypeCodeMapper {
   //
 
   String mapObject({required String fieldName, required String fieldTypeCode}) {
-    final formula = buildObjectMapper(fieldTypeCode, fieldName, mappers) ?? '#x0';
+    final formula =
+        buildObjectMapper(fieldTypeCode, fieldName, mappers) ?? '#x0';
     return formula;
   }
 

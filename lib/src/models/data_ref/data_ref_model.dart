@@ -37,7 +37,8 @@ const DATA_REF_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: DATA_REF_FIELDS)
-abstract class _DataRefModel extends BaseModel with EquatableMixin, ThisModelMixin<DataRefModel> {
+abstract class _DataRefModel extends BaseModel
+    with EquatableMixin, ThisModelMixin<DataRefModel> {
   const _DataRefModel();
 
   //
@@ -60,7 +61,8 @@ abstract class _DataRefModel extends BaseModel with EquatableMixin, ThisModelMix
 extension DataRefModelExtension on DataRefModel {
   /// Returns true [collection] is not `null`, does not contain only empty strings, and is not empty.
   bool get hasValidCollection =>
-      (collection != null && collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
+      (collection != null &&
+      collection!.map((e) => e.trim().nullIfEmpty).nonNulls.isNotEmpty);
 
   /// Returns true [id] is not `null` and is not empty.
   bool get hasValidId => id != null && id!.trim().isEmpty;

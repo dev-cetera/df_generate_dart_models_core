@@ -43,13 +43,15 @@ const GENERATE_DART_MODEL_FIELDS = {
     fieldPath: ['inheritanceConstructor'],
     fieldType: String,
     nullable: true,
-    description: 'The constructor from the superclass to use, if a custom one is required.',
+    description:
+        'The constructor from the superclass to use, if a custom one is required.',
   ),
   Field(
     fieldPath: ['keyStringCase'],
     fieldType: String,
     nullable: true,
-    description: 'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
+    description:
+        'Specifies the case format for the keys, with "CAMEL_CASE" as the default.',
   ),
   Field(
     fieldPath: ['description'],
