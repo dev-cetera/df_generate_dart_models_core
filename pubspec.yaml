@@ -15,9 +15,9 @@ name: df_generate_dart_models_core
 homepage: https://dev-cetera.com/
 repository: https://github.com/robmllze/df_generate_dart_models_core
 funding:
+- https://www.patreon.com/c/robelator
+- https://github.com/sponsors/robelator
 - https://www.buymeacoffee.com/dev_cetera
-- https://www.patreon.com/c/RobertMollentze
-- https://github.com/sponsors/robmllze
 description: A package that provides core dependencies for models generated with df_generate_dart_models.
 version: 0.9.22
 topics:
@@ -38,7 +38,7 @@ dependencies:
   equatable: ^2.0.7
   
   df_collection: ^0.9.8
-  df_string: ^0.2.9
+  df_string: ^0.2.10
   df_type: ^0.14.2
   df_gen_core: ^0.7.0
 
