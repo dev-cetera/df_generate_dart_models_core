@@ -180,10 +180,14 @@ class GenerateDartModel extends _GenerateDartModel {
         json?['fields'],
       )?.map((p0) => p0).nonNulls.nullIfEmpty?.toSet().unmodifiable;
       final shouldInherit = letAsOrNull<bool>(json?['shouldInherit']);
-      final inheritanceConstructor =
-          json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
-      final keyStringCase =
-          json?['keyStringCase']?.toString().trim().nullIfEmpty;
+      final inheritanceConstructor = json?['inheritanceConstructor']
+          ?.toString()
+          .trim()
+          .nullIfEmpty;
+      final keyStringCase = json?['keyStringCase']
+          ?.toString()
+          .trim()
+          .nullIfEmpty;
       final description = json?['description']?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
         className: className,
@@ -231,8 +235,9 @@ class GenerateDartModel extends _GenerateDartModel {
       final className0 = className?.trim().nullIfEmpty;
       final fields0 = fields?.map((p0) => p0).nonNulls.nullIfEmpty?.toList();
       final shouldInherit0 = shouldInherit;
-      final inheritanceConstructor0 =
-          inheritanceConstructor?.trim().nullIfEmpty;
+      final inheritanceConstructor0 = inheritanceConstructor
+          ?.trim()
+          .nullIfEmpty;
       final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
       final description0 = description?.trim().nullIfEmpty;
       final withNulls = {
@@ -352,8 +357,9 @@ extension GenerateDartModelX on GenerateDartModel {
       className: className ? this.className : null,
       fields: fields ? this.fields : null,
       shouldInherit: shouldInherit ? this.shouldInherit : null,
-      inheritanceConstructor:
-          inheritanceConstructor ? this.inheritanceConstructor : null,
+      inheritanceConstructor: inheritanceConstructor
+          ? this.inheritanceConstructor
+          : null,
       keyStringCase: keyStringCase ? this.keyStringCase : null,
       description: description ? this.description : null,
     );
