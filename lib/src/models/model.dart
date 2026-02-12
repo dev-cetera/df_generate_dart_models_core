@@ -31,7 +31,7 @@ class Model extends BaseModel {
   const Model([this._rootData = const {}]);
 
   const Model.fromJson([Map<String, dynamic>? otherData])
-    : _rootData = otherData ?? const {};
+      : _rootData = otherData ?? const {};
 
   factory Model.from(BaseModel? other) {
     return Model(other?.toJson() ?? {});
@@ -52,7 +52,7 @@ class Model extends BaseModel {
 
   static Model? fromJsonStringOrNull(String? source) {
     try {
-      if (source!.isNotEmpty) {
+      if (source != null && source.isNotEmpty) {
         final decoded = letMapOrNull<String, dynamic>(jsonDecode(source));
         return Model.fromJson(decoded);
       } else {

@@ -37,8 +37,7 @@ Iterable<List<String>> decomposeDartCollectionType(String fieldTypeCode) {
   String? decompose(String input) {
     // Find all collection type expressions from the input.
     const A = r'[\w\-\*\|\?]+';
-    const B =
-        r'\b('
+    const B = r'\b('
         '$A'
         r')\<(('
         '$A'

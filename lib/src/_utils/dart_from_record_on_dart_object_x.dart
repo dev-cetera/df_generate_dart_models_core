@@ -60,21 +60,16 @@ extension type DartFromRecordOnDartObjectX(_DartObject dartObj) {
 
   String? _rawFieldTypeFromRecord() {
     final a = dartObj.getField('\$2')?.toStringValue() as String?;
-    final b =
-        dartObj
-                .getField('\$2')
-                ?.toTypeValue()
-                ?.getDisplayString(withNullability: true)
-            as String?;
-    final c =
-        dartObj.getField(FieldModelFieldNames.fieldType)?.toStringValue()
-            as String?;
-    final d =
-        dartObj
-                .getField(FieldModelFieldNames.fieldType)
-                ?.toTypeValue()
-                ?.getDisplayString(withNullability: true)
-            as String?;
+    final b = dartObj
+        .getField('\$2')
+        ?.toTypeValue()
+        ?.getDisplayString(withNullability: true) as String?;
+    final c = dartObj.getField(FieldModelFieldNames.fieldType)?.toStringValue()
+        as String?;
+    final d = dartObj
+        .getField(FieldModelFieldNames.fieldType)
+        ?.toTypeValue()
+        ?.getDisplayString(withNullability: true) as String?;
     return a ?? b ?? c ?? d;
   }
 
@@ -97,15 +92,11 @@ extension type DartFromRecordOnDartObjectX(_DartObject dartObj) {
   /// [TFieldRecord] or `null`.
   List<Map<String, dynamic>>? childrenFromRecord() {
     final a =
-        dartObj
-                .getField(FieldModelFieldNames.children)
-                ?.toListValue()
-                ?.map(
-                  (e) => e.toMapValue()!.map(
+        dartObj.getField(FieldModelFieldNames.children)?.toListValue()?.map(
+              (e) => e.toMapValue()!.map(
                     (k, v) => MapEntry(k!.toStringValue()!, dartObjToObject(v)),
                   ),
-                )
-            as Iterable?;
+            ) as Iterable?;
     final b = a?.map((e) => (e as Map).cast<String, dynamic>()).toList();
     return b;
   }

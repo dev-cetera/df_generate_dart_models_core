@@ -39,7 +39,9 @@ String stripSpecialSyntaxFromFieldType(String fieldType) {
   String $step3(String input) {
     final x = RegExp(r'\w+\@clean\<([\w\[\]\+]+\??)(,[\w\[\]\+]+\??)*\>');
     var output = input;
-    while (true) {
+    var previousOutput = '';
+    while (previousOutput != output) {
+      previousOutput = output;
       final group0 = x.firstMatch(output)?.group(0);
       if (group0 == null) break;
       final replacement = group0
