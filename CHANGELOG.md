@@ -2,8 +2,9 @@
 
 ## [0.9.24]
 
-- Released @ 2/2026 (UTC)
+- Released @ 5/2026 (UTC)
 - Update and format
+- AI updates
 
 ## [0.9.23]
 
