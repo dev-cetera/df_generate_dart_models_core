@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.25]
+
+- Released @ 5/2026 (UTC)
+- Update version
+
 ## [0.9.24]
 
 - Released @ 5/2026 (UTC)
