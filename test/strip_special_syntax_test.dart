@@ -34,5 +34,49 @@ void main() {
           stripSpecialSyntaxFromFieldType('@let Map<LowerCase-String, int>');
       expect(r, 'Map<String,int>');
     });
+
+    test('parenthesised prefix params are consumed (PG_varchar(255))', () {
+      expect(
+        stripSpecialSyntaxFromFieldType('PG_varchar(255)-String'),
+        'String',
+      );
+    });
+
+    test('numeric precision in prefix is consumed (PG_numeric(10,2))', () {
+      expect(
+        stripSpecialSyntaxFromFieldType('PG_numeric(10,2)-String'),
+        'String',
+      );
+    });
+
+    test('array marker on prefix is consumed (PG_text[])', () {
+      expect(
+        stripSpecialSyntaxFromFieldType('PG_text[]-List<String>'),
+        'List<String>',
+      );
+    });
+
+    test('parenthesised array prefix (PG_varchar(255)[])', () {
+      expect(
+        stripSpecialSyntaxFromFieldType('PG_varchar(255)[]-List<String>'),
+        'List<String>',
+      );
+    });
+
+    test('PG_enum carries the postgres enum name in parens', () {
+      expect(
+        stripSpecialSyntaxFromFieldType(
+          'PG_enum(auth_provider_kind)-AuthProviderKindType',
+        ),
+        'AuthProviderKindType',
+      );
+    });
+
+    test('chained prefixes still collapse (Trimmed-PG_text-String)', () {
+      expect(
+        stripSpecialSyntaxFromFieldType('Trimmed-PG_text-String'),
+        'String',
+      );
+    });
   });
 }

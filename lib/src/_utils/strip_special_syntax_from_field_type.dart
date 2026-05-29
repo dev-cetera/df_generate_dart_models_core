@@ -26,9 +26,12 @@ String stripSpecialSyntaxFromFieldType(String fieldType) {
   // Step 2: Simplify expressions by retaining only the last word in sequences
   // that may include hyphen-separated prefixes.
   // Example: "LowerCase-String" becomes "String".
+  // Prefix tokens may also carry a parenthesised parameter or array marker
+  // (e.g. "PG_varchar(255)-String", "PG_text[]-List<String>", "PG_numeric(10,2)-String") —
+  // the optional (...) or [] section is consumed before the hyphen.
   String $step2(String input) {
     return input.replaceAllMapped(
-      RegExp(r'(\b\w+-)*(\w+)\b'),
+      RegExp(r'(\b\w+(?:\([^)]*\))?(?:\[\])?-)*(\w+)\b'),
       (m) => m.group(2)!,
     );
   }
