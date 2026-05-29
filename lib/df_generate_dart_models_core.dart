@@ -21,3 +21,4 @@ export 'dart:convert' show jsonEncode, jsonDecode, base64Encode, base64Decode;
 export 'package:df_collection/df_collection.dart';
 export 'package:df_string/df_string.dart';
 export 'package:df_type/df_type.dart';
+export 'package:equatable/equatable.dart' show EquatableMixin, Equatable;

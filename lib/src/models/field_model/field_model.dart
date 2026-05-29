@@ -72,7 +72,14 @@ const FIELD_MODEL_FIELDS = {
   ),
 };
 
-@GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
+@GenerateDartModel(
+  shouldInherit: true,
+  fields: FIELD_MODEL_FIELDS,
+  // Off because every `@GenerateDartModel(fields: {Field(...), ...})`
+  // annotation puts `Field` (= `FieldModel`) instances inside a const Set, and
+  // const set elements may not override `==` / `hashCode`.
+  equatable: false,
+)
 
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
