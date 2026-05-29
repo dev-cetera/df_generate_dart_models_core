@@ -73,6 +73,7 @@ const FIELD_MODEL_FIELDS = {
 };
 
 @GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
+
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
 abstract class _FieldModel extends BaseModel {
@@ -84,15 +85,15 @@ abstract class _FieldModel extends BaseModel {
 
   /// Converts this to a [TFieldRecord].
   TFieldRecord get toRecord => (
-    fieldPath: (this as FieldModel).fieldPath,
-    fieldType: (this as FieldModel).fieldType,
-    nullable: (this as FieldModel).nullable,
-    children: (this as FieldModel).children,
-    primaryKey: (this as FieldModel).primaryKey,
-    foreignKey: (this as FieldModel).foreignKey,
-    fallback: (this as FieldModel).fallback,
-    description: (this as FieldModel).description,
-  );
+        fieldPath: (this as FieldModel).fieldPath,
+        fieldType: (this as FieldModel).fieldType,
+        nullable: (this as FieldModel).nullable,
+        children: (this as FieldModel).children,
+        primaryKey: (this as FieldModel).primaryKey,
+        foreignKey: (this as FieldModel).foreignKey,
+        fallback: (this as FieldModel).fallback,
+        description: (this as FieldModel).description,
+      );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -112,15 +113,15 @@ typedef TFieldRecord = ({
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
   /// Converts this to a [FieldModel].
   FieldModel get toClass => FieldModel(
-    fieldPath: fieldPath,
-    fieldType: fieldType,
-    nullable: nullable,
-    children: children,
-    primaryKey: primaryKey,
-    foreignKey: foreignKey,
-    fallback: fallback,
-    description: description,
-  );
+        fieldPath: fieldPath,
+        fieldType: fieldType,
+        nullable: nullable,
+        children: children,
+        primaryKey: primaryKey,
+        foreignKey: foreignKey,
+        fallback: fallback,
+        description: description,
+      );
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -171,13 +172,24 @@ final class FieldUtils {
 
   /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
   /// the `fieldType` property, or returns `null`.
+  ///
+  /// [FieldModel.fieldType] is declared `dynamic` because it can be assigned
+  /// a [Type] literal (e.g. `fieldType: String`) directly. The direct
+  /// `as String` cast would throw for non-String values, so we fall back to
+  /// `.toString()` — which on a `Type` returns the type's display name.
   static String? fieldTypeOrNull(dynamic unknown) {
     try {
-      return unknown.fieldType as String;
+      final raw = unknown.fieldType;
+      if (raw == null) return null;
+      if (raw is String) return raw;
+      return raw.toString();
     } catch (_) {
       try {
-        return unknown.$2 as String;
-      } catch (e) {
+        final raw = unknown.$2;
+        if (raw == null) return null;
+        if (raw is String) return raw;
+        return raw.toString();
+      } catch (_) {
         return null;
       }
     }

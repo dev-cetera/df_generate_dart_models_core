@@ -11,6 +11,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-library;
+// Internal-only umbrella import. Files under lib/src/ import this as
+// `import '/_common.dart';`. Re-export third-party APIs the package depends on
+// here so individual sources don't repeat the same imports.
 
-export 'src/_utils/_utils.g.dart';
+export 'src/_src.g.dart';

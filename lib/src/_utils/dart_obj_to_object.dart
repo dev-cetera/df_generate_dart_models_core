@@ -27,16 +27,23 @@ Object? dartObjToObject(dynamic dartObj) {
       return dartObj.toDoubleValue()!;
     } catch (_) {}
     try {
-      return dartObj.toListValue()!.map((dynamic e) => dartObjToObject(e));
+      // Eagerly materialise to a `List` (not a lazy `Iterable`) so callers
+      // can cast the result to `List` — which the analyzer-driven extraction
+      // path in df_generate_dart_models does for `children:`.
+      return (dartObj.toListValue()! as Iterable<dynamic>)
+          .map((dynamic e) => dartObjToObject(e))
+          .toList();
     } catch (_) {}
     try {
-      return dartObj.toSetValue()!.map((dynamic e) => dartObjToObject(e));
+      return (dartObj.toSetValue()! as Iterable<dynamic>)
+          .map((dynamic e) => dartObjToObject(e))
+          .toSet();
     } catch (_) {}
     try {
       return dartObj.toMapValue()!.map(
-        (dynamic k, dynamic v) =>
-            MapEntry(dartObjToObject(k), dartObjToObject(v)),
-      );
+            (dynamic k, dynamic v) =>
+                MapEntry(dartObjToObject(k), dartObjToObject(v)),
+          );
     } catch (_) {}
   }
   return null;

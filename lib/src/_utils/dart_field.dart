@@ -112,7 +112,16 @@ final class DartField extends Field {
   bool? get _isFieldNameNullable =>
       super.fieldPath?.any((e) => e.contains('?'));
 
-  bool? get _isFieldTypeNullable => super.fieldType?.endsWith('?') == true;
+  /// `super.fieldType` is `dynamic` and can legitimately hold a [Type]
+  /// literal (e.g. `Field(fieldType: List<String>)`). Calling `endsWith`
+  /// directly on it would throw `NoSuchMethodError` for non-String values.
+  /// Normalise to the type's display string first.
+  bool? get _isFieldTypeNullable {
+    final raw = super.fieldType;
+    if (raw == null) return null;
+    final asString = raw is String ? raw : raw.toString();
+    return asString.endsWith('?');
+  }
 
   //
   //
@@ -165,7 +174,7 @@ String _expandDynamicTypes(String fieldTypeCode) {
     // This regex looks for the key (like "Map") that is not immediately
     // followed by a "<", but it will also match if the key is followed by "|"
     // and any text.
-    final regex = RegExp(r'\b' + key + r'\b(?![<|])');
+    final regex = RegExp(r'\b' + key + r'\b(?!<)');
     fieldTypeCode = fieldTypeCode.replaceAll(regex, value);
   }
   return fieldTypeCode;

@@ -12,5 +12,5 @@ export 'dart_obj_to_string_list.dart';
 export 'dart_field.dart';
 export 'dart_obj_to_object.dart';
 export 'decompose_dart_collection_type.dart';
-export 'dart_from_record_on_dart_object_x.dart';
+export 'dart_from_record_on_dart_object_ext.dart';
 export 'strip_special_syntax_from_field_type.dart';

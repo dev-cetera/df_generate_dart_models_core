@@ -1,7 +1,5 @@
-[![banner](https://github.com/dev-cetera/df_generate_dart_models_core/blob/v0.9.25/doc/assets/banner.png?raw=true)](https://github.com/dev-cetera)
-
 [![pub](https://img.shields.io/pub/v/df_generate_dart_models_core.svg)](https://pub.dev/packages/df_generate_dart_models_core)
-[![tag](https://img.shields.io/badge/Tag-v0.9.25-purple?logo=github)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.9.25)
+[![tag](https://img.shields.io/badge/Tag-v0.10.0-purple?logo=github)](https://github.com/dev-cetera/df_generate_dart_models_core/tree/v0.10.0)
 [![buymeacoffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/dev_cetera)
 [![sponsor](https://img.shields.io/badge/Sponsor-grey?logo=github-sponsors&logoColor=pink)](https://github.com/sponsors/dev-cetera)
 [![patreon](https://img.shields.io/badge/Patreon-grey?logo=patreon)](https://www.patreon.com/robelator)
@@ -14,7 +12,6 @@
 <!-- BEGIN _README_CONTENT -->
 
 A package that provides core dependencies for models generated with `df_generate_dart_models`.
-
 
 <!-- END _README_CONTENT -->
 
