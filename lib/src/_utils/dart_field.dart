@@ -31,6 +31,11 @@ final class DartField extends Field {
     super.foreignKey,
     super.fallback,
     super.description,
+    super.references,
+    super.referencesColumn,
+    super.unique,
+    super.onDelete,
+    super.sqlType,
   });
 
   /// Derives an instance [DartField] from [source].
@@ -44,6 +49,11 @@ final class DartField extends Field {
       foreignKey: source.foreignKey,
       fallback: source.fallback,
       description: source.description,
+      references: source.references,
+      referencesColumn: source.referencesColumn,
+      unique: source.unique,
+      onDelete: source.onDelete,
+      sqlType: source.sqlType,
     );
   }
 
@@ -58,6 +68,11 @@ final class DartField extends Field {
       foreignKey: record.foreignKey,
       fallback: record.fallback,
       description: record.description,
+      references: record.references,
+      referencesColumn: record.referencesColumn,
+      unique: record.unique,
+      onDelete: record.onDelete,
+      sqlType: record.sqlType,
     );
   }
 

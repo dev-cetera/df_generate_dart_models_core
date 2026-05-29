@@ -58,6 +58,21 @@ final Object? fallback;
   /// A brief comment or explanation for the field's purpose.
 final String? description;
 
+  /// The target model class this field references. Implies foreignKey. Resolves to the target model's primary key column by default; override via [referencesColumn].
+final Object? references;
+
+  /// Optional override naming the target column of the referenced model. Defaults to the referenced model's primary key column.
+final String? referencesColumn;
+
+  /// Whether this field carries a UNIQUE constraint at the schema level. Distinct from primaryKey, which is implicitly unique.
+final bool? unique;
+
+  /// Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', 'set null', or 'no action'. Drives DDL emission; ignored at runtime.
+final String? onDelete;
+
+  /// Explicit SQL column type override (e.g. 'varchar(255)', 'numeric(10,2)', 'citext'). When absent, defaults are derived from the Dart fieldType and any PG_/SQLITE_ prefix.
+final String? sqlType;
+
 
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
@@ -70,6 +85,11 @@ required this.fieldType,
  this.foreignKey,
  this.fallback,
  this.description,
+this.references,
+ this.referencesColumn,
+ this.unique,
+ this.onDelete,
+ this.sqlType,
   }) ;
 
   /// Construcs a new instance of [FieldModel],
@@ -83,6 +103,11 @@ this.primaryKey,
 this.foreignKey,
 this.fallback,
 this.description,
+this.references,
+this.referencesColumn,
+this.unique,
+this.onDelete,
+this.sqlType,
   }) ;
 
 
@@ -97,9 +122,18 @@ bool? primaryKey,
 bool? foreignKey,
 Object? fallback,
 String? description,
+Object? references,
+String? referencesColumn,
+bool? unique,
+String? onDelete,
+String? sqlType,
   }) {
     
 assert(fieldType != null);
+
+
+
+
 
 
 
@@ -115,6 +149,11 @@ primaryKey: primaryKey,
 foreignKey: foreignKey,
 fallback: fallback,
 description: description,
+references: references,
+referencesColumn: referencesColumn,
+unique: unique,
+onDelete: onDelete,
+sqlType: sqlType,
     );
   }
 
@@ -226,6 +265,11 @@ final primaryKey = letBoolOrNull(json?['primaryKey']);
 final foreignKey = letBoolOrNull(json?['foreignKey']);
 final fallback = json?['fallback'];
 final description = json?['description']?.toString().trim().nullIfEmpty;
+final references = json?['references'];
+final referencesColumn = json?['referencesColumn']?.toString().trim().nullIfEmpty;
+final unique = letBoolOrNull(json?['unique']);
+final onDelete = json?['onDelete']?.toString().trim().nullIfEmpty;
+final sqlType = json?['sqlType']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
 fieldType: fieldType,
@@ -235,6 +279,11 @@ primaryKey: primaryKey,
 foreignKey: foreignKey,
 fallback: fallback,
 description: description,
+references: references,
+referencesColumn: referencesColumn,
+unique: unique,
+onDelete: onDelete,
+sqlType: sqlType,
       );
     } catch (e) {
       return null;
@@ -285,8 +334,13 @@ final primaryKey0 = primaryKey;
 final foreignKey0 = foreignKey;
 final fallback0 = fallback;
 final description0 = description?.trim().nullIfEmpty;
+final references0 = references;
+final referencesColumn0 = referencesColumn?.trim().nullIfEmpty;
+final unique0 = unique;
+final onDelete0 = onDelete?.trim().nullIfEmpty;
+final sqlType0 = sqlType?.trim().nullIfEmpty;
       final withNulls = {
-        'primaryKey': primaryKey0,'nullable': nullable0,'foreignKey': foreignKey0,'fieldType': fieldType0,'fieldPath': fieldPath0,'fallback': fallback0,'description': description0,'children': children0,
+        'unique': unique0,'sqlType': sqlType0,'referencesColumn': referencesColumn0,'references': references0,'primaryKey': primaryKey0,'onDelete': onDelete0,'nullable': nullable0,'foreignKey': foreignKey0,'fieldType': fieldType0,'fieldPath': fieldPath0,'fallback': fallback0,'description': description0,'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -343,6 +397,36 @@ Object? get fallback$ => fallback;
 @pragma('vm:prefer-inline')
 String? get description$ => description;
 
+  /// Returns the value of the [references] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+@pragma('vm:prefer-inline')
+dynamic get references$ => references!;
+
+  /// Returns the value of the [referencesColumn] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+@pragma('vm:prefer-inline')
+String? get referencesColumn$ => referencesColumn;
+
+  /// Returns the value of the [unique] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+@pragma('vm:prefer-inline')
+bool? get unique$ => unique;
+
+  /// Returns the value of the [onDelete] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+@pragma('vm:prefer-inline')
+String? get onDelete$ => onDelete;
+
+  /// Returns the value of the [sqlType] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+@pragma('vm:prefer-inline')
+String? get sqlType$ => sqlType;
+
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -372,6 +456,21 @@ static const fallback = 'fallback';
   /// The field name of [FieldModel.description].
 static const description = 'description';
 
+  /// The field name of [FieldModel.references].
+static const references = 'references';
+
+  /// The field name of [FieldModel.referencesColumn].
+static const referencesColumn = 'referencesColumn';
+
+  /// The field name of [FieldModel.unique].
+static const unique = 'unique';
+
+  /// The field name of [FieldModel.onDelete].
+static const onDelete = 'onDelete';
+
+  /// The field name of [FieldModel.sqlType].
+static const sqlType = 'sqlType';
+
 }
 
 extension FieldModelX on FieldModel {
@@ -397,6 +496,11 @@ bool? primaryKey,
 bool? foreignKey,
 Object? fallback,
 String? description,
+Object? references,
+String? referencesColumn,
+bool? unique,
+String? onDelete,
+String? sqlType,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
@@ -407,6 +511,11 @@ primaryKey: primaryKey ?? this.primaryKey,
 foreignKey: foreignKey ?? this.foreignKey,
 fallback: fallback ?? this.fallback,
 description: description ?? this.description,
+references: references ?? this.references,
+referencesColumn: referencesColumn ?? this.referencesColumn,
+unique: unique ?? this.unique,
+onDelete: onDelete ?? this.onDelete,
+sqlType: sqlType ?? this.sqlType,
     );
   }
 
@@ -420,6 +529,11 @@ bool primaryKey = true,
 bool foreignKey = true,
 bool fallback = true,
 bool description = true,
+bool references = true,
+bool referencesColumn = true,
+bool unique = true,
+bool onDelete = true,
+bool sqlType = true,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ? this.fieldPath: null,
@@ -430,6 +544,11 @@ primaryKey: primaryKey ? this.primaryKey: null,
 foreignKey: foreignKey ? this.foreignKey: null,
 fallback: fallback ? this.fallback: null,
 description: description ? this.description: null,
+references: references ? this.references: null,
+referencesColumn: referencesColumn ? this.referencesColumn: null,
+unique: unique ? this.unique: null,
+onDelete: onDelete ? this.onDelete: null,
+sqlType: sqlType ? this.sqlType: null,
     );
   }
 }

@@ -75,17 +75,24 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
 
   /// Returns the `nullable` property from [dartObj] if it matches thestructure of
   /// [TFieldRecord] or `null`.
+  ///
+  /// Explicit `nullable: true|false` on the annotation always wins so a
+  /// `Field(fieldType: dynamic, nullable: true, ...)` (or `Object`) can opt
+  /// into nullability. When the flag is absent, `dynamic` defaults to
+  /// non-nullable to preserve the historic "no `?` suffix => `dynamic`"
+  /// shorthand.
   bool? nullableFromRecord() {
-    if (fieldTypeFromRecord() == 'dynamic') {
-      return false;
-    }
-
     final a =
         dartObj.getField(FieldModelFieldNames.nullable)?.toBoolValue() as bool?;
     final b = dartObj.getField('\$3')?.toBoolValue() as bool?;
+    if (a != null) return a;
+    if (b != null) return b;
+    if (fieldTypeFromRecord() == 'dynamic') {
+      return false;
+    }
     final c = _rawFieldPathFromRecord()?.any((e) => e.contains('?'));
     final d = _rawFieldTypeFromRecord()?.endsWith('?');
-    return a ?? b ?? ((c ?? false) || (d ?? false));
+    return ((c ?? false) || (d ?? false));
   }
 
   /// Returns the `children` property from [dartObj] if it matches the structure of
@@ -126,6 +133,42 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
   /// structure of [TFieldRecord] or `null`.
   String? descriptionFromRecord() {
     return dartObj.getField(FieldModelFieldNames.description)?.toStringValue()
+        as String?;
+  }
+
+  /// Returns the `references` property — the target model class as a Type
+  /// reference — from [dartObj] if it matches the structure of [TFieldRecord]
+  /// or `null`. Read as a display-string so the generator gets the target
+  /// class name without depending on the analyzer's Type API.
+  String? referencesFromRecord() {
+    return dartObj
+        .getField(FieldModelFieldNames.references)
+        ?.toTypeValue()
+        ?.getDisplayString(withNullability: false) as String?;
+  }
+
+  /// Returns the `referencesColumn` property from [dartObj] or `null`.
+  String? referencesColumnFromRecord() {
+    return dartObj
+        .getField(FieldModelFieldNames.referencesColumn)
+        ?.toStringValue() as String?;
+  }
+
+  /// Returns the `unique` property from [dartObj] or `null`.
+  bool? uniqueFromRecord() {
+    return dartObj.getField(FieldModelFieldNames.unique)?.toBoolValue()
+        as bool?;
+  }
+
+  /// Returns the `onDelete` property from [dartObj] or `null`.
+  String? onDeleteFromRecord() {
+    return dartObj.getField(FieldModelFieldNames.onDelete)?.toStringValue()
+        as String?;
+  }
+
+  /// Returns the `sqlType` property from [dartObj] or `null`.
+  String? sqlTypeFromRecord() {
+    return dartObj.getField(FieldModelFieldNames.sqlType)?.toStringValue()
         as String?;
   }
 }

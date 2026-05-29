@@ -70,6 +70,48 @@ const FIELD_MODEL_FIELDS = {
     nullable: true,
     description: "A brief comment or explanation for the field's purpose.",
   ),
+  Field(
+    fieldPath: ['references'],
+    fieldType: Object,
+    nullable: true,
+    description:
+        'The target model class this field references. Implies foreignKey. '
+        'Resolves to the target model\'s primary key column by default; '
+        'override via [referencesColumn].',
+  ),
+  Field(
+    fieldPath: ['referencesColumn'],
+    fieldType: String,
+    nullable: true,
+    description:
+        'Optional override naming the target column of the referenced model. '
+        "Defaults to the referenced model's primary key column.",
+  ),
+  Field(
+    fieldPath: ['unique'],
+    fieldType: bool,
+    nullable: true,
+    description:
+        'Whether this field carries a UNIQUE constraint at the schema level. '
+        'Distinct from primaryKey, which is implicitly unique.',
+  ),
+  Field(
+    fieldPath: ['onDelete'],
+    fieldType: String,
+    nullable: true,
+    description:
+        "Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', "
+        "'set null', or 'no action'. Drives DDL emission; ignored at runtime.",
+  ),
+  Field(
+    fieldPath: ['sqlType'],
+    fieldType: String,
+    nullable: true,
+    description:
+        "Explicit SQL column type override (e.g. 'varchar(255)', "
+        "'numeric(10,2)', 'citext'). When absent, defaults are derived from "
+        'the Dart fieldType and any PG_/SQLITE_ prefix.',
+  ),
 };
 
 @GenerateDartModel(
@@ -100,6 +142,11 @@ abstract class _FieldModel extends BaseModel {
         foreignKey: (this as FieldModel).foreignKey,
         fallback: (this as FieldModel).fallback,
         description: (this as FieldModel).description,
+        references: (this as FieldModel).references,
+        referencesColumn: (this as FieldModel).referencesColumn,
+        unique: (this as FieldModel).unique,
+        onDelete: (this as FieldModel).onDelete,
+        sqlType: (this as FieldModel).sqlType,
       );
 }
 
@@ -115,19 +162,29 @@ typedef TFieldRecord = ({
   bool? foreignKey,
   Object? fallback,
   String? description,
+  Object? references,
+  String? referencesColumn,
+  bool? unique,
+  String? onDelete,
+  String? sqlType,
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
   /// Converts this to a [FieldModel].
   FieldModel get toClass => FieldModel(
-        fieldPath: fieldPath,
-        fieldType: fieldType,
-        nullable: nullable,
-        children: children,
-        primaryKey: primaryKey,
-        foreignKey: foreignKey,
-        fallback: fallback,
-        description: description,
+        fieldPath: this.fieldPath,
+        fieldType: this.fieldType,
+        nullable: this.nullable,
+        children: this.children,
+        primaryKey: this.primaryKey,
+        foreignKey: this.foreignKey,
+        fallback: this.fallback,
+        description: this.description,
+        references: this.references,
+        referencesColumn: this.referencesColumn,
+        unique: this.unique,
+        onDelete: this.onDelete,
+        sqlType: this.sqlType,
       );
 }
 
@@ -143,11 +200,16 @@ final class FieldUtils {
       final fieldPath = fieldPathOrNull(unknown)!;
       final fieldType = fieldTypeOrNull(unknown) ?? 'dynamic';
       final nullable = nullableOrNull(unknown);
-      final children = childrenOrNull(unknown); // New method for children
-      final primaryKey = primaryKeyOrNull(unknown); // New method for primaryKey
-      final foreignKey = foreignKeyOrNull(unknown); // New method for foreignKey
-      final fallback = fallbackOrNull(unknown); // New method for fallback
+      final children = childrenOrNull(unknown);
+      final primaryKey = primaryKeyOrNull(unknown);
+      final foreignKey = foreignKeyOrNull(unknown);
+      final fallback = fallbackOrNull(unknown);
       final description = descriptionOrNull(unknown);
+      final references = referencesOrNull(unknown);
+      final referencesColumn = referencesColumnOrNull(unknown);
+      final unique = uniqueOrNull(unknown);
+      final onDelete = onDeleteOrNull(unknown);
+      final sqlType = sqlTypeOrNull(unknown);
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -157,6 +219,11 @@ final class FieldUtils {
         foreignKey: foreignKey,
         fallback: fallback,
         description: description,
+        references: references,
+        referencesColumn: referencesColumn,
+        unique: unique,
+        onDelete: onDelete,
+        sqlType: sqlType,
       );
     } catch (_) {
       return null; // Return null if any property retrieval fails
@@ -280,6 +347,78 @@ final class FieldUtils {
     } catch (_) {
       try {
         return unknown.$8 as String;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `references` property, or returns `null`. The value is typically a
+  /// Type literal (e.g. `references: ModelUser`); the generator resolves it
+  /// to the target model at codegen time.
+  static Object? referencesOrNull(dynamic unknown) {
+    try {
+      return unknown.references as Object?;
+    } catch (_) {
+      try {
+        return unknown.$9 as Object?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `referencesColumn` property, or returns `null`.
+  static String? referencesColumnOrNull(dynamic unknown) {
+    try {
+      return unknown.referencesColumn as String?;
+    } catch (_) {
+      try {
+        return unknown.$10 as String?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `unique` property, or returns `null`.
+  static bool? uniqueOrNull(dynamic unknown) {
+    try {
+      return unknown.unique as bool?;
+    } catch (_) {
+      try {
+        return unknown.$11 as bool?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `onDelete` property, or returns `null`.
+  static String? onDeleteOrNull(dynamic unknown) {
+    try {
+      return unknown.onDelete as String?;
+    } catch (_) {
+      try {
+        return unknown.$12 as String?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `sqlType` property, or returns `null`.
+  static String? sqlTypeOrNull(dynamic unknown) {
+    try {
+      return unknown.sqlType as String?;
+    } catch (_) {
+      try {
+        return unknown.$13 as String?;
       } catch (_) {
         return null;
       }
