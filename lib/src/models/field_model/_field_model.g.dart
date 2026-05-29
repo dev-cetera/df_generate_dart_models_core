@@ -78,14 +78,14 @@ final String? sqlType;
   /// from optional and required parameters.
   const FieldModel({
      this.fieldPath,
-required this.fieldType,
+ this.fieldType,
  this.nullable,
  this.children,
  this.primaryKey,
  this.foreignKey,
  this.fallback,
  this.description,
-this.references,
+ this.references,
  this.referencesColumn,
  this.unique,
  this.onDelete,
@@ -129,7 +129,8 @@ String? onDelete,
 String? sqlType,
   }) {
     
-assert(fieldType != null);
+
+
 
 
 
@@ -359,7 +360,7 @@ List<String>? get fieldPath$ => fieldPath;
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
 @pragma('vm:prefer-inline')
-dynamic get fieldType$ => fieldType!;
+dynamic? get fieldType$ => fieldType;
 
   /// Returns the value of the [nullable] field.
   /// If the field is nullable, the return value may be null; otherwise, it
@@ -401,7 +402,7 @@ String? get description$ => description;
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
 @pragma('vm:prefer-inline')
-dynamic get references$ => references!;
+Object? get references$ => references;
 
   /// Returns the value of the [referencesColumn] field.
   /// If the field is nullable, the return value may be null; otherwise, it
