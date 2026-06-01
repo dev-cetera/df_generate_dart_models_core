@@ -58,13 +58,6 @@ const FIELD_MODEL_FIELDS = {
     description: 'Whether this field serves as a foreign key.',
   ),
   Field(
-    fieldPath: ['fallback'],
-    fieldType: Object,
-    nullable: true,
-    description:
-        'The default/fallback value for the field, to use in cases where the value is null.',
-  ),
-  Field(
     fieldPath: ['description'],
     fieldType: String,
     nullable: true,
@@ -76,32 +69,7 @@ const FIELD_MODEL_FIELDS = {
     nullable: true,
     description:
         'The target model class this field references. Implies foreignKey. '
-        'Resolves to the target model\'s primary key column by default; '
-        'override via [referencesColumn].',
-  ),
-  Field(
-    fieldPath: ['referencesColumn'],
-    fieldType: String,
-    nullable: true,
-    description:
-        'Optional override naming the target column of the referenced model. '
-        "Defaults to the referenced model's primary key column.",
-  ),
-  Field(
-    fieldPath: ['unique'],
-    fieldType: bool,
-    nullable: true,
-    description:
-        'Whether this field carries a UNIQUE constraint at the schema level. '
-        'Distinct from primaryKey, which is implicitly unique.',
-  ),
-  Field(
-    fieldPath: ['onDelete'],
-    fieldType: String,
-    nullable: true,
-    description:
-        "Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', "
-        "'set null', or 'no action'. Drives DDL emission; ignored at runtime.",
+        "Resolves to the target model's primary key column.",
   ),
 };
 
@@ -131,12 +99,8 @@ abstract class _FieldModel extends BaseModel {
         children: (this as FieldModel).children,
         primaryKey: (this as FieldModel).primaryKey,
         foreignKey: (this as FieldModel).foreignKey,
-        fallback: (this as FieldModel).fallback,
         description: (this as FieldModel).description,
         references: (this as FieldModel).references,
-        referencesColumn: (this as FieldModel).referencesColumn,
-        unique: (this as FieldModel).unique,
-        onDelete: (this as FieldModel).onDelete,
       );
 }
 
@@ -150,12 +114,8 @@ typedef TFieldRecord = ({
   List<Map<String, dynamic>>? children,
   bool? primaryKey,
   bool? foreignKey,
-  Object? fallback,
   String? description,
   Object? references,
-  String? referencesColumn,
-  bool? unique,
-  String? onDelete,
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
@@ -167,12 +127,8 @@ extension ToClassOnTFieldRecordExtension on TFieldRecord {
         children: this.children,
         primaryKey: this.primaryKey,
         foreignKey: this.foreignKey,
-        fallback: this.fallback,
         description: this.description,
         references: this.references,
-        referencesColumn: this.referencesColumn,
-        unique: this.unique,
-        onDelete: this.onDelete,
       );
 }
 
@@ -191,12 +147,8 @@ final class FieldUtils {
       final children = childrenOrNull(unknown);
       final primaryKey = primaryKeyOrNull(unknown);
       final foreignKey = foreignKeyOrNull(unknown);
-      final fallback = fallbackOrNull(unknown);
       final description = descriptionOrNull(unknown);
       final references = referencesOrNull(unknown);
-      final referencesColumn = referencesColumnOrNull(unknown);
-      final unique = uniqueOrNull(unknown);
-      final onDelete = onDeleteOrNull(unknown);
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -204,12 +156,8 @@ final class FieldUtils {
         children: children,
         primaryKey: primaryKey,
         foreignKey: foreignKey,
-        fallback: fallback,
         description: description,
         references: references,
-        referencesColumn: referencesColumn,
-        unique: unique,
-        onDelete: onDelete,
       );
     } catch (_) {
       return null; // Return null if any property retrieval fails
@@ -312,27 +260,13 @@ final class FieldUtils {
   }
 
   /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `fallback` property, or returns `null`.
-  static Object? fallbackOrNull(dynamic unknown) {
-    try {
-      return unknown.fallback as Object?;
-    } catch (_) {
-      try {
-        return unknown.$7 as Object?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
   /// the `description` property, or returns `null`.
   static String? descriptionOrNull(dynamic unknown) {
     try {
       return unknown.description as String;
     } catch (_) {
       try {
-        return unknown.$8 as String;
+        return unknown.$7 as String;
       } catch (_) {
         return null;
       }
@@ -348,55 +282,12 @@ final class FieldUtils {
       return unknown.references as Object?;
     } catch (_) {
       try {
-        return unknown.$9 as Object?;
+        return unknown.$8 as Object?;
       } catch (_) {
         return null;
       }
     }
   }
-
-  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `referencesColumn` property, or returns `null`.
-  static String? referencesColumnOrNull(dynamic unknown) {
-    try {
-      return unknown.referencesColumn as String?;
-    } catch (_) {
-      try {
-        return unknown.$10 as String?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `unique` property, or returns `null`.
-  static bool? uniqueOrNull(dynamic unknown) {
-    try {
-      return unknown.unique as bool?;
-    } catch (_) {
-      try {
-        return unknown.$11 as bool?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `onDelete` property, or returns `null`.
-  static String? onDeleteOrNull(dynamic unknown) {
-    try {
-      return unknown.onDelete as String?;
-    } catch (_) {
-      try {
-        return unknown.$12 as String?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

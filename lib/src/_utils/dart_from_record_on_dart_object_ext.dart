@@ -122,13 +122,6 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
         as bool?;
   }
 
-  /// Retrieves the `fallback` property from this `DartObject` if it matches
-  /// the structure of [TFieldRecord] or returns `null`.
-  Object? fallbackFromRecord() {
-    final fallbackField = dartObj.getField(FieldModelFieldNames.fallback);
-    return dartObjToObject(fallbackField);
-  }
-
   /// Returns the `description` property from [dartObj] record if it matches the
   /// structure of [TFieldRecord] or `null`.
   String? descriptionFromRecord() {
@@ -146,24 +139,4 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
         ?.toTypeValue()
         ?.getDisplayString() as String?;
   }
-
-  /// Returns the `referencesColumn` property from [dartObj] or `null`.
-  String? referencesColumnFromRecord() {
-    return dartObj
-        .getField(FieldModelFieldNames.referencesColumn)
-        ?.toStringValue() as String?;
-  }
-
-  /// Returns the `unique` property from [dartObj] or `null`.
-  bool? uniqueFromRecord() {
-    return dartObj.getField(FieldModelFieldNames.unique)?.toBoolValue()
-        as bool?;
-  }
-
-  /// Returns the `onDelete` property from [dartObj] or `null`.
-  String? onDeleteFromRecord() {
-    return dartObj.getField(FieldModelFieldNames.onDelete)?.toStringValue()
-        as String?;
-  }
-
 }
