@@ -103,59 +103,6 @@ const FIELD_MODEL_FIELDS = {
         "Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', "
         "'set null', or 'no action'. Drives DDL emission; ignored at runtime.",
   ),
-  Field(
-    fieldPath: ['sqlType'],
-    fieldType: String,
-    nullable: true,
-    description:
-        "Explicit SQL column type override (e.g. 'varchar(255)', "
-        "'numeric(10,2)', 'citext'). When absent, defaults are derived from "
-        'the Dart fieldType and any PG_/SQLITE_ prefix.',
-  ),
-  Field(
-    fieldPath: ['unknownEnumValue'],
-    fieldType: Object,
-    nullable: true,
-    description:
-        'Fallback enum value to use when a wire-supplied name does not match '
-        'any enum constant. Wraps the generated `XxxType.values.valueOf(...)` '
-        'in a `?? <unknownEnumValue>` expression.',
-  ),
-  Field(
-    fieldPath: ['includeInJson'],
-    fieldType: bool,
-    nullable: true,
-    description:
-        'When false, the field is omitted from toJson() output and ignored '
-        'on fromJson() input. Defaults to true.',
-  ),
-  Field(
-    fieldPath: ['includeInSqlMap'],
-    fieldType: bool,
-    nullable: true,
-    description:
-        'When false, the field is omitted from toSqlMap() output. Useful for '
-        'fields that exist on the wire but never in the database, or vice '
-        'versa. Defaults to true.',
-  ),
-  Field(
-    fieldPath: ['includeInFirestoreMap'],
-    fieldType: bool,
-    nullable: true,
-    description:
-        'When false, the field is omitted from toFirestoreMap() output. '
-        'Defaults to true.',
-  ),
-  Field(
-    fieldPath: ['converter'],
-    fieldType: Object,
-    nullable: true,
-    description:
-        'Custom JsonConverter-style class for this field. When set, '
-        '`ConverterClass().fromJson(value)` / `.toJson(value)` is emitted '
-        'instead of the dialect-driven mapper. Bypass for types the '
-        'generator does not natively understand.',
-  ),
 };
 
 @GenerateDartModel(
@@ -190,12 +137,6 @@ abstract class _FieldModel extends BaseModel {
         referencesColumn: (this as FieldModel).referencesColumn,
         unique: (this as FieldModel).unique,
         onDelete: (this as FieldModel).onDelete,
-        sqlType: (this as FieldModel).sqlType,
-        unknownEnumValue: (this as FieldModel).unknownEnumValue,
-        includeInJson: (this as FieldModel).includeInJson,
-        includeInSqlMap: (this as FieldModel).includeInSqlMap,
-        includeInFirestoreMap: (this as FieldModel).includeInFirestoreMap,
-        converter: (this as FieldModel).converter,
       );
 }
 
@@ -215,12 +156,6 @@ typedef TFieldRecord = ({
   String? referencesColumn,
   bool? unique,
   String? onDelete,
-  String? sqlType,
-  Object? unknownEnumValue,
-  bool? includeInJson,
-  bool? includeInSqlMap,
-  bool? includeInFirestoreMap,
-  Object? converter,
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
@@ -238,12 +173,6 @@ extension ToClassOnTFieldRecordExtension on TFieldRecord {
         referencesColumn: this.referencesColumn,
         unique: this.unique,
         onDelete: this.onDelete,
-        sqlType: this.sqlType,
-        unknownEnumValue: this.unknownEnumValue,
-        includeInJson: this.includeInJson,
-        includeInSqlMap: this.includeInSqlMap,
-        includeInFirestoreMap: this.includeInFirestoreMap,
-        converter: this.converter,
       );
 }
 
@@ -268,12 +197,6 @@ final class FieldUtils {
       final referencesColumn = referencesColumnOrNull(unknown);
       final unique = uniqueOrNull(unknown);
       final onDelete = onDeleteOrNull(unknown);
-      final sqlType = sqlTypeOrNull(unknown);
-      final unknownEnumValue = unknownEnumValueOrNull(unknown);
-      final includeInJson = includeInJsonOrNull(unknown);
-      final includeInSqlMap = includeInSqlMapOrNull(unknown);
-      final includeInFirestoreMap = includeInFirestoreMapOrNull(unknown);
-      final converter = converterOrNull(unknown);
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -287,12 +210,6 @@ final class FieldUtils {
         referencesColumn: referencesColumn,
         unique: unique,
         onDelete: onDelete,
-        sqlType: sqlType,
-        unknownEnumValue: unknownEnumValue,
-        includeInJson: includeInJson,
-        includeInSqlMap: includeInSqlMap,
-        includeInFirestoreMap: includeInFirestoreMap,
-        converter: converter,
       );
     } catch (_) {
       return null; // Return null if any property retrieval fails
@@ -480,86 +397,6 @@ final class FieldUtils {
     }
   }
 
-  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `sqlType` property, or returns `null`.
-  static String? sqlTypeOrNull(dynamic unknown) {
-    try {
-      return unknown.sqlType as String?;
-    } catch (_) {
-      try {
-        return unknown.$13 as String?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Reads the `unknownEnumValue` slot, or `null`.
-  static Object? unknownEnumValueOrNull(dynamic unknown) {
-    try {
-      return unknown.unknownEnumValue as Object?;
-    } catch (_) {
-      try {
-        return unknown.$14 as Object?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Reads the `includeInJson` slot, or `null`.
-  static bool? includeInJsonOrNull(dynamic unknown) {
-    try {
-      return unknown.includeInJson as bool?;
-    } catch (_) {
-      try {
-        return unknown.$15 as bool?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Reads the `includeInSqlMap` slot, or `null`.
-  static bool? includeInSqlMapOrNull(dynamic unknown) {
-    try {
-      return unknown.includeInSqlMap as bool?;
-    } catch (_) {
-      try {
-        return unknown.$16 as bool?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Reads the `includeInFirestoreMap` slot, or `null`.
-  static bool? includeInFirestoreMapOrNull(dynamic unknown) {
-    try {
-      return unknown.includeInFirestoreMap as bool?;
-    } catch (_) {
-      try {
-        return unknown.$17 as bool?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
-
-  /// Reads the `converter` slot, or `null`. Like `references`, the value is
-  /// typically a Type literal; the analyzer side captures it as a display
-  /// name String for use in generated code.
-  static Object? converterOrNull(dynamic unknown) {
-    try {
-      return unknown.converter as Object?;
-    } catch (_) {
-      try {
-        return unknown.$18 as Object?;
-      } catch (_) {
-        return null;
-      }
-    }
-  }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

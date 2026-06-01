@@ -70,24 +70,6 @@ final bool? unique;
   /// Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', 'set null', or 'no action'. Drives DDL emission; ignored at runtime.
 final String? onDelete;
 
-  /// Explicit SQL column type override (e.g. 'varchar(255)', 'numeric(10,2)', 'citext'). When absent, defaults are derived from the Dart fieldType and any PG_/SQLITE_ prefix.
-final String? sqlType;
-
-  /// Fallback enum value to use when a wire-supplied name does not match any enum constant. Wraps the generated `XxxType.values.valueOf(...)` in a `?? <unknownEnumValue>` expression.
-final Object? unknownEnumValue;
-
-  /// When false, the field is omitted from toJson() output and ignored on fromJson() input. Defaults to true.
-final bool? includeInJson;
-
-  /// When false, the field is omitted from toSqlMap() output. Useful for fields that exist on the wire but never in the database, or vice versa. Defaults to true.
-final bool? includeInSqlMap;
-
-  /// When false, the field is omitted from toFirestoreMap() output. Defaults to true.
-final bool? includeInFirestoreMap;
-
-  /// Custom JsonConverter-style class for this field. When set, `ConverterClass().fromJson(value)` / `.toJson(value)` is emitted instead of the dialect-driven mapper. Bypass for types the generator does not natively understand.
-final Object? converter;
-
 
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
@@ -104,12 +86,6 @@ final Object? converter;
  this.referencesColumn,
  this.unique,
  this.onDelete,
- this.sqlType,
- this.unknownEnumValue,
- this.includeInJson,
- this.includeInSqlMap,
- this.includeInFirestoreMap,
- this.converter,
   }) ;
 
   /// Construcs a new instance of [FieldModel],
@@ -127,12 +103,6 @@ this.references,
 this.referencesColumn,
 this.unique,
 this.onDelete,
-this.sqlType,
-this.unknownEnumValue,
-this.includeInJson,
-this.includeInSqlMap,
-this.includeInFirestoreMap,
-this.converter,
   }) ;
 
 
@@ -151,20 +121,8 @@ Object? references,
 String? referencesColumn,
 bool? unique,
 String? onDelete,
-String? sqlType,
-Object? unknownEnumValue,
-bool? includeInJson,
-bool? includeInSqlMap,
-bool? includeInFirestoreMap,
-Object? converter,
   }) {
     
-
-
-
-
-
-
 
 
 
@@ -189,12 +147,6 @@ references: references,
 referencesColumn: referencesColumn,
 unique: unique,
 onDelete: onDelete,
-sqlType: sqlType,
-unknownEnumValue: unknownEnumValue,
-includeInJson: includeInJson,
-includeInSqlMap: includeInSqlMap,
-includeInFirestoreMap: includeInFirestoreMap,
-converter: converter,
     );
   }
 
@@ -310,12 +262,6 @@ final references = json?['references'];
 final referencesColumn = json?['referencesColumn']?.toString().trim().nullIfEmpty;
 final unique = letBoolOrNull(json?['unique']);
 final onDelete = json?['onDelete']?.toString().trim().nullIfEmpty;
-final sqlType = json?['sqlType']?.toString().trim().nullIfEmpty;
-final unknownEnumValue = json?['unknownEnumValue'];
-final includeInJson = letBoolOrNull(json?['includeInJson']);
-final includeInSqlMap = letBoolOrNull(json?['includeInSqlMap']);
-final includeInFirestoreMap = letBoolOrNull(json?['includeInFirestoreMap']);
-final converter = json?['converter'];
       return FieldModel(
         fieldPath: fieldPath,
 fieldType: fieldType,
@@ -329,12 +275,6 @@ references: references,
 referencesColumn: referencesColumn,
 unique: unique,
 onDelete: onDelete,
-sqlType: sqlType,
-unknownEnumValue: unknownEnumValue,
-includeInJson: includeInJson,
-includeInSqlMap: includeInSqlMap,
-includeInFirestoreMap: includeInFirestoreMap,
-converter: converter,
       );
     } catch (e) {
       return null;
@@ -389,14 +329,8 @@ final references0 = references;
 final referencesColumn0 = referencesColumn?.trim().nullIfEmpty;
 final unique0 = unique;
 final onDelete0 = onDelete?.trim().nullIfEmpty;
-final sqlType0 = sqlType?.trim().nullIfEmpty;
-final unknownEnumValue0 = unknownEnumValue;
-final includeInJson0 = includeInJson;
-final includeInSqlMap0 = includeInSqlMap;
-final includeInFirestoreMap0 = includeInFirestoreMap;
-final converter0 = converter;
       final withNulls = {
-        'unknownEnumValue': unknownEnumValue0,'unique': unique0,'sqlType': sqlType0,'referencesColumn': referencesColumn0,'references': references0,'primaryKey': primaryKey0,'onDelete': onDelete0,'nullable': nullable0,'includeInSqlMap': includeInSqlMap0,'includeInJson': includeInJson0,'includeInFirestoreMap': includeInFirestoreMap0,'foreignKey': foreignKey0,'fieldType': fieldType0,'fieldPath': fieldPath0,'fallback': fallback0,'description': description0,'converter': converter0,'children': children0,
+        'unique': unique0,'referencesColumn': referencesColumn0,'references': references0,'primaryKey': primaryKey0,'onDelete': onDelete0,'nullable': nullable0,'foreignKey': foreignKey0,'fieldType': fieldType0,'fieldPath': fieldPath0,'fallback': fallback0,'description': description0,'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -477,42 +411,6 @@ bool? get unique$ => unique;
 @pragma('vm:prefer-inline')
 String? get onDelete$ => onDelete;
 
-  /// Returns the value of the [sqlType] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-String? get sqlType$ => sqlType;
-
-  /// Returns the value of the [unknownEnumValue] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-Object? get unknownEnumValue$ => unknownEnumValue;
-
-  /// Returns the value of the [includeInJson] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get includeInJson$ => includeInJson;
-
-  /// Returns the value of the [includeInSqlMap] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get includeInSqlMap$ => includeInSqlMap;
-
-  /// Returns the value of the [includeInFirestoreMap] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get includeInFirestoreMap$ => includeInFirestoreMap;
-
-  /// Returns the value of the [converter] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-Object? get converter$ => converter;
-
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -554,24 +452,6 @@ static const unique = 'unique';
   /// The field name of [FieldModel.onDelete].
 static const onDelete = 'onDelete';
 
-  /// The field name of [FieldModel.sqlType].
-static const sqlType = 'sqlType';
-
-  /// The field name of [FieldModel.unknownEnumValue].
-static const unknownEnumValue = 'unknownEnumValue';
-
-  /// The field name of [FieldModel.includeInJson].
-static const includeInJson = 'includeInJson';
-
-  /// The field name of [FieldModel.includeInSqlMap].
-static const includeInSqlMap = 'includeInSqlMap';
-
-  /// The field name of [FieldModel.includeInFirestoreMap].
-static const includeInFirestoreMap = 'includeInFirestoreMap';
-
-  /// The field name of [FieldModel.converter].
-static const converter = 'converter';
-
 }
 
 extension FieldModelX on FieldModel {
@@ -601,12 +481,6 @@ Object? references,
 String? referencesColumn,
 bool? unique,
 String? onDelete,
-String? sqlType,
-Object? unknownEnumValue,
-bool? includeInJson,
-bool? includeInSqlMap,
-bool? includeInFirestoreMap,
-Object? converter,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
@@ -621,12 +495,6 @@ references: references ?? this.references,
 referencesColumn: referencesColumn ?? this.referencesColumn,
 unique: unique ?? this.unique,
 onDelete: onDelete ?? this.onDelete,
-sqlType: sqlType ?? this.sqlType,
-unknownEnumValue: unknownEnumValue ?? this.unknownEnumValue,
-includeInJson: includeInJson ?? this.includeInJson,
-includeInSqlMap: includeInSqlMap ?? this.includeInSqlMap,
-includeInFirestoreMap: includeInFirestoreMap ?? this.includeInFirestoreMap,
-converter: converter ?? this.converter,
     );
   }
 
@@ -644,12 +512,6 @@ bool references = true,
 bool referencesColumn = true,
 bool unique = true,
 bool onDelete = true,
-bool sqlType = true,
-bool unknownEnumValue = true,
-bool includeInJson = true,
-bool includeInSqlMap = true,
-bool includeInFirestoreMap = true,
-bool converter = true,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ? this.fieldPath: null,
@@ -664,12 +526,6 @@ references: references ? this.references: null,
 referencesColumn: referencesColumn ? this.referencesColumn: null,
 unique: unique ? this.unique: null,
 onDelete: onDelete ? this.onDelete: null,
-sqlType: sqlType ? this.sqlType: null,
-unknownEnumValue: unknownEnumValue ? this.unknownEnumValue: null,
-includeInJson: includeInJson ? this.includeInJson: null,
-includeInSqlMap: includeInSqlMap ? this.includeInSqlMap: null,
-includeInFirestoreMap: includeInFirestoreMap ? this.includeInFirestoreMap: null,
-converter: converter ? this.converter: null,
     );
   }
 }

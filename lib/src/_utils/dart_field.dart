@@ -35,12 +35,6 @@ final class DartField extends Field {
     super.referencesColumn,
     super.unique,
     super.onDelete,
-    super.sqlType,
-    super.unknownEnumValue,
-    super.includeInJson,
-    super.includeInSqlMap,
-    super.includeInFirestoreMap,
-    super.converter,
   });
 
   /// Derives an instance [DartField] from [source].
@@ -58,12 +52,6 @@ final class DartField extends Field {
       referencesColumn: source.referencesColumn,
       unique: source.unique,
       onDelete: source.onDelete,
-      sqlType: source.sqlType,
-      unknownEnumValue: source.unknownEnumValue,
-      includeInJson: source.includeInJson,
-      includeInSqlMap: source.includeInSqlMap,
-      includeInFirestoreMap: source.includeInFirestoreMap,
-      converter: source.converter,
     );
   }
 
@@ -82,12 +70,6 @@ final class DartField extends Field {
       referencesColumn: record.referencesColumn,
       unique: record.unique,
       onDelete: record.onDelete,
-      sqlType: record.sqlType,
-      unknownEnumValue: record.unknownEnumValue,
-      includeInJson: record.includeInJson,
-      includeInSqlMap: record.includeInSqlMap,
-      includeInFirestoreMap: record.includeInFirestoreMap,
-      converter: record.converter,
     );
   }
 
