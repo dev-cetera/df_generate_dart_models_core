@@ -63,13 +63,13 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
     final b = dartObj
         .getField('\$2')
         ?.toTypeValue()
-        ?.getDisplayString(withNullability: true) as String?;
+        ?.getDisplayString() as String?;
     final c = dartObj.getField(FieldModelFieldNames.fieldType)?.toStringValue()
         as String?;
     final d = dartObj
         .getField(FieldModelFieldNames.fieldType)
         ?.toTypeValue()
-        ?.getDisplayString(withNullability: true) as String?;
+        ?.getDisplayString() as String?;
     return a ?? b ?? c ?? d;
   }
 
@@ -144,7 +144,7 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
     return dartObj
         .getField(FieldModelFieldNames.references)
         ?.toTypeValue()
-        ?.getDisplayString(withNullability: false) as String?;
+        ?.getDisplayString() as String?;
   }
 
   /// Returns the `referencesColumn` property from [dartObj] or `null`.
@@ -190,7 +190,7 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
       }
     }
     // Type-valued fallback.
-    final asType = field.toTypeValue()?.getDisplayString(withNullability: false)
+    final asType = field.toTypeValue()?.getDisplayString()
         as String?;
     if (asType != null) return asType;
     // String literal fallback (`unknownEnumValue: 'unknown'`).
@@ -224,6 +224,6 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
     return dartObj
         .getField(FieldModelFieldNames.converter)
         ?.toTypeValue()
-        ?.getDisplayString(withNullability: false) as String?;
+        ?.getDisplayString() as String?;
   }
 }
