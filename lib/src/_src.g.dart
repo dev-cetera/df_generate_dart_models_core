@@ -14,3 +14,4 @@ export './models/referenced_model.dart/referenced_model.dart';
 export './models/field_model/field_model.dart';
 export './models/model.dart';
 export './string_case_type_constants.dart';
+export './field_types.dart';

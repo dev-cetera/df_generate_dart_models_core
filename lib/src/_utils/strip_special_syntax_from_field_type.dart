@@ -18,9 +18,12 @@ String stripSpecialSyntaxFromFieldType(String fieldType) {
     return input.replaceAll(' ', '');
   }
 
-  // Step 1: Remove the '@let' substring from the input String.
+  // Step 1: Remove the '@let' and '@enum' substrings from the input String.
+  // `@enum` is the sentinel injected by the extractor when analyzer detects an
+  // enum-typed field — the marker survives long enough for the type mappers to
+  // pick the enum codegen path, then gets stripped here for the declaration.
   String $step1(String input) {
-    return input.replaceAll('@let', '');
+    return input.replaceAll('@let', '').replaceAll('@enum', '');
   }
 
   // Step 2: Simplify expressions by retaining only the last word in sequences

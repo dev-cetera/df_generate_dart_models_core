@@ -36,7 +36,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   /// the same value semantics across hand-construction and `fromJson`
   /// round-trips since every field is included.
   @override
-  List<Object?> get props => [className, fields, shouldInherit, inheritanceConstructor, keyStringCase, description, equatable];
+  List<Object?> get props => [className, fields, shouldInherit, inheritanceConstructor, keyStringCase, description];
 
   /// Preserves [BaseModel]'s JSON pretty-print toString rather than letting
   /// [EquatableMixin]'s default toString shadow it. The mixin sits after
@@ -62,9 +62,6 @@ final String? keyStringCase;
   /// A comment describing the generated class.
 final String? description;
 
-  /// Whether to mix in EquatableMixin for value-based ==/hashCode. Defaults to true. Set false for classes that get used as elements inside a const Set in another annotation — Dart forbids const set elements from overriding == / hashCode, so the FieldModel/Field type itself opts out.
-final bool? equatable;
-
 
   /// Constructs a new instance of [GenerateDartModel]
   /// from optional and required parameters.
@@ -75,7 +72,6 @@ final bool? equatable;
  this.inheritanceConstructor,
  this.keyStringCase,
  this.description,
- this.equatable,
   }) ;
 
   /// Construcs a new instance of [GenerateDartModel],
@@ -87,7 +83,6 @@ this.shouldInherit,
 this.inheritanceConstructor,
 this.keyStringCase,
 this.description,
-this.equatable,
   }) ;
 
 
@@ -100,10 +95,8 @@ bool? shouldInherit,
 String? inheritanceConstructor,
 String? keyStringCase,
 String? description,
-bool? equatable,
   }) {
     
-
 
 
 
@@ -116,7 +109,6 @@ shouldInherit: shouldInherit,
 inheritanceConstructor: inheritanceConstructor,
 keyStringCase: keyStringCase,
 description: description,
-equatable: equatable,
     );
   }
 
@@ -226,7 +218,6 @@ final shouldInherit = letBoolOrNull(json?['shouldInherit']);
 final inheritanceConstructor = json?['inheritanceConstructor']?.toString().trim().nullIfEmpty;
 final keyStringCase = json?['keyStringCase']?.toString().trim().nullIfEmpty;
 final description = json?['description']?.toString().trim().nullIfEmpty;
-final equatable = letBoolOrNull(json?['equatable']);
       return GenerateDartModel(
         className: className,
 fields: fields,
@@ -234,7 +225,6 @@ shouldInherit: shouldInherit,
 inheritanceConstructor: inheritanceConstructor,
 keyStringCase: keyStringCase,
 description: description,
-equatable: equatable,
       );
     } catch (e) {
       return null;
@@ -283,9 +273,8 @@ final shouldInherit0 = shouldInherit;
 final inheritanceConstructor0 = inheritanceConstructor?.trim().nullIfEmpty;
 final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
 final description0 = description?.trim().nullIfEmpty;
-final equatable0 = equatable;
       final withNulls = {
-        'shouldInherit': shouldInherit0,'keyStringCase': keyStringCase0,'inheritanceConstructor': inheritanceConstructor0,'fields': fields0,'equatable': equatable0,'description': description0,'className': className0,
+        'shouldInherit': shouldInherit0,'keyStringCase': keyStringCase0,'inheritanceConstructor': inheritanceConstructor0,'fields': fields0,'description': description0,'className': className0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -330,12 +319,6 @@ String? get keyStringCase$ => keyStringCase;
 @pragma('vm:prefer-inline')
 String? get description$ => description;
 
-  /// Returns the value of the [equatable] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get equatable$ => equatable;
-
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -358,9 +341,6 @@ static const keyStringCase = 'keyStringCase';
 
   /// The field name of [GenerateDartModel.description].
 static const description = 'description';
-
-  /// The field name of [GenerateDartModel.equatable].
-static const equatable = 'equatable';
 
 }
 
@@ -385,7 +365,6 @@ bool? shouldInherit,
 String? inheritanceConstructor,
 String? keyStringCase,
 String? description,
-bool? equatable,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ?? this.className,
@@ -394,7 +373,6 @@ shouldInherit: shouldInherit ?? this.shouldInherit,
 inheritanceConstructor: inheritanceConstructor ?? this.inheritanceConstructor,
 keyStringCase: keyStringCase ?? this.keyStringCase,
 description: description ?? this.description,
-equatable: equatable ?? this.equatable,
     );
   }
 
@@ -406,7 +384,6 @@ bool shouldInherit = true,
 bool inheritanceConstructor = true,
 bool keyStringCase = true,
 bool description = true,
-bool equatable = true,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ? this.className: null,
@@ -415,7 +392,6 @@ shouldInherit: shouldInherit ? this.shouldInherit: null,
 inheritanceConstructor: inheritanceConstructor ? this.inheritanceConstructor: null,
 keyStringCase: keyStringCase ? this.keyStringCase: null,
 description: description ? this.description: null,
-equatable: equatable ? this.equatable: null,
     );
   }
 }

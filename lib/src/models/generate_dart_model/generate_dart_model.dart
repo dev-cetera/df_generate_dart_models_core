@@ -59,17 +59,6 @@ const GENERATE_DART_MODEL_FIELDS = {
     nullable: true,
     description: 'A comment describing the generated class.',
   ),
-  Field(
-    fieldPath: ['equatable'],
-    fieldType: bool,
-    nullable: true,
-    description:
-        'Whether to mix in EquatableMixin for value-based ==/hashCode. '
-        'Defaults to true. Set false for classes that get used as elements '
-        'inside a const Set in another annotation — Dart forbids const set '
-        'elements from overriding == / hashCode, so the FieldModel/Field type '
-        'itself opts out.',
-  ),
 };
 
 @GenerateDartModel(shouldInherit: true, fields: GENERATE_DART_MODEL_FIELDS)

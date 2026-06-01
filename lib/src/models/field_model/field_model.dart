@@ -20,10 +20,14 @@ part '_field_model.g.dart';
 const FIELD_MODEL_FIELDS = {
   Field(
     fieldPath: ['fieldPath'],
-    fieldType: List<String>,
+    fieldType: Object,
     nullable: true,
     description:
-        'The path of the field within the model, represented as a list of strings.',
+        'The path of the field within the model. Accepts a String '
+        "('profile.id'), an Iterable<String> (['profile', 'id']), or null. "
+        'Dot-separated and list forms are normalised to the same list of '
+        'segments — multi-segment paths produce nested map accessors '
+        "(json?['profile']?['id']) in the generated fromJson.",
   ),
   Field(
     fieldPath: ['fieldType'],
@@ -73,14 +77,7 @@ const FIELD_MODEL_FIELDS = {
   ),
 };
 
-@GenerateDartModel(
-  shouldInherit: true,
-  fields: FIELD_MODEL_FIELDS,
-  // Off because every `@GenerateDartModel(fields: {Field(...), ...})`
-  // annotation puts `Field` (= `FieldModel`) instances inside a const Set, and
-  // const set elements may not override `==` / `hashCode`.
-  equatable: false,
-)
+@GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
 
 /// Represents a field, its name, type, and its nullability. Similar to
 /// [TFieldRecord].
@@ -107,8 +104,13 @@ abstract class _FieldModel extends BaseModel {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// A record representing a field. Similar to [FieldModel].
+///
+/// `fieldPath` is intentionally typed `Object?` so users can pass a
+/// dot-separated `String` (`'profile.id'`), an `Iterable<String>`
+/// (`['profile', 'id']`), or `null`. Normalisation to `List<String>`
+/// happens via [FieldUtils.fieldPathOrNull].
 typedef TFieldRecord = ({
-  List<String>? fieldPath,
+  Object? fieldPath,
   String? fieldType,
   bool? nullable,
   List<Map<String, dynamic>>? children,
@@ -165,17 +167,40 @@ final class FieldUtils {
   }
 
   /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
-  /// the `fieldPath` property, or returns `null`.
+  /// the `fieldPath` property, normalising it to a `List<String>`.
+  ///
+  /// Accepted shapes for the underlying value:
+  ///  - `String` — dot-separated path, e.g. `'profile.id'` → `['profile', 'id']`.
+  ///  - `Iterable<String>` — converted as-is.
+  ///  - `null` — returns null.
+  /// Anything else returns null too (loud failure is caller's job).
   static List<String>? fieldPathOrNull(dynamic unknown) {
+    Object? raw;
     try {
-      return (unknown.fieldPath as List<String>);
+      raw = unknown.fieldPath as Object?;
     } catch (_) {
       try {
-        return unknown.$1 as List<String>;
+        raw = unknown.$1 as Object?;
       } catch (_) {
         return null;
       }
     }
+    return _normalisePath(raw);
+  }
+
+  /// Shared normaliser — `String`/`Iterable<String>`/`null` → `List<String>?`.
+  static List<String>? normalisePath(Object? raw) => _normalisePath(raw);
+
+  static List<String>? _normalisePath(Object? raw) {
+    if (raw == null) return null;
+    if (raw is String) {
+      if (raw.isEmpty) return null;
+      return raw.split('.');
+    }
+    if (raw is Iterable) {
+      return raw.map((e) => e.toString()).toList();
+    }
+    return null;
   }
 
   /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get

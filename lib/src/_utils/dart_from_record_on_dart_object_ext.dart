@@ -30,8 +30,13 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
   //
   //
 
-  /// Returns `fieldName` property from [dartObj] if it matches the structure of
-  /// [TFieldRecord] or `null`.
+  /// Returns the `fieldPath` property from [dartObj] if it matches the
+  /// structure of [TFieldRecord] / [FieldModel], or `null`.
+  ///
+  /// The annotation may have used a dot-separated `String`
+  /// (`fieldPath: 'profile.id'`) or an `Iterable<String>`
+  /// (`fieldPath: ['profile', 'id']`); both shapes normalise to the same
+  /// `List<String>` of path segments.
   List<String>? fieldPathFromRecord() {
     return _rawFieldPathFromRecord()
         ?.map((e) => e.replaceAll('?', ''))
@@ -39,11 +44,26 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
   }
 
   List<String>? _rawFieldPathFromRecord() {
-    final a = dartObjToStringList(dartObj.getField('\$1'));
-    final b = dartObjToStringList(
-      dartObj.getField(FieldModelFieldNames.fieldPath),
-    );
-    return (a ?? b)?.toList();
+    // Resolve the raw DartObject first — positional `$1` (record shape) or the
+    // named `fieldPath` field (FieldModel shape). Either may be set; whichever
+    // is non-null wins.
+    final raw = dartObj.getField('\$1') ??
+        dartObj.getField(FieldModelFieldNames.fieldPath);
+    if (raw == null) return null;
+
+    // String form first: a dot-separated literal like 'profile.id' must split
+    // into ['profile', 'id']. Doing this *before* probing for a list shape
+    // avoids `dartObjToStringList` wrapping a single string as `[s]` (which
+    // would collapse multi-segment paths into one key).
+    final asString = raw.toStringValue() as String?;
+    if (asString != null) {
+      if (asString.isEmpty) return null;
+      return asString.split('.');
+    }
+
+    // List/Iterable form: ['profile', 'id'].
+    final asList = dartObjToStringList(raw);
+    return asList?.toList();
   }
 
   /// Returns the `fieldType` property from [dartObj] if it matches the structure

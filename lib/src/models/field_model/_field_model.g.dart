@@ -35,7 +35,7 @@ class FieldModel extends _FieldModel {
   
 
     /// The path of the field within the model, represented as a list of strings.
-final List<String>? fieldPath;
+final Object? fieldPath;
 
   /// The data type of the field, such as "String", "int", or any dynamic type.
 final dynamic? fieldType;
@@ -109,7 +109,7 @@ this.onDelete,
   /// Constructs a new instance of [FieldModel],
   /// and asserts that all required parameters are not null.
   factory FieldModel.assertRequired({
-    List<String>? fieldPath,
+    Object? fieldPath,
 dynamic? fieldType,
 bool? nullable,
 List<Map<String,dynamic>>? children,
@@ -317,7 +317,7 @@ onDelete: onDelete,
     bool includeNulls = false,
   }) {
     try {
-      final fieldPath0 = fieldPath?.map((p0) => p0?.trim().nullIfEmpty,).nonNulls.nullIfEmpty?.toList();
+      final fieldPath0 = fieldPath;
 final fieldType0 = fieldType;
 final nullable0 = nullable;
 final children0 = children?.map((p0) => p0?.map((p0, p1) => MapEntry(p0?.trim().nullIfEmpty, p1,),).nonNulls.nullIfEmpty,).nonNulls.nullIfEmpty?.toList();
@@ -343,7 +343,7 @@ final onDelete0 = onDelete?.trim().nullIfEmpty;
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
 @pragma('vm:prefer-inline')
-List<String>? get fieldPath$ => fieldPath;
+Object? get fieldPath$ => fieldPath;
 
   /// Returns the value of the [fieldType] field.
   /// If the field is nullable, the return value may be null; otherwise, it
@@ -469,7 +469,7 @@ extension FieldModelX on FieldModel {
 
   /// Creates a copy of this instance, replacing the specified fields.
   FieldModel copyWith({
-    List<String>? fieldPath,
+    Object? fieldPath,
 dynamic? fieldType,
 bool? nullable,
 List<Map<String,dynamic>>? children,

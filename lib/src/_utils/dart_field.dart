@@ -65,10 +65,24 @@ final class DartField extends Field {
   //
   //
 
-  /// The super.fieldPath stripped of '?'.
+  /// The path of this field, normalised to a `List<String>` regardless of
+  /// whether the user wrote it as a `String` (`'profile.id'`) or as an
+  /// `Iterable<String>` (`['profile', 'id']`).
+  ///
+  /// `?` markers are stripped per the same convention used elsewhere
+  /// (some path segments may carry a `?` suffix to indicate the source
+  /// field is nullable; runtime nullability comes from the `nullable:`
+  /// slot, not the path).
+  ///
+  /// Reads `super.fieldPath` directly to avoid infinite recursion through
+  /// `FieldUtils.fieldPathOrNull(this)`, which would call back into this
+  /// override.
   @override
   List<String>? get fieldPath {
-    return super.fieldPath?.map((e) => e.trim().replaceAll('?', '')).toList();
+    final normalised = FieldUtils.normalisePath(super.fieldPath);
+    return normalised
+        ?.map((e) => e.trim().replaceAll('?', ''))
+        .toList();
   }
 
   /// The [fieldPath] joined and to camelCase.
@@ -109,8 +123,11 @@ final class DartField extends Field {
     ].any((e) => e == true);
   }
 
+  /// Any path segment ending in `?` was the user's way of marking the
+  /// source field as nullable (legacy convention). Normalisation happens
+  /// before we look, so both String and Iterable inputs surface the same.
   bool? get _isFieldNameNullable =>
-      super.fieldPath?.any((e) => e.contains('?'));
+      FieldUtils.normalisePath(super.fieldPath)?.any((e) => e.contains('?'));
 
   /// `super.fieldType` is `dynamic` and can legitimately hold a [Type]
   /// literal (e.g. `Field(fieldType: List<String>)`). Calling `endsWith`
