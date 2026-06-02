@@ -80,9 +80,7 @@ final class DartField extends Field {
   @override
   List<String>? get fieldPath {
     final normalised = FieldUtils.normalisePath(super.fieldPath);
-    return normalised
-        ?.map((e) => e.trim().replaceAll('?', ''))
-        .toList();
+    return normalised?.map((e) => e.trim().replaceAll('?', '')).toList();
   }
 
   /// The [fieldPath] joined and to camelCase.

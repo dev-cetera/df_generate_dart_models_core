@@ -70,7 +70,9 @@ void main() {
     test('hasValidId', () {
       expect(const DataRefModel(id: 'x', collection: ['c']).hasValidId, isTrue);
       expect(
-          const DataRefModel(id: ' ', collection: ['c']).hasValidId, isFalse,);
+        const DataRefModel(id: ' ', collection: ['c']).hasValidId,
+        isFalse,
+      );
       expect(const DataRefModel(collection: ['c']).hasValidId, isFalse);
     });
 

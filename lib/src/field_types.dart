@@ -160,8 +160,7 @@ abstract final class FieldTypes {
       'PG_enum($pgEnumName)-$dartTypeName';
 
   // JSON / JSONB -----------------------------------------------------------
-  static const String pgJsonbMapStringDynamic =
-      'PG_jsonb-Map<String, dynamic>';
+  static const String pgJsonbMapStringDynamic = 'PG_jsonb-Map<String, dynamic>';
   static const String pgJsonMapStringDynamic = 'PG_json-Map<String, dynamic>';
 
   /// `PG_jsonb-<ModelXxx>` — nested model in jsonb.
@@ -169,7 +168,8 @@ abstract final class FieldTypes {
 
   /// `PG_jsonb-List<T>` — list embedded in jsonb (T can be primitive or
   /// nested model name).
-  static String pgJsonbList(String elementType) => 'PG_jsonb-List<$elementType>';
+  static String pgJsonbList(String elementType) =>
+      'PG_jsonb-List<$elementType>';
 
   /// `PG_jsonb-Set<T>`.
   static String pgJsonbSet(String elementType) => 'PG_jsonb-Set<$elementType>';
@@ -231,8 +231,7 @@ abstract final class FieldTypes {
       'SQLITE_json-List<$elementType>';
 
   /// `SQLITE_jsonb-<ModelXxx>` — SQLite 3.45+ binary JSON.
-  static String sqliteJsonbModel(String modelName) =>
-      'SQLITE_jsonb-$modelName';
+  static String sqliteJsonbModel(String modelName) => 'SQLITE_jsonb-$modelName';
 
   // ───────────────────────────────────────────────────────────────────────
   // FS_ — Firestore

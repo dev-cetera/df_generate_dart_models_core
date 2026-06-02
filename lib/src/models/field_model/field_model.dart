@@ -22,8 +22,7 @@ const FIELD_MODEL_FIELDS = {
     fieldPath: ['fieldPath'],
     fieldType: Object,
     nullable: true,
-    description:
-        'The path of the field within the model. Accepts a String '
+    description: 'The path of the field within the model. Accepts a String '
         "('profile.id'), an Iterable<String> (['profile', 'id']), or null. "
         'Dot-separated and list forms are normalised to the same list of '
         'segments — multi-segment paths produce nested map accessors '

@@ -2,8 +2,14 @@
 
 ## [0.10.0]
 
-- Released @ 5/2026 (UTC)
-- Pulls in df_gen_core 0.8.0 with mapper robustness fixes (missing-mapper sentinel, empty-type guard, optional-group coercion)
+- Released @ 6/2026 (UTC)
+- New: `Field.fieldPath` accepts `String` (`'profile.id'`), `Iterable<String>` (`['profile', 'id']`), or `null`; multi-segment paths produce deep null-aware accessors (`json?['profile']?['id']`)
+- New: `FieldTypes` constants class for prefix-vocabulary strings (`FieldTypes.pgUuid`, `sqliteEpochms`, `fsTimestamp`, …)
+- New: `FieldUtils.normalisePath` exposed publicly
+- New: `Field` slot field type changed to `Object?` for `fieldPath` and `references`
+- Removed: `equatable`, `sqlType`, `onDelete`, `unique`, `referencesColumn`, `fallback`, `unknownEnumValue`, `includeInJson/SqlMap/FirestoreMap`, `converter` slots (deferred to template/inheritance)
+- Fix: `DartField.fieldPath` no longer recurses infinitely through `FieldUtils.fieldPathOrNull`
+- Pulls in df_gen_core 0.8.0 with mapper robustness fixes
 
 ## [0.9.25]
 

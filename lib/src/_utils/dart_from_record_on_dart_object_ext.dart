@@ -80,10 +80,8 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
 
   String? _rawFieldTypeFromRecord() {
     final a = dartObj.getField('\$2')?.toStringValue() as String?;
-    final b = dartObj
-        .getField('\$2')
-        ?.toTypeValue()
-        ?.getDisplayString() as String?;
+    final b =
+        dartObj.getField('\$2')?.toTypeValue()?.getDisplayString() as String?;
     final c = dartObj.getField(FieldModelFieldNames.fieldType)?.toStringValue()
         as String?;
     final d = dartObj

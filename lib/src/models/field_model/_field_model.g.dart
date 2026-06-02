@@ -32,121 +32,105 @@ class FieldModel extends _FieldModel {
   @override
   String get $className => CLASS_NAME;
 
-  
-
-    /// The path of the field within the model, represented as a list of strings.
-final Object? fieldPath;
+  /// The path of the field within the model, represented as a list of strings.
+  final Object? fieldPath;
 
   /// The data type of the field, such as "String", "int", or any dynamic type.
-final dynamic? fieldType;
+  final dynamic? fieldType;
 
   /// Whether the field can hold a null value.
-final bool? nullable;
+  final bool? nullable;
 
   /// Children of this field, allowing for nested fields or complex structures.
-final List<Map<String,dynamic>>? children;
+  final List<Map<String, dynamic>>? children;
 
   /// Whether this field serves as a primary key.
-final bool? primaryKey;
+  final bool? primaryKey;
 
   /// Whether this field serves as a foreign key.
-final bool? foreignKey;
+  final bool? foreignKey;
 
   /// The default/fallback value for the field, to use in cases where the value is null.
-final Object? fallback;
+  final Object? fallback;
 
   /// A brief comment or explanation for the field's purpose.
-final String? description;
+  final String? description;
 
   /// The target model class this field references. Implies foreignKey. Resolves to the target model's primary key column by default; override via [referencesColumn].
-final Object? references;
+  final Object? references;
 
   /// Optional override naming the target column of the referenced model. Defaults to the referenced model's primary key column.
-final String? referencesColumn;
+  final String? referencesColumn;
 
   /// Whether this field carries a UNIQUE constraint at the schema level. Distinct from primaryKey, which is implicitly unique.
-final bool? unique;
+  final bool? unique;
 
   /// Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', 'set null', or 'no action'. Drives DDL emission; ignored at runtime.
-final String? onDelete;
-
+  final String? onDelete;
 
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
   const FieldModel({
-     this.fieldPath,
- this.fieldType,
- this.nullable,
- this.children,
- this.primaryKey,
- this.foreignKey,
- this.fallback,
- this.description,
- this.references,
- this.referencesColumn,
- this.unique,
- this.onDelete,
-  }) ;
+    this.fieldPath,
+    this.fieldType,
+    this.nullable,
+    this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
+    this.description,
+    this.references,
+    this.referencesColumn,
+    this.unique,
+    this.onDelete,
+  });
 
   /// Construcs a new instance of [FieldModel],
   /// forcing all parameters to be optional.
   const FieldModel.optional({
     this.fieldPath,
-this.fieldType,
-this.nullable,
-this.children,
-this.primaryKey,
-this.foreignKey,
-this.fallback,
-this.description,
-this.references,
-this.referencesColumn,
-this.unique,
-this.onDelete,
-  }) ;
-
+    this.fieldType,
+    this.nullable,
+    this.children,
+    this.primaryKey,
+    this.foreignKey,
+    this.fallback,
+    this.description,
+    this.references,
+    this.referencesColumn,
+    this.unique,
+    this.onDelete,
+  });
 
   /// Constructs a new instance of [FieldModel],
   /// and asserts that all required parameters are not null.
   factory FieldModel.assertRequired({
     Object? fieldPath,
-dynamic? fieldType,
-bool? nullable,
-List<Map<String,dynamic>>? children,
-bool? primaryKey,
-bool? foreignKey,
-Object? fallback,
-String? description,
-Object? references,
-String? referencesColumn,
-bool? unique,
-String? onDelete,
+    dynamic? fieldType,
+    bool? nullable,
+    List<Map<String, dynamic>>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
+    String? description,
+    Object? references,
+    String? referencesColumn,
+    bool? unique,
+    String? onDelete,
   }) {
-    
-
-
-
-
-
-
-
-
-
-
-
     return FieldModel(
       fieldPath: fieldPath,
-fieldType: fieldType,
-nullable: nullable,
-children: children,
-primaryKey: primaryKey,
-foreignKey: foreignKey,
-fallback: fallback,
-description: description,
-references: references,
-referencesColumn: referencesColumn,
-unique: unique,
-onDelete: onDelete,
+      fieldType: fieldType,
+      nullable: nullable,
+      children: children,
+      primaryKey: primaryKey,
+      foreignKey: foreignKey,
+      fallback: fallback,
+      description: description,
+      references: references,
+      referencesColumn: referencesColumn,
+      unique: unique,
+      onDelete: onDelete,
     );
   }
 
@@ -172,7 +156,6 @@ onDelete: onDelete,
   ) {
     return fromJsonOrNull(another?.toJson())!;
   }
-
 
   /// Constructs a new instance of [FieldModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
@@ -206,7 +189,7 @@ onDelete: onDelete,
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
-     assert(false, '$FieldModel.fromJsonString: $e');
+      assert(false, '$FieldModel.fromJsonString: $e');
       rethrow;
     }
   }
@@ -250,31 +233,55 @@ onDelete: onDelete,
     Map<String, dynamic>? json,
   ) {
     try {
-      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])?.map((p0) => p0?.toString().trim().nullIfEmpty,).nonNulls.nullIfEmpty?.toList().unmodifiable;
-final fieldType = json?['fieldType'];
-final nullable = letBoolOrNull(json?['nullable']);
-final children = letListOrNull<dynamic>(json?['children'])?.map((p0) => letMapOrNull<dynamic, dynamic>(p0)?.map((p0, p1) => MapEntry(p0?.toString().trim().nullIfEmpty, p1,),).nonNulls.nullIfEmpty?.unmodifiable,).nonNulls.nullIfEmpty?.toList().unmodifiable;
-final primaryKey = letBoolOrNull(json?['primaryKey']);
-final foreignKey = letBoolOrNull(json?['foreignKey']);
-final fallback = json?['fallback'];
-final description = json?['description']?.toString().trim().nullIfEmpty;
-final references = json?['references'];
-final referencesColumn = json?['referencesColumn']?.toString().trim().nullIfEmpty;
-final unique = letBoolOrNull(json?['unique']);
-final onDelete = json?['onDelete']?.toString().trim().nullIfEmpty;
+      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])
+          ?.map(
+            (p0) => p0?.toString().trim().nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
+      final fieldType = json?['fieldType'];
+      final nullable = letBoolOrNull(json?['nullable']);
+      final children = letListOrNull<dynamic>(json?['children'])
+          ?.map(
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.toString().trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty
+                ?.unmodifiable,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
+      final primaryKey = letBoolOrNull(json?['primaryKey']);
+      final foreignKey = letBoolOrNull(json?['foreignKey']);
+      final fallback = json?['fallback'];
+      final description = json?['description']?.toString().trim().nullIfEmpty;
+      final references = json?['references'];
+      final referencesColumn =
+          json?['referencesColumn']?.toString().trim().nullIfEmpty;
+      final unique = letBoolOrNull(json?['unique']);
+      final onDelete = json?['onDelete']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
-fieldType: fieldType,
-nullable: nullable,
-children: children,
-primaryKey: primaryKey,
-foreignKey: foreignKey,
-fallback: fallback,
-description: description,
-references: references,
-referencesColumn: referencesColumn,
-unique: unique,
-onDelete: onDelete,
+        fieldType: fieldType,
+        nullable: nullable,
+        children: children,
+        primaryKey: primaryKey,
+        foreignKey: foreignKey,
+        fallback: fallback,
+        description: description,
+        references: references,
+        referencesColumn: referencesColumn,
+        unique: unique,
+        onDelete: onDelete,
       );
     } catch (e) {
       return null;
@@ -318,19 +325,44 @@ onDelete: onDelete,
   }) {
     try {
       final fieldPath0 = fieldPath;
-final fieldType0 = fieldType;
-final nullable0 = nullable;
-final children0 = children?.map((p0) => p0?.map((p0, p1) => MapEntry(p0?.trim().nullIfEmpty, p1,),).nonNulls.nullIfEmpty,).nonNulls.nullIfEmpty?.toList();
-final primaryKey0 = primaryKey;
-final foreignKey0 = foreignKey;
-final fallback0 = fallback;
-final description0 = description?.trim().nullIfEmpty;
-final references0 = references;
-final referencesColumn0 = referencesColumn?.trim().nullIfEmpty;
-final unique0 = unique;
-final onDelete0 = onDelete?.trim().nullIfEmpty;
+      final fieldType0 = fieldType;
+      final nullable0 = nullable;
+      final children0 = children
+          ?.map(
+            (p0) => p0
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
+      final primaryKey0 = primaryKey;
+      final foreignKey0 = foreignKey;
+      final fallback0 = fallback;
+      final description0 = description?.trim().nullIfEmpty;
+      final references0 = references;
+      final referencesColumn0 = referencesColumn?.trim().nullIfEmpty;
+      final unique0 = unique;
+      final onDelete0 = onDelete?.trim().nullIfEmpty;
       final withNulls = {
-        'unique': unique0,'referencesColumn': referencesColumn0,'references': references0,'primaryKey': primaryKey0,'onDelete': onDelete0,'nullable': nullable0,'foreignKey': foreignKey0,'fieldType': fieldType0,'fieldPath': fieldPath0,'fallback': fallback0,'description': description0,'children': children0,
+        'unique': unique0,
+        'referencesColumn': referencesColumn0,
+        'references': references0,
+        'primaryKey': primaryKey0,
+        'onDelete': onDelete0,
+        'nullable': nullable0,
+        'foreignKey': foreignKey0,
+        'fieldType': fieldType0,
+        'fieldPath': fieldPath0,
+        'fallback': fallback0,
+        'description': description0,
+        'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
@@ -339,119 +371,117 @@ final onDelete0 = onDelete?.trim().nullIfEmpty;
     }
   }
 
-    /// Returns the value of the [fieldPath] field.
+  /// Returns the value of the [fieldPath] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-Object? get fieldPath$ => fieldPath;
+  @pragma('vm:prefer-inline')
+  Object? get fieldPath$ => fieldPath;
 
   /// Returns the value of the [fieldType] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-dynamic? get fieldType$ => fieldType;
+  @pragma('vm:prefer-inline')
+  dynamic? get fieldType$ => fieldType;
 
   /// Returns the value of the [nullable] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get nullable$ => nullable;
+  @pragma('vm:prefer-inline')
+  bool? get nullable$ => nullable;
 
   /// Returns the value of the [children] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-List<Map<String,dynamic>>? get children$ => children;
+  @pragma('vm:prefer-inline')
+  List<Map<String, dynamic>>? get children$ => children;
 
   /// Returns the value of the [primaryKey] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get primaryKey$ => primaryKey;
+  @pragma('vm:prefer-inline')
+  bool? get primaryKey$ => primaryKey;
 
   /// Returns the value of the [foreignKey] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get foreignKey$ => foreignKey;
+  @pragma('vm:prefer-inline')
+  bool? get foreignKey$ => foreignKey;
 
   /// Returns the value of the [fallback] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-Object? get fallback$ => fallback;
+  @pragma('vm:prefer-inline')
+  Object? get fallback$ => fallback;
 
   /// Returns the value of the [description] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-String? get description$ => description;
+  @pragma('vm:prefer-inline')
+  String? get description$ => description;
 
   /// Returns the value of the [references] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-Object? get references$ => references;
+  @pragma('vm:prefer-inline')
+  Object? get references$ => references;
 
   /// Returns the value of the [referencesColumn] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-String? get referencesColumn$ => referencesColumn;
+  @pragma('vm:prefer-inline')
+  String? get referencesColumn$ => referencesColumn;
 
   /// Returns the value of the [unique] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-bool? get unique$ => unique;
+  @pragma('vm:prefer-inline')
+  bool? get unique$ => unique;
 
   /// Returns the value of the [onDelete] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
-@pragma('vm:prefer-inline')
-String? get onDelete$ => onDelete;
-
+  @pragma('vm:prefer-inline')
+  String? get onDelete$ => onDelete;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 abstract final class FieldModelFieldNames {
-    /// The field name of [FieldModel.fieldPath].
-static const fieldPath = 'fieldPath';
+  /// The field name of [FieldModel.fieldPath].
+  static const fieldPath = 'fieldPath';
 
   /// The field name of [FieldModel.fieldType].
-static const fieldType = 'fieldType';
+  static const fieldType = 'fieldType';
 
   /// The field name of [FieldModel.nullable].
-static const nullable = 'nullable';
+  static const nullable = 'nullable';
 
   /// The field name of [FieldModel.children].
-static const children = 'children';
+  static const children = 'children';
 
   /// The field name of [FieldModel.primaryKey].
-static const primaryKey = 'primaryKey';
+  static const primaryKey = 'primaryKey';
 
   /// The field name of [FieldModel.foreignKey].
-static const foreignKey = 'foreignKey';
+  static const foreignKey = 'foreignKey';
 
   /// The field name of [FieldModel.fallback].
-static const fallback = 'fallback';
+  static const fallback = 'fallback';
 
   /// The field name of [FieldModel.description].
-static const description = 'description';
+  static const description = 'description';
 
   /// The field name of [FieldModel.references].
-static const references = 'references';
+  static const references = 'references';
 
   /// The field name of [FieldModel.referencesColumn].
-static const referencesColumn = 'referencesColumn';
+  static const referencesColumn = 'referencesColumn';
 
   /// The field name of [FieldModel.unique].
-static const unique = 'unique';
+  static const unique = 'unique';
 
   /// The field name of [FieldModel.onDelete].
-static const onDelete = 'onDelete';
-
+  static const onDelete = 'onDelete';
 }
 
 extension FieldModelX on FieldModel {
@@ -470,62 +500,62 @@ extension FieldModelX on FieldModel {
   /// Creates a copy of this instance, replacing the specified fields.
   FieldModel copyWith({
     Object? fieldPath,
-dynamic? fieldType,
-bool? nullable,
-List<Map<String,dynamic>>? children,
-bool? primaryKey,
-bool? foreignKey,
-Object? fallback,
-String? description,
-Object? references,
-String? referencesColumn,
-bool? unique,
-String? onDelete,
+    dynamic? fieldType,
+    bool? nullable,
+    List<Map<String, dynamic>>? children,
+    bool? primaryKey,
+    bool? foreignKey,
+    Object? fallback,
+    String? description,
+    Object? references,
+    String? referencesColumn,
+    bool? unique,
+    String? onDelete,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
-fieldType: fieldType ?? this.fieldType,
-nullable: nullable ?? this.nullable,
-children: children ?? this.children,
-primaryKey: primaryKey ?? this.primaryKey,
-foreignKey: foreignKey ?? this.foreignKey,
-fallback: fallback ?? this.fallback,
-description: description ?? this.description,
-references: references ?? this.references,
-referencesColumn: referencesColumn ?? this.referencesColumn,
-unique: unique ?? this.unique,
-onDelete: onDelete ?? this.onDelete,
+      fieldType: fieldType ?? this.fieldType,
+      nullable: nullable ?? this.nullable,
+      children: children ?? this.children,
+      primaryKey: primaryKey ?? this.primaryKey,
+      foreignKey: foreignKey ?? this.foreignKey,
+      fallback: fallback ?? this.fallback,
+      description: description ?? this.description,
+      references: references ?? this.references,
+      referencesColumn: referencesColumn ?? this.referencesColumn,
+      unique: unique ?? this.unique,
+      onDelete: onDelete ?? this.onDelete,
     );
   }
 
   /// Creates a copy of this instance, removing the specified fields.
   FieldModel copyWithout({
     bool fieldPath = true,
-bool fieldType = true,
-bool nullable = true,
-bool children = true,
-bool primaryKey = true,
-bool foreignKey = true,
-bool fallback = true,
-bool description = true,
-bool references = true,
-bool referencesColumn = true,
-bool unique = true,
-bool onDelete = true,
+    bool fieldType = true,
+    bool nullable = true,
+    bool children = true,
+    bool primaryKey = true,
+    bool foreignKey = true,
+    bool fallback = true,
+    bool description = true,
+    bool references = true,
+    bool referencesColumn = true,
+    bool unique = true,
+    bool onDelete = true,
   }) {
     return FieldModel.assertRequired(
-      fieldPath: fieldPath ? this.fieldPath: null,
-fieldType: fieldType ? this.fieldType: null,
-nullable: nullable ? this.nullable: null,
-children: children ? this.children: null,
-primaryKey: primaryKey ? this.primaryKey: null,
-foreignKey: foreignKey ? this.foreignKey: null,
-fallback: fallback ? this.fallback: null,
-description: description ? this.description: null,
-references: references ? this.references: null,
-referencesColumn: referencesColumn ? this.referencesColumn: null,
-unique: unique ? this.unique: null,
-onDelete: onDelete ? this.onDelete: null,
+      fieldPath: fieldPath ? this.fieldPath : null,
+      fieldType: fieldType ? this.fieldType : null,
+      nullable: nullable ? this.nullable : null,
+      children: children ? this.children : null,
+      primaryKey: primaryKey ? this.primaryKey : null,
+      foreignKey: foreignKey ? this.foreignKey : null,
+      fallback: fallback ? this.fallback : null,
+      description: description ? this.description : null,
+      references: references ? this.references : null,
+      referencesColumn: referencesColumn ? this.referencesColumn : null,
+      unique: unique ? this.unique : null,
+      onDelete: onDelete ? this.onDelete : null,
     );
   }
 }
