@@ -23,7 +23,7 @@ const FIELD_MODEL_FIELDS = {
     fieldType: Object,
     nullable: true,
     description: 'The path of the field within the model. Accepts a String '
-        "('profile.id'), an Iterable<String> (['profile', 'id']), or null. "
+        "('profile.id'), a String Iterable (['profile', 'id']), or null. "
         'Dot-separated and list forms are normalised to the same list of '
         'segments — multi-segment paths produce nested map accessors '
         "(json?['profile']?['id']) in the generated fromJson.",

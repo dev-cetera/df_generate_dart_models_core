@@ -147,14 +147,21 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
         as String?;
   }
 
-  /// Returns the `references` property — the target model class as a Type
-  /// reference — from [dartObj] if it matches the structure of [TFieldRecord]
-  /// or `null`. Read as a display-string so the generator gets the target
-  /// class name without depending on the analyzer's Type API.
+  /// Returns the `references` property — the target model class — from
+  /// [dartObj] as a display-string, or `null` if absent. Accepts either:
+  ///
+  ///  - A `Type` literal (`references: ModelUser`) — read via `toTypeValue()`.
+  ///  - A `String` literal (`references: 'ModelUser'`) — read via
+  ///    `toStringValue()`. Useful in cross-package projects where importing
+  ///    every target model just to satisfy a Type literal would add noise.
+  ///
+  /// The generator only needs the class name, so we collapse both shapes to
+  /// the same `String?` and stay independent of the analyzer's Type API.
   String? referencesFromRecord() {
-    return dartObj
-        .getField(FieldModelFieldNames.references)
-        ?.toTypeValue()
-        ?.getDisplayString() as String?;
+    final raw = dartObj.getField(FieldModelFieldNames.references);
+    if (raw == null) return null;
+    final asType = raw.toTypeValue()?.getDisplayString() as String?;
+    if (asType != null) return asType;
+    return raw.toStringValue() as String?;
   }
 }

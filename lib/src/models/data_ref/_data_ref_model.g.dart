@@ -40,22 +40,36 @@ class DataRefModel extends _DataRefModel {
 
   /// Constructs a new instance of [DataRefModel]
   /// from optional and required parameters.
-  const DataRefModel({this.id, required this.collection});
+  const DataRefModel({
+    this.id,
+    required this.collection,
+  });
 
   /// Construcs a new instance of [DataRefModel],
   /// forcing all parameters to be optional.
-  const DataRefModel.optional({this.id, this.collection});
+  const DataRefModel.optional({
+    this.id,
+    this.collection,
+  });
 
   /// Constructs a new instance of [DataRefModel],
   /// and asserts that all required parameters are not null.
-  factory DataRefModel.assertRequired({String? id, List<String>? collection}) {
+  factory DataRefModel.assertRequired({
+    String? id,
+    List<String>? collection,
+  }) {
     assert(collection != null);
-    return DataRefModel(id: id, collection: collection);
+    return DataRefModel(
+      id: id,
+      collection: collection,
+    );
   }
 
   /// Constructs a new instance of [DataRefModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory DataRefModel.from(BaseModel another) {
+  factory DataRefModel.from(
+    BaseModel another,
+  ) {
     try {
       return fromOrNull(another)!;
     } catch (e) {
@@ -68,13 +82,18 @@ class DataRefModel extends _DataRefModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static DataRefModel? fromOrNull(BaseModel? another) {
-    return fromJsonOrNull(another?.toJson())!;
+  static DataRefModel? fromOrNull(
+    BaseModel? another,
+  ) {
+    if (another == null) return null;
+    return fromJsonOrNull(another.toJson());
   }
 
   /// Constructs a new instance of [DataRefModel],
   /// from the fields of [another] instance. Throws if the conversion fails.
-  factory DataRefModel.of(DataRefModel another) {
+  factory DataRefModel.of(
+    DataRefModel another,
+  ) {
     try {
       return ofOrNull(another)!;
     } catch (e) {
@@ -87,14 +106,18 @@ class DataRefModel extends _DataRefModel {
   /// from the fields of [another] instance. Returns `null` if [another] is
   /// `null` or if the conversion fails.
   @pragma('vm:prefer-inline')
-  static DataRefModel? ofOrNull(DataRefModel? other) {
+  static DataRefModel? ofOrNull(
+    DataRefModel? other,
+  ) {
     return fromJsonOrNull(other?.toJson());
   }
 
   /// Constructs a new instance of [DataRefModel],
   /// from [jsonString], which must be a valid JSON String. Throws if the
   /// conversion fails.
-  factory DataRefModel.fromJsonString(String jsonString) {
+  factory DataRefModel.fromJsonString(
+    String jsonString,
+  ) {
     try {
       return fromJsonStringOrNull(jsonString)!;
     } catch (e) {
@@ -106,14 +129,13 @@ class DataRefModel extends _DataRefModel {
   /// Constructs a new instance of [DataRefModel],
   /// from [jsonString], which must be a valid JSON String. Returns `null` if
   /// [jsonString] is `null` or if the conversion fails.
-  static DataRefModel? fromJsonStringOrNull(String? jsonString) {
+  static DataRefModel? fromJsonStringOrNull(
+    String? jsonString,
+  ) {
+    if (jsonString == null || jsonString.isEmpty) return null;
     try {
-      if (jsonString!.isNotEmpty) {
-        final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
-        return DataRefModel.fromJson(decoded);
-      } else {
-        return DataRefModel.assertRequired();
-      }
+      final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
+      return DataRefModel.fromJsonOrNull(decoded);
     } catch (_) {
       return null;
     }
@@ -122,7 +144,9 @@ class DataRefModel extends _DataRefModel {
   /// Constructs a new instance of [DataRefModel],
   /// from [json], which must be a valid JSON object. Throws if the conversion
   /// fails.
-  factory DataRefModel.fromJson(Map<String, dynamic>? json) {
+  factory DataRefModel.fromJson(
+    Map<String, dynamic>? json,
+  ) {
     try {
       return fromJsonOrNull(json)!;
     } catch (e) {
@@ -134,16 +158,23 @@ class DataRefModel extends _DataRefModel {
   /// Constructs a new instance of [DataRefModel],
   /// from [json], which must be a valid JSON object. Returns `null` if
   /// [json] is `null` or if the conversion fails.
-  static DataRefModel? fromJsonOrNull(Map<String, dynamic>? json) {
+  static DataRefModel? fromJsonOrNull(
+    Map<String, dynamic>? json,
+  ) {
     try {
       final id = json?['id']?.toString().trim().nullIfEmpty;
       final collection = letListOrNull<dynamic>(json?['collection'])
-          ?.map((p0) => p0?.toString().trim().nullIfEmpty)
+          ?.map(
+            (p0) => p0?.toString().trim().nullIfEmpty,
+          )
           .nonNulls
           .nullIfEmpty
           ?.toList()
           .unmodifiable;
-      return DataRefModel(id: id, collection: collection);
+      return DataRefModel(
+        id: id,
+        collection: collection,
+      );
     } catch (e) {
       return null;
     }
@@ -152,7 +183,9 @@ class DataRefModel extends _DataRefModel {
   /// Constructs a new instance of [DataRefModel],
   /// from the query parameters of [uri]. Throws if the conversion
   /// fails.
-  factory DataRefModel.fromUri(Uri? uri) {
+  factory DataRefModel.fromUri(
+    Uri? uri,
+  ) {
     try {
       return fromUriOrNull(uri)!;
     } catch (e) {
@@ -164,28 +197,34 @@ class DataRefModel extends _DataRefModel {
   /// Constructs a new instance of [DataRefModel],
   /// from the query parameters of [uri]. Returns `null` if [uri] is `null` or
   /// if the conversion fails.
-  static DataRefModel? fromUriOrNull(Uri? uri) {
+  static DataRefModel? fromUriOrNull(
+    Uri? uri,
+  ) {
+    if (uri == null || uri.path != CLASS_NAME) return null;
     try {
-      if (uri != null && uri.path == CLASS_NAME) {
-        return DataRefModel.fromJson(uri.queryParameters);
-      } else {
-        return DataRefModel.assertRequired();
-      }
+      return DataRefModel.fromJsonOrNull(uri.queryParameters);
     } catch (_) {
       return null;
     }
   }
 
   @override
-  Map<String, dynamic> toJson({bool includeNulls = false}) {
+  Map<String, dynamic> toJson({
+    bool includeNulls = false,
+  }) {
     try {
       final id0 = id?.trim().nullIfEmpty;
       final collection0 = collection
-          ?.map((p0) => p0?.trim().nullIfEmpty)
+          ?.map(
+            (p0) => p0?.trim().nullIfEmpty,
+          )
           .nonNulls
           .nullIfEmpty
           ?.toList();
-      final withNulls = {'id': id0, 'collection': collection0};
+      final withNulls = {
+        'id': id0,
+        'collection': collection0,
+      };
       return includeNulls ? withNulls : withNulls.nonNulls;
     } catch (e) {
       assert(false, '$DataRefModel.toJson: $e');
@@ -219,7 +258,10 @@ abstract final class DataRefModelFieldNames {
 extension DataRefModelX on DataRefModel {
   /// Creates a copy of this instance, merging another model's fields into
   /// this model's fields.
-  DataRefModel mergeWith(BaseModel? other, {bool deepMerge = false}) {
+  DataRefModel mergeWith(
+    BaseModel? other, {
+    bool deepMerge = false,
+  }) {
     final a = toJson();
     final b = other?.toJson() ?? {};
     final data = (deepMerge ? mergeDataDeep(a, b) : {...a, ...b}) as Map;
@@ -227,7 +269,10 @@ extension DataRefModelX on DataRefModel {
   }
 
   /// Creates a copy of this instance, replacing the specified fields.
-  DataRefModel copyWith({String? id, List<String>? collection}) {
+  DataRefModel copyWith({
+    String? id,
+    List<String>? collection,
+  }) {
     return DataRefModel.assertRequired(
       id: id ?? this.id,
       collection: collection ?? this.collection,
@@ -235,7 +280,10 @@ extension DataRefModelX on DataRefModel {
   }
 
   /// Creates a copy of this instance, removing the specified fields.
-  DataRefModel copyWithout({bool id = true, bool collection = true}) {
+  DataRefModel copyWithout({
+    bool id = true,
+    bool collection = true,
+  }) {
     return DataRefModel.assertRequired(
       id: id ? this.id : null,
       collection: collection ? this.collection : null,

@@ -42,7 +42,9 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
         shouldInherit,
         inheritanceConstructor,
         keyStringCase,
-        description
+        description,
+        tableName,
+        schema
       ];
 
   /// Preserves [BaseModel]'s JSON pretty-print toString rather than letting
@@ -69,6 +71,12 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   /// A comment describing the generated class.
   final String? description;
 
+  /// Database table name this model maps to. Consumed by the DBML generator (and any tool that emits a wire-level table name). When null, the table name is derived from the class name (Model prefix stripped, snake-cased) — no automatic pluralisation.
+  final String? tableName;
+
+  /// Database schema this model belongs to. Acts as the DBML emission gate — models without a schema are skipped, and emitted tables are grouped into one DBML file per distinct schema value. Pass a project-wide const (e.g. `MY_APP_SCHEMA`) so the schema name has a single source of truth.
+  final String? schema;
+
   /// Constructs a new instance of [GenerateDartModel]
   /// from optional and required parameters.
   const GenerateDartModel({
@@ -78,6 +86,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     this.inheritanceConstructor,
     this.keyStringCase,
     this.description,
+    this.tableName,
+    this.schema,
   });
 
   /// Construcs a new instance of [GenerateDartModel],
@@ -89,6 +99,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     this.inheritanceConstructor,
     this.keyStringCase,
     this.description,
+    this.tableName,
+    this.schema,
   });
 
   /// Constructs a new instance of [GenerateDartModel],
@@ -100,6 +112,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     String? inheritanceConstructor,
     String? keyStringCase,
     String? description,
+    String? tableName,
+    String? schema,
   }) {
     return GenerateDartModel(
       className: className,
@@ -108,6 +122,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
       inheritanceConstructor: inheritanceConstructor,
       keyStringCase: keyStringCase,
       description: description,
+      tableName: tableName,
+      schema: schema,
     );
   }
 
@@ -131,7 +147,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   static GenerateDartModel? fromOrNull(
     BaseModel? another,
   ) {
-    return fromJsonOrNull(another?.toJson())!;
+    if (another == null) return null;
+    return fromJsonOrNull(another.toJson());
   }
 
   /// Constructs a new instance of [GenerateDartModel],
@@ -177,13 +194,10 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   static GenerateDartModel? fromJsonStringOrNull(
     String? jsonString,
   ) {
+    if (jsonString == null || jsonString.isEmpty) return null;
     try {
-      if (jsonString!.isNotEmpty) {
-        final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
-        return GenerateDartModel.fromJson(decoded);
-      } else {
-        return GenerateDartModel.assertRequired();
-      }
+      final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
+      return GenerateDartModel.fromJsonOrNull(decoded);
     } catch (_) {
       return null;
     }
@@ -225,6 +239,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
       final keyStringCase =
           json?['keyStringCase']?.toString().trim().nullIfEmpty;
       final description = json?['description']?.toString().trim().nullIfEmpty;
+      final tableName = json?['tableName']?.toString().trim().nullIfEmpty;
+      final schema = json?['schema']?.toString().trim().nullIfEmpty;
       return GenerateDartModel(
         className: className,
         fields: fields,
@@ -232,6 +248,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
         inheritanceConstructor: inheritanceConstructor,
         keyStringCase: keyStringCase,
         description: description,
+        tableName: tableName,
+        schema: schema,
       );
     } catch (e) {
       return null;
@@ -258,12 +276,9 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   static GenerateDartModel? fromUriOrNull(
     Uri? uri,
   ) {
+    if (uri == null || uri.path != CLASS_NAME) return null;
     try {
-      if (uri != null && uri.path == CLASS_NAME) {
-        return GenerateDartModel.fromJson(uri.queryParameters);
-      } else {
-        return GenerateDartModel.assertRequired();
-      }
+      return GenerateDartModel.fromJsonOrNull(uri.queryParameters);
     } catch (_) {
       return null;
     }
@@ -287,8 +302,12 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
           inheritanceConstructor?.trim().nullIfEmpty;
       final keyStringCase0 = keyStringCase?.trim().nullIfEmpty;
       final description0 = description?.trim().nullIfEmpty;
+      final tableName0 = tableName?.trim().nullIfEmpty;
+      final schema0 = schema?.trim().nullIfEmpty;
       final withNulls = {
+        'tableName': tableName0,
         'shouldInherit': shouldInherit0,
+        'schema': schema0,
         'keyStringCase': keyStringCase0,
         'inheritanceConstructor': inheritanceConstructor0,
         'fields': fields0,
@@ -337,6 +356,18 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
   String? get description$ => description;
+
+  /// Returns the value of the [tableName] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  String? get tableName$ => tableName;
+
+  /// Returns the value of the [schema] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  String? get schema$ => schema;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -359,6 +390,12 @@ abstract final class GenerateDartModelFieldNames {
 
   /// The field name of [GenerateDartModel.description].
   static const description = 'description';
+
+  /// The field name of [GenerateDartModel.tableName].
+  static const tableName = 'tableName';
+
+  /// The field name of [GenerateDartModel.schema].
+  static const schema = 'schema';
 }
 
 extension GenerateDartModelX on GenerateDartModel {
@@ -382,6 +419,8 @@ extension GenerateDartModelX on GenerateDartModel {
     String? inheritanceConstructor,
     String? keyStringCase,
     String? description,
+    String? tableName,
+    String? schema,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ?? this.className,
@@ -391,6 +430,8 @@ extension GenerateDartModelX on GenerateDartModel {
           inheritanceConstructor ?? this.inheritanceConstructor,
       keyStringCase: keyStringCase ?? this.keyStringCase,
       description: description ?? this.description,
+      tableName: tableName ?? this.tableName,
+      schema: schema ?? this.schema,
     );
   }
 
@@ -402,6 +443,8 @@ extension GenerateDartModelX on GenerateDartModel {
     bool inheritanceConstructor = true,
     bool keyStringCase = true,
     bool description = true,
+    bool tableName = true,
+    bool schema = true,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ? this.className : null,
@@ -411,6 +454,8 @@ extension GenerateDartModelX on GenerateDartModel {
           inheritanceConstructor ? this.inheritanceConstructor : null,
       keyStringCase: keyStringCase ? this.keyStringCase : null,
       description: description ? this.description : null,
+      tableName: tableName ? this.tableName : null,
+      schema: schema ? this.schema : null,
     );
   }
 }

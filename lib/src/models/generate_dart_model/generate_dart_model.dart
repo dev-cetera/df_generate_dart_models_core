@@ -59,6 +59,25 @@ const GENERATE_DART_MODEL_FIELDS = {
     nullable: true,
     description: 'A comment describing the generated class.',
   ),
+  Field(
+    fieldPath: ['tableName'],
+    fieldType: String,
+    nullable: true,
+    description: 'Database table name this model maps to. Consumed by the DBML '
+        'generator (and any tool that emits a wire-level table name). When '
+        'null, the table name is derived from the class name (Model prefix '
+        'stripped, snake-cased) — no automatic pluralisation.',
+  ),
+  Field(
+    fieldPath: ['schema'],
+    fieldType: String,
+    nullable: true,
+    description: 'Database schema this model belongs to. Acts as the DBML '
+        'emission gate — models without a schema are skipped, and emitted '
+        'tables are grouped into one DBML file per distinct schema value. '
+        'Pass a project-wide const (e.g. `MY_APP_SCHEMA`) so the schema name '
+        'has a single source of truth.',
+  ),
 };
 
 @GenerateDartModel(shouldInherit: true, fields: GENERATE_DART_MODEL_FIELDS)

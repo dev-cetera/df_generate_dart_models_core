@@ -32,7 +32,7 @@ class FieldModel extends _FieldModel {
   @override
   String get $className => CLASS_NAME;
 
-  /// The path of the field within the model, represented as a list of strings.
+  /// The path of the field within the model. Accepts a String ('profile.id'), a String Iterable (['profile', 'id']), or null. Dot-separated and list forms are normalised to the same list of segments — multi-segment paths produce nested map accessors (json?['profile']?['id']) in the generated fromJson.
   final Object? fieldPath;
 
   /// The data type of the field, such as "String", "int", or any dynamic type.
@@ -50,23 +50,11 @@ class FieldModel extends _FieldModel {
   /// Whether this field serves as a foreign key.
   final bool? foreignKey;
 
-  /// The default/fallback value for the field, to use in cases where the value is null.
-  final Object? fallback;
-
   /// A brief comment or explanation for the field's purpose.
   final String? description;
 
-  /// The target model class this field references. Implies foreignKey. Resolves to the target model's primary key column by default; override via [referencesColumn].
+  /// The target model class this field references. Implies foreignKey. Resolves to the target model's primary key column.
   final Object? references;
-
-  /// Optional override naming the target column of the referenced model. Defaults to the referenced model's primary key column.
-  final String? referencesColumn;
-
-  /// Whether this field carries a UNIQUE constraint at the schema level. Distinct from primaryKey, which is implicitly unique.
-  final bool? unique;
-
-  /// Cascade behaviour for foreign-key deletions: 'cascade', 'restrict', 'set null', or 'no action'. Drives DDL emission; ignored at runtime.
-  final String? onDelete;
 
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
@@ -77,12 +65,8 @@ class FieldModel extends _FieldModel {
     this.children,
     this.primaryKey,
     this.foreignKey,
-    this.fallback,
     this.description,
     this.references,
-    this.referencesColumn,
-    this.unique,
-    this.onDelete,
   });
 
   /// Construcs a new instance of [FieldModel],
@@ -94,12 +78,8 @@ class FieldModel extends _FieldModel {
     this.children,
     this.primaryKey,
     this.foreignKey,
-    this.fallback,
     this.description,
     this.references,
-    this.referencesColumn,
-    this.unique,
-    this.onDelete,
   });
 
   /// Constructs a new instance of [FieldModel],
@@ -111,12 +91,8 @@ class FieldModel extends _FieldModel {
     List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
-    Object? fallback,
     String? description,
     Object? references,
-    String? referencesColumn,
-    bool? unique,
-    String? onDelete,
   }) {
     return FieldModel(
       fieldPath: fieldPath,
@@ -125,12 +101,8 @@ class FieldModel extends _FieldModel {
       children: children,
       primaryKey: primaryKey,
       foreignKey: foreignKey,
-      fallback: fallback,
       description: description,
       references: references,
-      referencesColumn: referencesColumn,
-      unique: unique,
-      onDelete: onDelete,
     );
   }
 
@@ -154,7 +126,8 @@ class FieldModel extends _FieldModel {
   static FieldModel? fromOrNull(
     BaseModel? another,
   ) {
-    return fromJsonOrNull(another?.toJson())!;
+    if (another == null) return null;
+    return fromJsonOrNull(another.toJson());
   }
 
   /// Constructs a new instance of [FieldModel],
@@ -200,13 +173,10 @@ class FieldModel extends _FieldModel {
   static FieldModel? fromJsonStringOrNull(
     String? jsonString,
   ) {
+    if (jsonString == null || jsonString.isEmpty) return null;
     try {
-      if (jsonString!.isNotEmpty) {
-        final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
-        return FieldModel.fromJson(decoded);
-      } else {
-        return FieldModel.assertRequired();
-      }
+      final decoded = letMapOrNull<String, dynamic>(jsonDecode(jsonString));
+      return FieldModel.fromJsonOrNull(decoded);
     } catch (_) {
       return null;
     }
@@ -233,14 +203,7 @@ class FieldModel extends _FieldModel {
     Map<String, dynamic>? json,
   ) {
     try {
-      final fieldPath = letListOrNull<dynamic>(json?['fieldPath'])
-          ?.map(
-            (p0) => p0?.toString().trim().nullIfEmpty,
-          )
-          .nonNulls
-          .nullIfEmpty
-          ?.toList()
-          .unmodifiable;
+      final fieldPath = json?['fieldPath'];
       final fieldType = json?['fieldType'];
       final nullable = letBoolOrNull(json?['nullable']);
       final children = letListOrNull<dynamic>(json?['children'])
@@ -262,13 +225,8 @@ class FieldModel extends _FieldModel {
           .unmodifiable;
       final primaryKey = letBoolOrNull(json?['primaryKey']);
       final foreignKey = letBoolOrNull(json?['foreignKey']);
-      final fallback = json?['fallback'];
       final description = json?['description']?.toString().trim().nullIfEmpty;
       final references = json?['references'];
-      final referencesColumn =
-          json?['referencesColumn']?.toString().trim().nullIfEmpty;
-      final unique = letBoolOrNull(json?['unique']);
-      final onDelete = json?['onDelete']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -276,12 +234,8 @@ class FieldModel extends _FieldModel {
         children: children,
         primaryKey: primaryKey,
         foreignKey: foreignKey,
-        fallback: fallback,
         description: description,
         references: references,
-        referencesColumn: referencesColumn,
-        unique: unique,
-        onDelete: onDelete,
       );
     } catch (e) {
       return null;
@@ -308,12 +262,9 @@ class FieldModel extends _FieldModel {
   static FieldModel? fromUriOrNull(
     Uri? uri,
   ) {
+    if (uri == null || uri.path != CLASS_NAME) return null;
     try {
-      if (uri != null && uri.path == CLASS_NAME) {
-        return FieldModel.fromJson(uri.queryParameters);
-      } else {
-        return FieldModel.assertRequired();
-      }
+      return FieldModel.fromJsonOrNull(uri.queryParameters);
     } catch (_) {
       return null;
     }
@@ -344,23 +295,15 @@ class FieldModel extends _FieldModel {
           ?.toList();
       final primaryKey0 = primaryKey;
       final foreignKey0 = foreignKey;
-      final fallback0 = fallback;
       final description0 = description?.trim().nullIfEmpty;
       final references0 = references;
-      final referencesColumn0 = referencesColumn?.trim().nullIfEmpty;
-      final unique0 = unique;
-      final onDelete0 = onDelete?.trim().nullIfEmpty;
       final withNulls = {
-        'unique': unique0,
-        'referencesColumn': referencesColumn0,
         'references': references0,
         'primaryKey': primaryKey0,
-        'onDelete': onDelete0,
         'nullable': nullable0,
         'foreignKey': foreignKey0,
         'fieldType': fieldType0,
         'fieldPath': fieldPath0,
-        'fallback': fallback0,
         'description': description0,
         'children': children0,
       };
@@ -407,12 +350,6 @@ class FieldModel extends _FieldModel {
   @pragma('vm:prefer-inline')
   bool? get foreignKey$ => foreignKey;
 
-  /// Returns the value of the [fallback] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  Object? get fallback$ => fallback;
-
   /// Returns the value of the [description] field.
   /// If the field is nullable, the return value may be null; otherwise, it
   /// will always return a non-null value.
@@ -424,24 +361,6 @@ class FieldModel extends _FieldModel {
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
   Object? get references$ => references;
-
-  /// Returns the value of the [referencesColumn] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  String? get referencesColumn$ => referencesColumn;
-
-  /// Returns the value of the [unique] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  bool? get unique$ => unique;
-
-  /// Returns the value of the [onDelete] field.
-  /// If the field is nullable, the return value may be null; otherwise, it
-  /// will always return a non-null value.
-  @pragma('vm:prefer-inline')
-  String? get onDelete$ => onDelete;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -465,23 +384,11 @@ abstract final class FieldModelFieldNames {
   /// The field name of [FieldModel.foreignKey].
   static const foreignKey = 'foreignKey';
 
-  /// The field name of [FieldModel.fallback].
-  static const fallback = 'fallback';
-
   /// The field name of [FieldModel.description].
   static const description = 'description';
 
   /// The field name of [FieldModel.references].
   static const references = 'references';
-
-  /// The field name of [FieldModel.referencesColumn].
-  static const referencesColumn = 'referencesColumn';
-
-  /// The field name of [FieldModel.unique].
-  static const unique = 'unique';
-
-  /// The field name of [FieldModel.onDelete].
-  static const onDelete = 'onDelete';
 }
 
 extension FieldModelX on FieldModel {
@@ -505,12 +412,8 @@ extension FieldModelX on FieldModel {
     List<Map<String, dynamic>>? children,
     bool? primaryKey,
     bool? foreignKey,
-    Object? fallback,
     String? description,
     Object? references,
-    String? referencesColumn,
-    bool? unique,
-    String? onDelete,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
@@ -519,12 +422,8 @@ extension FieldModelX on FieldModel {
       children: children ?? this.children,
       primaryKey: primaryKey ?? this.primaryKey,
       foreignKey: foreignKey ?? this.foreignKey,
-      fallback: fallback ?? this.fallback,
       description: description ?? this.description,
       references: references ?? this.references,
-      referencesColumn: referencesColumn ?? this.referencesColumn,
-      unique: unique ?? this.unique,
-      onDelete: onDelete ?? this.onDelete,
     );
   }
 
@@ -536,12 +435,8 @@ extension FieldModelX on FieldModel {
     bool children = true,
     bool primaryKey = true,
     bool foreignKey = true,
-    bool fallback = true,
     bool description = true,
     bool references = true,
-    bool referencesColumn = true,
-    bool unique = true,
-    bool onDelete = true,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ? this.fieldPath : null,
@@ -550,12 +445,8 @@ extension FieldModelX on FieldModel {
       children: children ? this.children : null,
       primaryKey: primaryKey ? this.primaryKey : null,
       foreignKey: foreignKey ? this.foreignKey : null,
-      fallback: fallback ? this.fallback : null,
       description: description ? this.description : null,
       references: references ? this.references : null,
-      referencesColumn: referencesColumn ? this.referencesColumn : null,
-      unique: unique ? this.unique : null,
-      onDelete: onDelete ? this.onDelete : null,
     );
   }
 }
