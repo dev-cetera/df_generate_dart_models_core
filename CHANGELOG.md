@@ -3,6 +3,7 @@
 ## [0.11.1]
 
 - chore: bump `df_string` to `^0.4.0` and `df_gen_core` to `^0.8.1`, adopting df_string 0.4.0's case-conversion digit-boundary change (`phone_e164` instead of `phone_e_164`). Model/wire-key generation that runs case conversions on identifiers with embedded digits emits the new form on the next generation run; already-generated code is unaffected until regenerated. All 70 tests pass against df_string 0.4.0.
+- build: constrain `equatable` to `>=2.0.7 <2.1.0`. equatable 2.1.0 deprecates `EquatableMixin` (used by the generated models and re-exported here), which trips CI's `dart analyze --fatal-infos`; pin below it until the models migrate off the mixin. The cap propagates to dependents (df_screen_core, etc.) so their analysis stays green too.
 
 ## [0.11.0]
 
