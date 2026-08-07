@@ -164,4 +164,12 @@ extension type DartFromRecordOnDartObjectExt(_DartObject dartObj) {
     if (asType != null) return asType;
     return raw.toStringValue() as String?;
   }
+
+  /// Returns the `columnDefault` property from [dartObj] record if it matches
+  /// the structure of [TFieldRecord] or `null`. Consumed by the DBML emitter
+  /// to render `default: <value>`.
+  String? columnDefaultFromRecord() {
+    return dartObj.getField(FieldModelFieldNames.columnDefault)?.toStringValue()
+        as String?;
+  }
 }

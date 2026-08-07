@@ -78,6 +78,17 @@ const GENERATE_DART_MODEL_FIELDS = {
         'Pass a project-wide const (e.g. `MY_APP_SCHEMA`) so the schema name '
         'has a single source of truth.',
   ),
+  Field(
+    fieldPath: ['indexes'],
+    fieldType: List<Map<String, dynamic>>,
+    nullable: true,
+    description: 'Table indexes emitted by the DBML generator as an '
+        '`indexes { ... }` block. Each entry is a map: '
+        "{'columns': ['a', 'b'], 'unique': true, 'name': 'idx_name', "
+        "'note': '...'}. A single-column index may pass 'columns': ['a']. "
+        'Consumed by the DBML emitter only; it does not affect the generated '
+        'Dart model.',
+  ),
 };
 
 @GenerateDartModel(shouldInherit: true, fields: GENERATE_DART_MODEL_FIELDS)

@@ -31,6 +31,7 @@ final class DartField extends Field {
     super.foreignKey,
     super.description,
     super.references,
+    super.columnDefault,
   });
 
   /// Derives an instance [DartField] from [source].
@@ -44,6 +45,7 @@ final class DartField extends Field {
       foreignKey: source.foreignKey,
       description: source.description,
       references: source.references,
+      columnDefault: source.columnDefault,
     );
   }
 
@@ -58,6 +60,7 @@ final class DartField extends Field {
       foreignKey: record.foreignKey,
       description: record.description,
       references: record.references,
+      columnDefault: record.columnDefault,
     );
   }
 

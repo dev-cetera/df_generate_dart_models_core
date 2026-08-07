@@ -74,6 +74,17 @@ const FIELD_MODEL_FIELDS = {
         'The target model class this field references. Implies foreignKey. '
         "Resolves to the target model's primary key column.",
   ),
+  Field(
+    fieldPath: ['columnDefault'],
+    fieldType: String,
+    nullable: true,
+    description:
+        'The SQL DEFAULT expression for this column, emitted verbatim by the '
+        'DBML generator as `default: <value>`. Write the exact DBML token: a '
+        "quoted string (\"'PENDING'\"), a backtick expression (\"`now()`\"), "
+        'or a bare literal ("false", "0"). Consumed by the DBML emitter only; '
+        'it does not affect the generated Dart model.',
+  ),
 };
 
 @GenerateDartModel(shouldInherit: true, fields: FIELD_MODEL_FIELDS)
@@ -97,6 +108,7 @@ abstract class _FieldModel extends BaseModel {
         foreignKey: (this as FieldModel).foreignKey,
         description: (this as FieldModel).description,
         references: (this as FieldModel).references,
+        columnDefault: (this as FieldModel).columnDefault,
       );
 }
 
@@ -117,6 +129,7 @@ typedef TFieldRecord = ({
   bool? foreignKey,
   String? description,
   Object? references,
+  String? columnDefault,
 });
 
 extension ToClassOnTFieldRecordExtension on TFieldRecord {
@@ -130,6 +143,7 @@ extension ToClassOnTFieldRecordExtension on TFieldRecord {
         foreignKey: this.foreignKey,
         description: this.description,
         references: this.references,
+        columnDefault: this.columnDefault,
       );
 }
 
@@ -150,6 +164,7 @@ final class FieldUtils {
       final foreignKey = foreignKeyOrNull(unknown);
       final description = descriptionOrNull(unknown);
       final references = referencesOrNull(unknown);
+      final columnDefault = columnDefaultOrNull(unknown);
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -159,6 +174,7 @@ final class FieldUtils {
         foreignKey: foreignKey,
         description: description,
         references: references,
+        columnDefault: columnDefault,
       );
     } catch (_) {
       return null; // Return null if any property retrieval fails
@@ -307,6 +323,21 @@ final class FieldUtils {
     } catch (_) {
       try {
         return unknown.$8 as Object?;
+      } catch (_) {
+        return null;
+      }
+    }
+  }
+
+  /// Assumes [unknown] is a [TFieldRecord] or [FieldModel] and tries to get
+  /// the `columnDefault` property, or returns `null`. Consumed by the DBML
+  /// emitter to render `default: <value>`; it does not affect the Dart model.
+  static String? columnDefaultOrNull(dynamic unknown) {
+    try {
+      return unknown.columnDefault as String;
+    } catch (_) {
+      try {
+        return unknown.$9 as String;
       } catch (_) {
         return null;
       }

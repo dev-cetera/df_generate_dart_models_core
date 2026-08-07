@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.2]
+
+- feat: Add `Field.columnDefault` and `GenerateDartModel.indexes` annotation slots. Both are optional, additive, and DBML-only — consumed by `df_generate_dbml` to emit column `default: <value>`, an `indexes { ... }` block, and (via the model `description`) a table-level `note:`. Neither affects the generated Dart model; existing models compile and behave unchanged.
+
 ## [0.11.1]
 
 - chore: bump `df_string` to `^0.4.0` and `df_gen_core` to `^0.8.1`, adopting df_string 0.4.0's case-conversion digit-boundary change (`phone_e164` instead of `phone_e_164`). Model/wire-key generation that runs case conversions on identifiers with embedded digits emits the new form on the next generation run; already-generated code is unaffected until regenerated. All 70 tests pass against df_string 0.4.0.

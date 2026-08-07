@@ -32,6 +32,15 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   @override
   String get $className => CLASS_NAME;
 
+  /// The database table name this model maps to, mirroring `tableName:` on
+  /// the annotation. When the annotation omits `tableName:`, this is derived
+  /// from the class name (Model prefix/suffix stripped, snake-cased) — no
+  /// automatic pluralisation. The `$` prefix matches the convention used by
+  /// the other framework-reserved statics (`$className`, `$primaryKey`,
+  /// `$foreignKeys`, `$values`) and prevents collisions with user columns
+  /// named `table_name` / `tableName`.
+  static const $tableName = 'generate_dart';
+
   /// Field list backing `==` and `hashCode` via [EquatableMixin]. Preserves
   /// the same value semantics across hand-construction and `fromJson`
   /// round-trips since every field is included.
@@ -44,7 +53,8 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
         keyStringCase,
         description,
         tableName,
-        schema
+        schema,
+        indexes
       ];
 
   /// Preserves [BaseModel]'s JSON pretty-print toString rather than letting
@@ -77,6 +87,9 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   /// Database schema this model belongs to. Acts as the DBML emission gate — models without a schema are skipped, and emitted tables are grouped into one DBML file per distinct schema value. Pass a project-wide const (e.g. `MY_APP_SCHEMA`) so the schema name has a single source of truth.
   final String? schema;
 
+  /// Table indexes emitted by the DBML generator as an `indexes { ... }` block. Each entry is a map: {'columns': ['a', 'b'], 'unique': true, 'name': 'idx_name', 'note': '...'}. A single-column index may pass 'columns': ['a']. Consumed by the DBML emitter only; it does not affect the generated Dart model.
+  final List<Map<String, dynamic>>? indexes;
+
   /// Constructs a new instance of [GenerateDartModel]
   /// from optional and required parameters.
   const GenerateDartModel({
@@ -88,6 +101,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     this.description,
     this.tableName,
     this.schema,
+    this.indexes,
   });
 
   /// Construcs a new instance of [GenerateDartModel],
@@ -101,6 +115,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     this.description,
     this.tableName,
     this.schema,
+    this.indexes,
   });
 
   /// Constructs a new instance of [GenerateDartModel],
@@ -114,6 +129,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
     String? description,
     String? tableName,
     String? schema,
+    List<Map<String, dynamic>>? indexes,
   }) {
     return GenerateDartModel(
       className: className,
@@ -124,6 +140,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
       description: description,
       tableName: tableName,
       schema: schema,
+      indexes: indexes,
     );
   }
 
@@ -241,6 +258,23 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
       final description = json?['description']?.toString().trim().nullIfEmpty;
       final tableName = json?['tableName']?.toString().trim().nullIfEmpty;
       final schema = json?['schema']?.toString().trim().nullIfEmpty;
+      final indexes = letListOrNull<dynamic>(json?['indexes'])
+          ?.map(
+            (p0) => letMapOrNull<dynamic, dynamic>(p0)
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.toString().trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty
+                ?.unmodifiable,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList()
+          .unmodifiable;
       return GenerateDartModel(
         className: className,
         fields: fields,
@@ -250,6 +284,7 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
         description: description,
         tableName: tableName,
         schema: schema,
+        indexes: indexes,
       );
     } catch (e) {
       return null;
@@ -304,12 +339,28 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
       final description0 = description?.trim().nullIfEmpty;
       final tableName0 = tableName?.trim().nullIfEmpty;
       final schema0 = schema?.trim().nullIfEmpty;
+      final indexes0 = indexes
+          ?.map(
+            (p0) => p0
+                ?.map(
+                  (p0, p1) => MapEntry(
+                    p0?.trim().nullIfEmpty,
+                    p1,
+                  ),
+                )
+                .nonNulls
+                .nullIfEmpty,
+          )
+          .nonNulls
+          .nullIfEmpty
+          ?.toList();
       final withNulls = {
         'tableName': tableName0,
         'shouldInherit': shouldInherit0,
         'schema': schema0,
         'keyStringCase': keyStringCase0,
         'inheritanceConstructor': inheritanceConstructor0,
+        'indexes': indexes0,
         'fields': fields0,
         'description': description0,
         'className': className0,
@@ -368,6 +419,12 @@ class GenerateDartModel extends _GenerateDartModel with EquatableMixin {
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
   String? get schema$ => schema;
+
+  /// Returns the value of the [indexes] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  List<Map<String, dynamic>>? get indexes$ => indexes;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -396,6 +453,30 @@ abstract final class GenerateDartModelFieldNames {
 
   /// The field name of [GenerateDartModel.schema].
   static const schema = 'schema';
+
+  /// The field name of [GenerateDartModel.indexes].
+  static const indexes = 'indexes';
+
+  /// Every declared field-name constant in declaration order. Mirrors
+  /// `enum.values` so consumers can iterate the schema without reflection.
+  static const List<String> $values = [
+    className,
+    fields,
+    shouldInherit,
+    inheritanceConstructor,
+    keyStringCase,
+    description,
+    tableName,
+    schema,
+    indexes
+  ];
+
+  /// The field marked `primaryKey: true`, or `null` if none was declared.
+  static const String? $primaryKey = null;
+
+  /// Foreign-key fields mapped to the referenced class name (as a String).
+  /// Empty when no field uses `foreignKey:` / `references:`.
+  static const Map<String, String> $foreignKeys = {};
 }
 
 extension GenerateDartModelX on GenerateDartModel {
@@ -421,6 +502,7 @@ extension GenerateDartModelX on GenerateDartModel {
     String? description,
     String? tableName,
     String? schema,
+    List<Map<String, dynamic>>? indexes,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ?? this.className,
@@ -432,6 +514,7 @@ extension GenerateDartModelX on GenerateDartModel {
       description: description ?? this.description,
       tableName: tableName ?? this.tableName,
       schema: schema ?? this.schema,
+      indexes: indexes ?? this.indexes,
     );
   }
 
@@ -445,6 +528,7 @@ extension GenerateDartModelX on GenerateDartModel {
     bool description = true,
     bool tableName = true,
     bool schema = true,
+    bool indexes = true,
   }) {
     return GenerateDartModel.assertRequired(
       className: className ? this.className : null,
@@ -456,6 +540,7 @@ extension GenerateDartModelX on GenerateDartModel {
       description: description ? this.description : null,
       tableName: tableName ? this.tableName : null,
       schema: schema ? this.schema : null,
+      indexes: indexes ? this.indexes : null,
     );
   }
 }

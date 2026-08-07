@@ -32,6 +32,15 @@ class FieldModel extends _FieldModel {
   @override
   String get $className => CLASS_NAME;
 
+  /// The database table name this model maps to, mirroring `tableName:` on
+  /// the annotation. When the annotation omits `tableName:`, this is derived
+  /// from the class name (Model prefix/suffix stripped, snake-cased) — no
+  /// automatic pluralisation. The `$` prefix matches the convention used by
+  /// the other framework-reserved statics (`$className`, `$primaryKey`,
+  /// `$foreignKeys`, `$values`) and prevents collisions with user columns
+  /// named `table_name` / `tableName`.
+  static const $tableName = 'field';
+
   /// The path of the field within the model. Accepts a String ('profile.id'), a String Iterable (['profile', 'id']), or null. Dot-separated and list forms are normalised to the same list of segments — multi-segment paths produce nested map accessors (json?['profile']?['id']) in the generated fromJson.
   final Object? fieldPath;
 
@@ -56,6 +65,9 @@ class FieldModel extends _FieldModel {
   /// The target model class this field references. Implies foreignKey. Resolves to the target model's primary key column.
   final Object? references;
 
+  /// The SQL DEFAULT expression for this column, emitted verbatim by the DBML generator as `default: <value>`. Write the exact DBML token: a quoted string ("'PENDING'"), a backtick expression ("`now()`"), or a bare literal ("false", "0"). Consumed by the DBML emitter only; it does not affect the generated Dart model.
+  final String? columnDefault;
+
   /// Constructs a new instance of [FieldModel]
   /// from optional and required parameters.
   const FieldModel({
@@ -67,6 +79,7 @@ class FieldModel extends _FieldModel {
     this.foreignKey,
     this.description,
     this.references,
+    this.columnDefault,
   });
 
   /// Construcs a new instance of [FieldModel],
@@ -80,6 +93,7 @@ class FieldModel extends _FieldModel {
     this.foreignKey,
     this.description,
     this.references,
+    this.columnDefault,
   });
 
   /// Constructs a new instance of [FieldModel],
@@ -93,6 +107,7 @@ class FieldModel extends _FieldModel {
     bool? foreignKey,
     String? description,
     Object? references,
+    String? columnDefault,
   }) {
     return FieldModel(
       fieldPath: fieldPath,
@@ -103,6 +118,7 @@ class FieldModel extends _FieldModel {
       foreignKey: foreignKey,
       description: description,
       references: references,
+      columnDefault: columnDefault,
     );
   }
 
@@ -227,6 +243,8 @@ class FieldModel extends _FieldModel {
       final foreignKey = letBoolOrNull(json?['foreignKey']);
       final description = json?['description']?.toString().trim().nullIfEmpty;
       final references = json?['references'];
+      final columnDefault =
+          json?['columnDefault']?.toString().trim().nullIfEmpty;
       return FieldModel(
         fieldPath: fieldPath,
         fieldType: fieldType,
@@ -236,6 +254,7 @@ class FieldModel extends _FieldModel {
         foreignKey: foreignKey,
         description: description,
         references: references,
+        columnDefault: columnDefault,
       );
     } catch (e) {
       return null;
@@ -297,6 +316,7 @@ class FieldModel extends _FieldModel {
       final foreignKey0 = foreignKey;
       final description0 = description?.trim().nullIfEmpty;
       final references0 = references;
+      final columnDefault0 = columnDefault?.trim().nullIfEmpty;
       final withNulls = {
         'references': references0,
         'primaryKey': primaryKey0,
@@ -305,6 +325,7 @@ class FieldModel extends _FieldModel {
         'fieldType': fieldType0,
         'fieldPath': fieldPath0,
         'description': description0,
+        'columnDefault': columnDefault0,
         'children': children0,
       };
       return includeNulls ? withNulls : withNulls.nonNulls;
@@ -361,6 +382,12 @@ class FieldModel extends _FieldModel {
   /// will always return a non-null value.
   @pragma('vm:prefer-inline')
   Object? get references$ => references;
+
+  /// Returns the value of the [columnDefault] field.
+  /// If the field is nullable, the return value may be null; otherwise, it
+  /// will always return a non-null value.
+  @pragma('vm:prefer-inline')
+  String? get columnDefault$ => columnDefault;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -389,6 +416,30 @@ abstract final class FieldModelFieldNames {
 
   /// The field name of [FieldModel.references].
   static const references = 'references';
+
+  /// The field name of [FieldModel.columnDefault].
+  static const columnDefault = 'columnDefault';
+
+  /// Every declared field-name constant in declaration order. Mirrors
+  /// `enum.values` so consumers can iterate the schema without reflection.
+  static const List<String> $values = [
+    fieldPath,
+    fieldType,
+    nullable,
+    children,
+    primaryKey,
+    foreignKey,
+    description,
+    references,
+    columnDefault
+  ];
+
+  /// The field marked `primaryKey: true`, or `null` if none was declared.
+  static const String? $primaryKey = null;
+
+  /// Foreign-key fields mapped to the referenced class name (as a String).
+  /// Empty when no field uses `foreignKey:` / `references:`.
+  static const Map<String, String> $foreignKeys = {};
 }
 
 extension FieldModelX on FieldModel {
@@ -414,6 +465,7 @@ extension FieldModelX on FieldModel {
     bool? foreignKey,
     String? description,
     Object? references,
+    String? columnDefault,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ?? this.fieldPath,
@@ -424,6 +476,7 @@ extension FieldModelX on FieldModel {
       foreignKey: foreignKey ?? this.foreignKey,
       description: description ?? this.description,
       references: references ?? this.references,
+      columnDefault: columnDefault ?? this.columnDefault,
     );
   }
 
@@ -437,6 +490,7 @@ extension FieldModelX on FieldModel {
     bool foreignKey = true,
     bool description = true,
     bool references = true,
+    bool columnDefault = true,
   }) {
     return FieldModel.assertRequired(
       fieldPath: fieldPath ? this.fieldPath : null,
@@ -447,6 +501,7 @@ extension FieldModelX on FieldModel {
       foreignKey: foreignKey ? this.foreignKey : null,
       description: description ? this.description : null,
       references: references ? this.references : null,
+      columnDefault: columnDefault ? this.columnDefault : null,
     );
   }
 }
