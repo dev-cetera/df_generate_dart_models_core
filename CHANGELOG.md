@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.1]
+
+- chore: bump `df_string` to `^0.4.0` and `df_gen_core` to `^0.8.1`, adopting df_string 0.4.0's case-conversion digit-boundary change (`phone_e164` instead of `phone_e_164`). Model/wire-key generation that runs case conversions on identifiers with embedded digits emits the new form on the next generation run; already-generated code is unaffected until regenerated. All 70 tests pass against df_string 0.4.0.
+
 ## [0.11.0]
 
 - Released @ 6/2026 (UTC)

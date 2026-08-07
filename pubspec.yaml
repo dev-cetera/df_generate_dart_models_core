@@ -19,7 +19,7 @@ funding:
   - https://www.patreon.com/c/robelator
   - https://github.com/sponsors/robelator
 description: A package that provides core dependencies for models generated with df_generate_dart_models.
-version: 0.11.0
+version: 0.11.1
 topics:
   - build-runner
   - cli
@@ -38,9 +38,9 @@ dependencies:
   equatable: ^2.0.7
 
   df_collection: ^0.10.0
-  df_string: ^0.3.0
+  df_string: ^0.4.0
   df_type: ^0.16.0
-  df_gen_core: ^0.8.0
+  df_gen_core: ^0.8.1
 
 ## -----------------------------------------------------------------------------
 
