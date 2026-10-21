@@ -11,7 +11,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:convert' show JsonEncoder;
+import 'dart:convert' show JsonEncoder, jsonEncode;
 
 import '/df_generate_dart_models_core.dart';
 
@@ -29,16 +29,17 @@ abstract mixin class BaseModel {
   //
 
   /// Returns a JSON string representation of the BaseModel.
+  ///
+  /// If the model cannot be encoded, this returns a JSON object with the
+  /// error message under the key `"e"` instead of throwing, because
+  /// [toString] calls it and a `toString` that throws breaks logging and
+  /// debugging.
   String toJsonString() {
     try {
       final encoder = const JsonEncoder.withIndent('  ');
       return encoder.convert(sortedJson());
     } catch (e) {
-      try {
-        return '{"e": "$e"}';
-      } catch (e) {
-        return '{"e": "An error occurred but could not be converted to JSON!"}';
-      }
+      return jsonEncode({'e': '$e'});
     }
   }
 
@@ -77,11 +78,23 @@ abstract mixin class BaseModel {
   /// Converts the current [BaseModel] to a [Uri] that can be used as a
   /// distinct identifier. The model must not be too large to avoid exceeding
   /// the maximum length of a URL.
+  ///
+  /// Each field of [toJson] becomes one query parameter. Scalar values
+  /// (strings, numbers, booleans) are written with `toString()`; lists and
+  /// maps are JSON-encoded, so the generated `fromUri` / `fromUriOrNull` read
+  /// them back unchanged.
   Uri toUrl() {
     return Uri(
       path: $className,
-      queryParameters: toJson().mapValues((v) => v.toString()),
+      queryParameters: toJson().mapValues(_toQueryValue),
     );
+  }
+
+  static String _toQueryValue(dynamic value) {
+    if (value is Iterable || value is Map) {
+      return jsonEncode(value is Iterable ? value.toList() : value);
+    }
+    return value.toString();
   }
 
   //

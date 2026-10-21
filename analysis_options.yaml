@@ -33,7 +33,9 @@ analyzer:
     strict-raw-types: true
   exclude:
     - build/**
-    # - '**.g.dart'
+    # Generated models mix in EquatableMixin, deprecated from equatable 2.1;
+    # they are the generator's output and are checked by this package's tests.
+    - '**.g.dart'
 
   errors:
     always_declare_return_types: error

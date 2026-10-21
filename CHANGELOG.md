@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.3]
+
+- Released @ 10/2026 (UTC)
+- build: depend on `df_gen_core ^0.8.2` and widen `equatable` to `>=2.0.7 <3.0.0`, admitting equatable 2.1.x. Capped below 3.0.0 because equatable 3.0.0 removes `EquatableMixin`, which generated models mix in and this package re-exports. The `EquatableMixin` deprecation that 2.1 adds is silenced where this package uses the mixin itself, and generated `*.g.dart` files are excluded from this package's analysis, so `dart analyze --fatal-infos` stays green on 2.1.
+- fix: `BaseModel.toUrl()` JSON-encodes list and map values in the query string (scalars are still written with `toString()`), so the generated `fromUri` / `fromUriOrNull` read list and map fields back instead of losing them.
+- fix: the error fallback of `BaseModel.toJsonString()` is built with `jsonEncode`, so an error message containing quotes or backslashes still yields valid JSON.
+
 ## [0.11.2]
 
 - feat: Add `Field.columnDefault` and `GenerateDartModel.indexes` annotation slots. Both are optional, additive, and DBML-only — consumed by `df_generate_dbml` to emit column `default: <value>`, an `indexes { ... }` block, and (via the model `description`) a table-level `note:`. Neither affects the generated Dart model; existing models compile and behave unchanged.

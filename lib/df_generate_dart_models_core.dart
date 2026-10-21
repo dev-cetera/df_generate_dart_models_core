@@ -11,6 +11,11 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// equatable 2.1 deprecates EquatableMixin and 3.0 removes it. Generated models
+// still mix it in, so it stays until the generator moves to `with Equatable`;
+// pubspec.yaml caps equatable below 3.0.0 for the same reason.
+// ignore_for_file: deprecated_member_use
+
 /// A package that provides core dependencies for models generated with df_generate_dart_models.
 library;
 
